@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Kasim.Core.Factory\Kasim.Core.Factory.csproj" />
+    <ProjectReference Include="..\Kasim.Core.IBLL\Kasim.Core.IBLL.csproj" />
+    <ProjectReference Include="..\Kasim.Core.IDAL\Kasim.Core.IDAL.csproj" />
+    <ProjectReference Include="..\Kasim.Core.SQLServerDAL\Kasim.Core.SQLServerDAL.csproj" />
+  </ItemGroup>
+
+</Project>
