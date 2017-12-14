@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EPPlus.Core" Version="1.5.4" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.6.7" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Kasim.Core.Factory\Kasim.Core.Factory.csproj" />
     <ProjectReference Include="..\Kasim.Core.IBLL\Kasim.Core.IBLL.csproj" />
     <ProjectReference Include="..\Kasim.Core.IDAL\Kasim.Core.IDAL.csproj" />
