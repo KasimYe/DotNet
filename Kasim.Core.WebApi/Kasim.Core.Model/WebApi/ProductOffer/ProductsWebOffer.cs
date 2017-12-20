@@ -32,11 +32,11 @@
 /*----------------------------------------------------------------
 ** Copyright (C) 2017 
 **
-** file：ConnectionOptions
+** file：ProductsWebOffer
 ** desc：
 ** 
 ** auth：KasimYe (KASIM)
-** date：2017-12-05 14:21:38
+** date：2017-12-20 15:12:35
 **
 ** Ver.：V1.0.0
 **----------------------------------------------------------------*/
@@ -45,13 +45,21 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Kasim.Core.Model.WebApi
+namespace Kasim.Core.Model.WebApi.ProductOffer
 {
-    public class ConnectionStringOptions
+    public class ProductsWebOffer
     {
-        public string DevConnection { get; set; }
-        public string TaxConnection { get; set; }
-        public string B2bConnection { get; set; }
+        public int ProductID { get; set; }
+        public bool Enable { get; set; }
+        public DateTime LastUpdateTime { get; set; }
+        public bool BSpreadInHomePage { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
+        public OfferTypes OfferType { get; set; }
+        public OfferGroups OfferGroup { get; set; }
+        public decimal OfferPrice { get; set; }
+        public string OfferNotes { get; set; }
+        public string OfferRemain { get; set; }
 
     }
 }

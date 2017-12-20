@@ -32,26 +32,59 @@
 /*----------------------------------------------------------------
 ** Copyright (C) 2017 
 **
-** file：ConnectionOptions
+** file：ProductOfferDAL
 ** desc：
 ** 
 ** auth：KasimYe (KASIM)
-** date：2017-12-05 14:21:38
+** date：2017-12-20 15:24:18
 **
 ** Ver.：V1.0.0
 **----------------------------------------------------------------*/
 
+using Dapper;
+using Kasim.Core.Factory;
+using Kasim.Core.IDAL.WebApi;
+using Kasim.Core.Model.WebApi.ProductOffer;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
-namespace Kasim.Core.Model.WebApi
+namespace Kasim.Core.SQLServerDAL.WebApi
 {
-    public class ConnectionStringOptions
+    public class ProductOfferDAL : IProductOfferDAL
     {
-        public string DevConnection { get; set; }
-        public string TaxConnection { get; set; }
-        public string B2bConnection { get; set; }
+        private IDbConnection _conn;
 
+        public IDbConnection Conn
+        {
+            get
+            {
+                var connString = ConnectionFactory.ConnectionStrings.B2bConnection;
+                return _conn = ConnectionFactory.CreateConnection(connString);
+            }
+        }
+
+        public List<ProductsWebOffer> GetListByProductId(int productId)
+        {
+            using (Conn)
+            {
+                string query = "SELECT o.StartDate,o.EndDate,o.OfferNotes,o.OfferRemain,o.OfferPrice,t.TypeName,g.GroupNotes "
+                    + "FROM dbo.Products_WebOffer o LEFT JOIN dbo.OfferTypes t ON o.OfferTypeID=t.OfferTypeID LEFT JOIN dbo.OfferGroups g ON o.OfferGroupID=g.OfferGroupID "
+                    + "WHERE Enable=1 AND ProductID=@ProductID";
+                var result = Conn.Query<ProductsWebOffer,OfferTypes,OfferGroups,ProductsWebOffer>(query, new { ProductID = productId }).SingleOrDefault();
+                return result;
+            }
+        }
+
+        public int GetProductIDByErpPID(int pID)
+        {
+            using (Conn)
+            {
+                string query = "SELECT ProductID FROM dbo.Products WHERE BrPID=@BrPID";
+                var result = (int)Conn.ExecuteScalar(query, new { BrPID = pID });
+                return result;
+            }
+        }
     }
 }

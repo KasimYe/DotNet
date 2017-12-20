@@ -32,26 +32,24 @@
 /*----------------------------------------------------------------
 ** Copyright (C) 2017 
 **
-** file：ConnectionOptions
+** file：IProductOfferBLL
 ** desc：
 ** 
 ** auth：KasimYe (KASIM)
-** date：2017-12-05 14:21:38
+** date：2017-12-20 15:25:04
 **
 ** Ver.：V1.0.0
 **----------------------------------------------------------------*/
-
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Kasim.Core.Model.WebApi.ProductOffer;
 
-namespace Kasim.Core.Model.WebApi
+namespace Kasim.Core.IBLL.WebApi
 {
-    public class ConnectionStringOptions
+    public interface IProductOfferBLL
     {
-        public string DevConnection { get; set; }
-        public string TaxConnection { get; set; }
-        public string B2bConnection { get; set; }
-
+        int GetProductIdByPID(int pID);
+        List<ProductsWebOffer> ProductsWebOfferListById(int productId);
     }
 }

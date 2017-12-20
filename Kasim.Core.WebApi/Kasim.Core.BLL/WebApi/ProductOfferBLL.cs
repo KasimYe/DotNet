@@ -32,26 +32,43 @@
 /*----------------------------------------------------------------
 ** Copyright (C) 2017 
 **
-** file：ConnectionOptions
+** file：ProductOfferBLL
 ** desc：
 ** 
 ** auth：KasimYe (KASIM)
-** date：2017-12-05 14:21:38
+** date：2017-12-20 15:25:19
 **
 ** Ver.：V1.0.0
 **----------------------------------------------------------------*/
 
+using Kasim.Core.Factory;
+using Kasim.Core.IBLL.WebApi;
+using Kasim.Core.IDAL.WebApi;
+using Kasim.Core.Model.WebApi;
+using Kasim.Core.Model.WebApi.ProductOffer;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Kasim.Core.Model.WebApi
+namespace Kasim.Core.BLL.WebApi
 {
-    public class ConnectionStringOptions
+    public class ProductOfferBLL: IProductOfferBLL
     {
-        public string DevConnection { get; set; }
-        public string TaxConnection { get; set; }
-        public string B2bConnection { get; set; }
+        IProductOfferDAL productOfferDAL = DALFactory.CreateProductOfferDAL();
 
+        public ProductOfferBLL(ConnectionStringOptions connectionStrings)
+        {
+            ConnectionFactory.ConnectionStrings = connectionStrings;
+        }
+
+        public int GetProductIdByPID(int pID)
+        {
+            return productOfferDAL.GetProductIDByErpPID(pID);
+        }
+
+        public List<ProductsWebOffer> ProductsWebOfferListById(int productId)
+        {
+            return productOfferDAL.GetListByProductId(productId);
+        }
     }
 }

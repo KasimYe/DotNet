@@ -62,5 +62,11 @@ namespace Kasim.Core.Factory
             string className = _path + ".WebApi.TaxCostPic28DAL";
             return (ITaxCostPic28DAL)Assembly.Load(_path).CreateInstance(className);
         }
+
+        public static IProductOfferDAL CreateProductOfferDAL()
+        {
+            string className = _path + ".WebApi.ProductOfferDAL";
+            return (IProductOfferDAL)Assembly.Load(_path).CreateInstance(className);
+        }        
     }
 }
