@@ -30,6 +30,18 @@ namespace Kasim.Core.WebApi.Controllers
             taxCostPic28BLL = new TaxCostPic28BLL(_conns);
         }
 
+        /// <summary>
+        /// 获取两票制发票图片数据
+        /// </summary>
+        /// <param name="id">批次CostID</param>
+        /// <remarks>
+        /// 参数为商品的批次ID.
+        /// 
+        ///     GET /CostImg/id
+        ///     123456  
+        ///     
+        /// </remarks>
+        /// <returns>TaxCostPic28的JSON对象</returns>
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {
@@ -75,6 +87,20 @@ namespace Kasim.Core.WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// 获取两票制发票图片数据
+        /// </summary>
+        /// <param name="taxCostPic28">TaxCostPic28类</param>
+        /// <remarks>
+        /// 参数为两票制图片信息的JSON字符串,格式如下. 
+        /// 
+        ///     POST /CostImg  
+        ///     {  
+        ///        "CostID": "12345"
+        ///     }  
+        ///     
+        /// </remarks>
+        /// <returns>TaxCostPic28的JSON对象</returns>
         [HttpPost]
         public ActionResult Post([FromBody]TaxCostPic28 taxCostPic28)
         {            
@@ -119,6 +145,18 @@ namespace Kasim.Core.WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// 获取图片地址
+        /// </summary>
+        /// <param name="id">图片文件名</param>
+        /// <remarks>
+        /// 参数为图片的文件名,从上面POST或者GET方法中可获得.
+        /// 
+        ///     GET /CostImg/Images/1234_456.jpg
+        ///     123456 
+        ///     
+        ///</remarks>
+        /// <returns>图片</returns>
         [HttpGet("{Images}/{id}")]
         public ActionResult Images(string id)
         {
