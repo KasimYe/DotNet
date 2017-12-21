@@ -59,10 +59,10 @@ namespace Kasim.Core.Test
         public void TestProductOffer()
         {
             ConnectionStringOptions _conns = new ConnectionStringOptions {
-                B2bConnection= "Data Source=192.168.215.4;database=BzOnlineMedicineOld;uid=sa;pwd=BRYY@abc123"
+                B2bConnection= "Data Source=192.168.215.4;database=BzOnlineMedicineOld;uid=sa;pwd=abc123"
             };
             IProductOfferBLL productOfferBLL = new ProductOfferBLL(_conns);
-            List<ProductsWebOffer> list = productOfferBLL.ProductsWebOfferListById(1234);
+            List<ProductsWebOffer> list = productOfferBLL.ProductsWebOfferListById(18548);
         }
     }
 }

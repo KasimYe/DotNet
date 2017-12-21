@@ -42,16 +42,22 @@ namespace Kasim.Core.WebApi.Controllers
         {
             return "value";
         }
-        
+
         // POST: api/ProductOffer
         [HttpPost]
-        public ActionResult Post([FromBody]string value)
+        public ActionResult Post([FromBody]ProductsWebOffer value)
         {
             try
             {
-                int productId = productOfferBLL.GetProductIdByPID(int.Parse(value));
+                int productId = productOfferBLL.GetProductIdByPID(value.ProductID);
                 List<ProductsWebOffer> list = productOfferBLL.ProductsWebOfferListById(productId);
-                return null;
+                if (list == null || list.Count == 0)
+                {
+                    var tempObj = new { Result = "ProductsWebOffer No Found", ProductsWebOffer = list };
+                    return Json(tempObj);
+                }
+                var tempObjSuccess = new { Result = "Success", ProductsWebOffer = list };
+                return Json(tempObjSuccess);                
             }
             catch (Exception ex)
             {
@@ -60,13 +66,13 @@ namespace Kasim.Core.WebApi.Controllers
                 return Json(tempObj);
             }
         }
-        
+
         // PUT: api/ProductOffer/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string value)
         {
         }
-        
+
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)

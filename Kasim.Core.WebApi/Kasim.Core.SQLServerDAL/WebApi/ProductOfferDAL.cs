@@ -79,7 +79,7 @@ namespace Kasim.Core.SQLServerDAL.WebApi
                         productsWebOffer.OfferGroup = offerGroups;
                         return productsWebOffer;
                     }
-                    , new { ProductID = productId }, splitOn: "OfferTypeID").AsList();
+                    , new { ProductID = productId }, splitOn: "TypeName,GroupNotes").AsList();
                 return result;
             }
         }
