@@ -49,5 +49,24 @@ namespace Kasim.Core.Model.ConsoleApp
 {
     public class SaleBillDetail
     {
+        public string FormNumber { get; set; }
+        public DateTime SystemDate { get; set; }
+        public string ClientName { get; set; }
+        public int PID { get; set; }
+        public int CostID { get; set; }
+        public int ClientID { get; set; }
+        public string Batch { get; set; }
+        public decimal TaxPrice { get; set; }
+        public decimal Quantity { get; set; }
+        public decimal TaxTotal { get; set; }
+        public decimal? SupplierReturn { get; set; }
+        public int? SRSCID { get; set; }
+        public bool? ByPurPay { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("FormNumber:{0}\r\nSystemDate:{1}\r\nClientName:{2}\r\nTaxPrice:{3}\r\nQuantity:{4}",
+                FormNumber,SystemDate.ToShortDateString(),ClientName,TaxPrice.ToString("0.00##"),Quantity.ToString("0.###"));
+        }
     }
 }

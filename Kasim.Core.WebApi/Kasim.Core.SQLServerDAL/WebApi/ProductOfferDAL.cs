@@ -53,21 +53,10 @@ using System.Text;
 namespace Kasim.Core.SQLServerDAL.WebApi
 {
     public class ProductOfferDAL : IProductOfferDAL
-    {
-        private IDbConnection _conn;
-
-        public IDbConnection Conn
-        {
-            get
-            {
-                var connString = ConnectionFactory.ConnectionStrings.B2bConnection;
-                return _conn = ConnectionFactory.CreateConnection(connString);
-            }
-        }
-
+    {       
         public List<ProductsWebOffer> GetListByProductId(int productId)
         {
-            using (Conn)
+            using (var Conn = ConnectionFactory.Connection)
             {
                 string query = "SELECT o.StartDate,o.EndDate,o.OfferNotes,o.OfferRemain,o.OfferPrice,t.TypeName,g.GroupNotes "
                     + "FROM dbo.Products_WebOffer o LEFT JOIN dbo.OfferTypes t ON o.OfferTypeID=t.OfferTypeID LEFT JOIN dbo.OfferGroups g ON o.OfferGroupID=g.OfferGroupID "
@@ -80,16 +69,20 @@ namespace Kasim.Core.SQLServerDAL.WebApi
                         return productsWebOffer;
                     }
                     , new { ProductID = productId }, splitOn: "TypeName,GroupNotes").AsList();
+                Conn.Close();
+                Conn.Dispose();
                 return result;
             }
         }
 
         public int GetProductIDByErpPID(int pID)
         {
-            using (Conn)
+            using (var Conn = ConnectionFactory.Connection)
             {
                 string query = "SELECT ProductID FROM dbo.Products WHERE BrPID=@BrPID";
                 var result = (int)Conn.ExecuteScalar(query, new { BrPID = pID });
+                Conn.Close();
+                Conn.Dispose();
                 return result;
             }
         }

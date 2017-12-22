@@ -58,7 +58,7 @@ namespace Kasim.Core.BLL.WebApi
 
         public TaxCostPic28BLL(ConnectionStringOptions connectionStrings)
         {
-            ConnectionFactory.ConnectionStrings = connectionStrings;
+            ConnectionFactory.ConnectionString = connectionStrings.DevConnection;
         }
 
         public TaxCostPic28 GetImgByCostID(TaxCostPic28 taxCostPic)

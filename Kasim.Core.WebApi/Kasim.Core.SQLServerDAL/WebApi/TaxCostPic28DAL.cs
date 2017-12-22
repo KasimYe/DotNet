@@ -54,44 +54,40 @@ using System.Linq;
 namespace Kasim.Core.SQLServerDAL.WebApi
 {
     public class TaxCostPic28DAL : ITaxCostPic28DAL
-    {
-        private IDbConnection _conn;
-
-        public IDbConnection Conn
-        {
-            get
-            {
-                var connString = ConnectionFactory.ConnectionStrings.DevConnection;
-                return _conn = ConnectionFactory.CreateConnection(connString);
-            }
-        }
-
+    { 
         public TaxCostPic28 GetEntity(int id)
         {
-            using (Conn)
+            using (var Conn = ConnectionFactory.Connection)
             {
                 string query = "SELECT * FROM dbo.TaxCostPic28 WHERE CostID=@CostID";
                 var result = Conn.Query<TaxCostPic28>(query, new { CostID = id }).SingleOrDefault();
+                Conn.Close();
+                Conn.Dispose();
                 return result;
             }
         }
 
         public TaxCostPic28 GetEntityByTax(string invoiceCode, string invoiceID)
         {
-            using (Conn)
+            using (var Conn = ConnectionFactory.Connection)
             {
                 string query = "SELECT TOP 1 PicUrl FROM dbo.TaxCostPic28 WHERE InvoiceCode=@InvoiceCode AND InvoiceID=@InvoiceID";
                 var result = Conn.Query<TaxCostPic28>(query, new { InvoiceCode = invoiceCode, InvoiceID = invoiceID }).SingleOrDefault();
+                Conn.Close();
+                Conn.Dispose();
                 return result;
             }
         }
 
         public int UpdateMd5(TaxCostPic28 taxCostPic)
         {
-            using (Conn)
+            using (var Conn = ConnectionFactory.Connection)
             {
                 string query = "UPDATE dbo.TaxCostPic28 SET PicMD5=@PicMD5 WHERE PicId =@PicId";
-                return Conn.Execute(query, taxCostPic);
+                var result= Conn.Execute(query, taxCostPic);
+                Conn.Close();
+                Conn.Dispose();
+                return result;
             }
         }
     }

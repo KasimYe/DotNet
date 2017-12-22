@@ -52,7 +52,27 @@ namespace Kasim.Core.Factory
 {
     public class ConnectionFactory
     {
-        public static ConnectionStringOptions ConnectionStrings { get; set; }
+        private static IDbConnection _connection;
+
+        public static IDbConnection Connection
+        {
+            get
+            {
+                var connString = ConnectionString;
+                if (_connection != null)
+                {
+                    if (_connection.State != ConnectionState.Closed)
+                    {
+                        _connection.Close();
+                    }
+                    _connection.Dispose();
+                    _connection = null;
+                }
+                return _connection = CreateConnection(connString);
+            }
+        }
+
+        public static string ConnectionString { get; set; }
         public static IDbConnection CreateConnection(string connString)
         {
             IDbConnection conn = null;

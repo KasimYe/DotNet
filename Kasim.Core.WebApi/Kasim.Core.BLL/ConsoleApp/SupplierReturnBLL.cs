@@ -58,7 +58,7 @@ namespace Kasim.Core.BLL.ConsoleApp
 
         public SupplierReturnBLL(ConnectionStringOptions connectionStrings)
         {
-            ConnectionFactory.ConnectionStrings = connectionStrings;
+            ConnectionFactory.ConnectionString = connectionStrings.DevConnection;
         }
 
         public void SupplySupplierReturn(int sRSCID)
@@ -94,11 +94,61 @@ namespace Kasim.Core.BLL.ConsoleApp
 
         private void SearchSaleBillDetail(SupplierReturnSaleClients entity)
         {
+
             var list = supplierReturnDAL.GetSaleBillDetailCount(entity);
             if (list != null && list.Count > 0)
             {
-                var writeMsg = string.Format("");
-                Console.WriteLine("");
+                var keyCode = Console.ReadLine();
+                while (keyCode.ToUpper() != "BACK")
+                {
+                    var writeMsg = string.Format("共找到未关联返利明细{0}条(包含不符合条件)\r\n是否开始执行检查并关联操作(Y/N)", list.Count);
+                    Console.WriteLine(writeMsg);
+                    var contKey = Console.ReadKey();
+                    if (contKey.Key == ConsoleKey.Y)
+                    {
+                        CheckSupplierReturn(list);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                    keyCode = Console.ReadLine();
+                }
+            }
+            else
+            {
+                Console.WriteLine("找不到未关联返利的销售明细!");
+            }
+            Console.WriteLine("请输入返利设置ID：");
+        }
+
+        private void CheckSupplierReturn(List<SaleBillDetail> list)
+        {
+            SaleBillDetail curMsg = null;
+            try
+            {
+                foreach (var entity in list)
+                {                    
+                    curMsg = entity;
+                    var saleBillDetail = supplierReturnDAL.CheckSupplierReturn(entity);
+                    if (saleBillDetail != null && saleBillDetail.SRSCID != null && saleBillDetail.SRSCID != 0)
+                    {
+                        Console.WriteLine(string.Format("符合返利条件：\r\n日期:{0} 客户:{1} 单号:{2} 批号:{3} 数量:{4} 单价:{5}",
+                            entity.SystemDate.ToShortDateString(), entity.ClientName, entity.FormNumber, entity.Batch,
+                            entity.Quantity.ToString("0.###"), entity.TaxPrice.ToString("0.00##")));
+                    }
+                    else
+                    {
+                        Console.WriteLine("不符合返利条件");
+                    }
+                    //System.Threading.Thread.Sleep(100);
+                }
+                Console.WriteLine("关联执行完毕");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("\r\n$$$$$$$$$$$$$$$$$$$$$$ ERROR $$$$$$$$$$$$$$$$$$$$$$\r\n{0}\r\n{1}\r\n$$$$$$$$$$$$$$$$$$$$$$ ERROR $$$$$$$$$$$$$$$$$$$$$$", 
+                    ex.Message,curMsg.ToString());                
             }
         }
     }

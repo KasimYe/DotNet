@@ -51,5 +51,6 @@ namespace Kasim.Core.IDAL.ConsoleApp
     {
         SupplierReturnSaleClients GetEntity(int sRSCID);
         List<SaleBillDetail> GetSaleBillDetailCount(SupplierReturnSaleClients entity);
+        SaleBillDetail CheckSupplierReturn(SaleBillDetail entity);
     }
 }

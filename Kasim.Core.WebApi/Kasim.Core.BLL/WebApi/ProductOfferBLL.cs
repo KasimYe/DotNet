@@ -58,7 +58,7 @@ namespace Kasim.Core.BLL.WebApi
 
         public ProductOfferBLL(ConnectionStringOptions connectionStrings)
         {
-            ConnectionFactory.ConnectionStrings = connectionStrings;
+            ConnectionFactory.ConnectionString = connectionStrings.B2bConnection;
         }
 
         public int GetProductIdByPID(int pID)
