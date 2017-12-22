@@ -118,3 +118,15 @@
 2017-12-21 14:21:39.3809 Info Configured from an XML element in D:\Kasim\WebApi\WebApi\Kasim.Core.WebApi\Kasim.Core.WebApi\nlog.config...
 2017-12-21 14:21:39.4112 Info Found 53 configuration items
 2017-12-21 14:21:39.4408 Info Found 53 configuration items
+2017-12-22 09:28:14.5481 Info Adding target File Target[allfile]
+2017-12-22 09:28:14.6695 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2017-12-22 09:28:14.8628 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2017-12-22 09:28:14.8628 Info Adding target File Target[ownFile-web]
+2017-12-22 09:28:14.8628 Info Adding target Null Target[blackhole]
+2017-12-22 09:28:14.8628 Info Configured from an XML element in D:\Kasim\WebApi\WebApi\Kasim.Core.WebApi\Kasim.Core.WebApi\nlog.config...
+2017-12-22 09:28:14.8961 Info Found 53 configuration items
+2017-12-22 09:28:14.9259 Info Found 53 configuration items
