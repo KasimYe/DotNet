@@ -29,21 +29,34 @@ namespace Kasim.Core.WebApi.Controllers
             productOfferBLL = new ProductOfferBLL(_conns);
         }
 
-        // GET: api/ProductOffer
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        //// GET: api/ProductOffer
+        //[HttpGet]
+        //public IEnumerable<string> Get()
+        //{
+        //    return new string[] { "value1", "value2" };
+        //}
 
-        // GET: api/ProductOffer/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+        //// GET: api/ProductOffer/5
+        //[HttpGet("{id}", Name = "Get")]
+        //public string Get(int id)
+        //{
+        //    return "value";
+        //}
 
-        // POST: api/ProductOffer
+
+        /// <summary>
+        /// 获取B2B商品促销信息
+        /// </summary>
+        /// <param name="value">ProductsWebOffer类</param> 
+        /// <remarks>
+        /// 参数为ERP的商品ID的JSON字符串,格式如下.  
+        ///    
+        ///     POST /ProductOffer  
+        ///     {  
+        ///        "ProductID": "12345"
+        ///     }  
+        ///   
+        /// </remarks>
         [HttpPost]
         public ActionResult Post([FromBody]ProductsWebOffer value)
         {
@@ -67,16 +80,16 @@ namespace Kasim.Core.WebApi.Controllers
             }
         }
 
-        // PUT: api/ProductOffer/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+        //// PUT: api/ProductOffer/5
+        //[HttpPut("{id}")]
+        //public void Put(int id, [FromBody]string value)
+        //{
+        //}
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        //// DELETE: api/ApiWithActions/5
+        //[HttpDelete("{id}")]
+        //public void Delete(int id)
+        //{
+        //}
     }
 }
