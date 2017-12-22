@@ -32,48 +32,42 @@
 /*----------------------------------------------------------------
 ** Copyright (C) 2017 
 **
-** file：DALFactory
+** file：SupplierReturnSaleClients
 ** desc：
 ** 
 ** auth：KasimYe (KASIM)
-** date：2017-12-05 14:38:38
+** date：2017-12-22 15:21:45
 **
 ** Ver.：V1.0.0
 **----------------------------------------------------------------*/
 
-using Kasim.Core.IDAL.ConsoleApp;
-using Kasim.Core.IDAL.WebApi;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Text;
 
-namespace Kasim.Core.Factory
+namespace Kasim.Core.Model.ConsoleApp
 {
-    public class DALFactory
+    public class SupplierReturnSaleClients
     {
-        private static readonly string _path= "Kasim.Core.SQLServerDAL";
-        private DALFactory()
-        {
+        public int SRSCID { get; set; }
+        public int SID { get; set; }
+        public int ClientID { get; set; }
+        public int StoreID { get; set; }
+        public int PID { get; set; }
+        public string PName { get; set; }
+        public int ByCostID { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public decimal MinPrice { get; set; }
+        public decimal MaxPrice { get; set; }
+        public decimal MinQuantity { get; set; }
+        public decimal MaxQuantity { get; set; }
+        public decimal SupplierReturn { get; set; }
+        public DateTime SystemDate { get; set; }
+        public int CreatorID { get; set; }
+        public int Status { get; set; }
+        public int SupplierID { get; set; }
+        public bool ByPurPay { get; set; }
 
-        }
-
-        public static ITaxCostPic28DAL CreateTaxCostPic28DAL()
-        {
-            string className = _path + ".WebApi.TaxCostPic28DAL";
-            return (ITaxCostPic28DAL)Assembly.Load(_path).CreateInstance(className);
-        }
-
-        public static ISupplierReturnDAL CreateSupplierReturnDAL()
-        {
-            string className = _path + ".ConsoleApp.SupplierReturnDAL";
-            return (ISupplierReturnDAL)Assembly.Load(_path).CreateInstance(className);
-        }
-
-        public static IProductOfferDAL CreateProductOfferDAL()
-        {
-            string className = _path + ".WebApi.ProductOfferDAL";
-            return (IProductOfferDAL)Assembly.Load(_path).CreateInstance(className);
-        }        
     }
 }

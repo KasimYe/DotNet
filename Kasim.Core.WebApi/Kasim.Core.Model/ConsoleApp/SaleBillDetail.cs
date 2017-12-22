@@ -32,48 +32,22 @@
 /*----------------------------------------------------------------
 ** Copyright (C) 2017 
 **
-** file：DALFactory
+** file：SaleBillDetail
 ** desc：
 ** 
 ** auth：KasimYe (KASIM)
-** date：2017-12-05 14:38:38
+** date：2017-12-22 16:09:24
 **
 ** Ver.：V1.0.0
 **----------------------------------------------------------------*/
 
-using Kasim.Core.IDAL.ConsoleApp;
-using Kasim.Core.IDAL.WebApi;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Text;
 
-namespace Kasim.Core.Factory
+namespace Kasim.Core.Model.ConsoleApp
 {
-    public class DALFactory
+    public class SaleBillDetail
     {
-        private static readonly string _path= "Kasim.Core.SQLServerDAL";
-        private DALFactory()
-        {
-
-        }
-
-        public static ITaxCostPic28DAL CreateTaxCostPic28DAL()
-        {
-            string className = _path + ".WebApi.TaxCostPic28DAL";
-            return (ITaxCostPic28DAL)Assembly.Load(_path).CreateInstance(className);
-        }
-
-        public static ISupplierReturnDAL CreateSupplierReturnDAL()
-        {
-            string className = _path + ".ConsoleApp.SupplierReturnDAL";
-            return (ISupplierReturnDAL)Assembly.Load(_path).CreateInstance(className);
-        }
-
-        public static IProductOfferDAL CreateProductOfferDAL()
-        {
-            string className = _path + ".WebApi.ProductOfferDAL";
-            return (IProductOfferDAL)Assembly.Load(_path).CreateInstance(className);
-        }        
     }
 }

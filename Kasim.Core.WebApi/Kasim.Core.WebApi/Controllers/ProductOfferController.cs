@@ -70,11 +70,11 @@ namespace Kasim.Core.WebApi.Controllers
                     return Json(tempObj);
                 }
                 var tempObjSuccess = new { Result = "Success", ProductsWebOffer = list };
-                return Json(tempObjSuccess);                
+                return Json(tempObjSuccess);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                _logger.LogError("获取B2B商品促销信息:" + ex.Message);
                 var tempObj = new { Result = ex.Message };
                 return Json(tempObj);
             }
