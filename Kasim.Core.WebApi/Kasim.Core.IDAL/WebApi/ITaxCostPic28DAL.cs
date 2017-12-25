@@ -52,5 +52,7 @@ namespace Kasim.Core.IDAL.WebApi
         TaxCostPic28 GetEntity(int id);
         TaxCostPic28 GetEntityByTax(string invoiceCode,string invoiceID);
         int UpdateMd5(TaxCostPic28 taxCostPic);
+        int UpdateMd5(TaxCost28 taxCost);
+        TaxCost28 GetEntity(string id);
     }
 }

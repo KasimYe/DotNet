@@ -67,6 +67,11 @@ namespace Kasim.Core.SQLServerDAL.WebApi
             }
         }
 
+        public TaxCost28 GetEntity(string id)
+        {
+            throw new NotImplementedException();
+        }
+
         public TaxCostPic28 GetEntityByTax(string invoiceCode, string invoiceID)
         {
             using (var Conn = ConnectionFactory.Connection)
@@ -85,6 +90,18 @@ namespace Kasim.Core.SQLServerDAL.WebApi
             {
                 string query = "UPDATE dbo.TaxCostPic28 SET PicMD5=@PicMD5 WHERE PicId =@PicId";
                 var result= Conn.Execute(query, taxCostPic);
+                Conn.Close();
+                Conn.Dispose();
+                return result;
+            }
+        }
+
+        public int UpdateMd5(TaxCost28 taxCost)
+        {
+            using (var Conn = ConnectionFactory.Connection)
+            {
+                string query = "UPDATE dbo.TaxCost28 SET PicMD5=@PicMD5 WHERE IID =@IID";
+                var result = Conn.Execute(query, taxCost);
                 Conn.Close();
                 Conn.Dispose();
                 return result;

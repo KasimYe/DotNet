@@ -55,6 +55,24 @@ namespace Kasim.Core.SQLServerDAL.ConsoleApp
 {
     public class SupplierReturnDAL : ISupplierReturnDAL
     {
+        public string AddSupplierReturn(SaleBillDetail detail)
+        {
+            using (var Conn = ConnectionFactory.Connection)
+            {
+                var param = new DynamicParameters();
+                param.Add("@SupplierReturn", detail.SupplierReturn, DbType.Decimal);
+                param.Add("@DetailID", detail.DetailID, DbType.Int32);
+                param.Add("@UserID", 1, DbType.Int32);
+                param.Add("@SRSCID", detail.SRSCID, DbType.Int32);
+                param.Add("@ret", "", DbType.String, ParameterDirection.Output);
+                Conn.Execute("dbo.SupplierReturnSaleClients_ADD", param, commandType: CommandType.StoredProcedure);
+                var result = param.Get<string>("@ret");
+                Conn.Close();
+                Conn.Dispose();
+                return result;
+            }
+        }
+
         public SaleBillDetail CheckSupplierReturn(SaleBillDetail entity)
         {
             using (var Conn = ConnectionFactory.Connection)
@@ -96,7 +114,7 @@ namespace Kasim.Core.SQLServerDAL.ConsoleApp
         {
             using (var Conn = ConnectionFactory.Connection)
             {
-                var query = "SELECT FormNumber,SystemDate,(SELECT ClientName FROM dbo.Clients WHERE ClientID=f.ClientID) AS ClientName,pb.PID,CostID,f.ClientID,Batch,TaxPrice,Quantity,TaxTotal "
+                var query = "SELECT d.DetailID,FormNumber,SystemDate,(SELECT ClientName FROM dbo.Clients WHERE ClientID=f.ClientID) AS ClientName,pb.PID,CostID,f.ClientID,Batch,TaxPrice,Quantity,TaxTotal "
                     + "FROM dbo.SaleBill f,dbo.SaleBillDetail d,dbo.ProductBatches pb WHERE f.SaleBillID=d.SaleBillID AND d.PBID=pb.PBID AND f.SystemDate BETWEEN @StartDate AND @EndDate "
                     + "AND pb.PID=@PID AND ISNULL(f.WarehouseID,-1)<>0 AND d.SRSCID IS NULL AND f.FormTypeID IN (7,8,9) AND StoreID=1";
                 var result = Conn.Query<SaleBillDetail>(query, new

@@ -146,6 +146,63 @@ namespace Kasim.Core.WebApi.Controllers
         }
 
         /// <summary>
+        /// 获取两票制发票图片数据(通过发票号码)
+        /// </summary>
+        /// <param name="id">发票号码</param>
+        /// <remarks>
+        /// 参数为税票号码.
+        /// 
+        ///     GET /CostImg/Invoice/id
+        ///     123456  
+        ///     
+        /// </remarks>
+        /// <returns>TaxCostPic28的JSON对象</returns>
+        [HttpGet("{Invoice}/{id}")]
+        public ActionResult Invoice(string id)
+        {
+            try
+            {
+                TaxCost28 taxCost28 = new TaxCost28() { InvoiceCode = id };
+                taxCost28 = taxCostPic28BLL.GetImgByInvoice(taxCost28);
+
+                if (taxCost28 == null)
+                {
+                    var tempObj = new { Result = "Image No Found", CostImg = taxCost28 };
+                    return Json(tempObj);
+                }
+
+                if (string.IsNullOrEmpty(taxCost28.PicUrl))
+                {
+                    var tempObj = new { Result = "Image Url Is Null", CostImg = taxCost28 };
+                    return Json(tempObj);
+                }
+
+                string url = _apiOptions.AppImgServer.Tax + taxCost28.PicUrl;
+                string path = _apiOptions.AppImgSavePath.Path + taxCost28.InvoiceID + "_" + taxCost28.InvoiceCode + ".jpg";
+                ImageDown imgDown = new ImageDown();
+                Image originalImage = imgDown.DownUrlPic(url);
+                Image thumbnailImage = ImageClass.MakeThumbnail(originalImage, _apiOptions.AppImgThumbnail.Width,
+                    _apiOptions.AppImgThumbnail.Height, _apiOptions.AppImgThumbnail.Model);
+                if (string.IsNullOrEmpty(taxCost28.PicMD5))
+                {
+                    imgDown.PicSave(thumbnailImage, path);
+                    taxCost28.PicMD5 = MD5.GetFileMd5(path);
+                    imgDown.PicRemove(path);
+                    taxCostPic28BLL.SetImgMd5(taxCost28);
+                }
+                taxCost28.PicUrl = _apiOptions.AppImgServer.CostImg + taxCost28.InvoiceID + "_" + taxCost28.InvoiceCode + ".jpg";
+                var tempObjSuccess = new { Result = "Success", CostImg = taxCost28 };
+                return Json(tempObjSuccess);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                var tempObj = new { Result = ex.Message };
+                return Json(tempObj);
+            }
+        }
+
+        /// <summary>
         /// 获取图片地址
         /// </summary>
         /// <param name="id">图片文件名</param>

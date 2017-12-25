@@ -52,5 +52,7 @@ namespace Kasim.Core.IBLL.WebApi
         TaxCostPic28 GetImgByCostID(TaxCostPic28 taxCostPic);
         string GetImgUrlByFileName(string fileName);
         int SetImgMd5(TaxCostPic28 taxCostPic);
+        int SetImgMd5(TaxCost28 taxCost);
+        TaxCost28 GetImgByInvoice(TaxCost28 taxCost);
     }
 }

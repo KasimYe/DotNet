@@ -125,10 +125,12 @@ namespace Kasim.Core.BLL.ConsoleApp
         private void CheckSupplierReturn(List<SaleBillDetail> list)
         {
             SaleBillDetail curMsg = null;
+            int s = 0;
+            int f = 0;
             try
             {
                 foreach (var entity in list)
-                {                    
+                {
                     curMsg = entity;
                     var saleBillDetail = supplierReturnDAL.CheckSupplierReturn(entity);
                     if (saleBillDetail != null && saleBillDetail.SRSCID != null && saleBillDetail.SRSCID != 0)
@@ -136,20 +138,36 @@ namespace Kasim.Core.BLL.ConsoleApp
                         Console.WriteLine(string.Format("符合返利条件：\r\n日期:{0} 客户:{1} 单号:{2} 批号:{3} 数量:{4} 单价:{5}",
                             entity.SystemDate.ToShortDateString(), entity.ClientName, entity.FormNumber, entity.Batch,
                             entity.Quantity.ToString("0.###"), entity.TaxPrice.ToString("0.00##")));
+                        var result = AddSupplierReturnSaleClients(saleBillDetail);
+                        if (result=="")
+                        {
+                            s++;
+                        }
+                        else
+                        {
+                            Console.WriteLine("******************** "+ result + " ***********************");
+                            f++;
+                        }
                     }
                     else
                     {
                         Console.WriteLine("不符合返利条件");
+                        f++;
                     }
                     //System.Threading.Thread.Sleep(100);
                 }
-                Console.WriteLine("关联执行完毕");
+                Console.WriteLine(string.Format("关联执行完毕,符合条件{0}条,不符合条件{1}条.", s, f));
             }
             catch (Exception ex)
             {
-                Console.WriteLine("\r\n$$$$$$$$$$$$$$$$$$$$$$ ERROR $$$$$$$$$$$$$$$$$$$$$$\r\n{0}\r\n{1}\r\n$$$$$$$$$$$$$$$$$$$$$$ ERROR $$$$$$$$$$$$$$$$$$$$$$", 
-                    ex.Message,curMsg.ToString());                
+                Console.WriteLine("\r\n$$$$$$$$$$$$$$$$$$$$$$ ERROR $$$$$$$$$$$$$$$$$$$$$$\r\n{0}\r\n{1}\r\n$$$$$$$$$$$$$$$$$$$$$$ ERROR $$$$$$$$$$$$$$$$$$$$$$",
+                    ex.Message, curMsg.ToString());
             }
+        }
+
+        private string AddSupplierReturnSaleClients(SaleBillDetail detail)
+        {
+            return supplierReturnDAL.AddSupplierReturn(detail);
         }
     }
 }

@@ -32,33 +32,34 @@
 /*----------------------------------------------------------------
 ** Copyright (C) 2017 
 **
-** file：TaxCostPic28
+** file：TaxCost28
 ** desc：
 ** 
 ** auth：KasimYe (KASIM)
-** date：2017-12-05 13:11:40
+** date：2017-12-25 14:30:07
 **
 ** Ver.：V1.0.0
 **----------------------------------------------------------------*/
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Kasim.Core.Model.WebApi
 {
-    public class TaxCostPic28
+    public class TaxCost28
     {
-        public int PicId { get; set; }
+        [Key]
+        public int IID { get; set; }
         public int ClientID { get; set; }
-        public int PBID { get; set; }
-        public int CostID { get; set; }
         public string InvoiceCode { get; set; }
         public string InvoiceID { get; set; }
         public DateTime InvoiceDate { get; set; }
         public string PicUrl { get; set; }
         public string PicMD5 { get; set; }
         public DateTime AddDate { get; set; }
-        public TaxCost28 TaxCost28 { get; set; }
+        public List<TaxCostPic28> TaxCostPic28List { get; set; }
+
     }
 }

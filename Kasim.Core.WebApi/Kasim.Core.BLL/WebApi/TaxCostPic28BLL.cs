@@ -66,6 +66,11 @@ namespace Kasim.Core.BLL.WebApi
             return taxCostPic28DAL.GetEntity(taxCostPic.CostID);
         }
 
+        public TaxCost28 GetImgByInvoice(TaxCost28 taxCost)
+        {
+            return taxCostPic28DAL.GetEntity(taxCost.InvoiceCode);
+        }
+
         public string GetImgUrlByFileName(string fileName)
         {
             try
@@ -86,6 +91,19 @@ namespace Kasim.Core.BLL.WebApi
             try
             {
                 return taxCostPic28DAL.UpdateMd5(taxCostPic);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public int SetImgMd5(TaxCost28 taxCost)
+        {
+            try
+            {
+                return taxCostPic28DAL.UpdateMd5(taxCost);
             }
             catch (Exception)
             {

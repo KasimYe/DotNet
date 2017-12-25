@@ -62,6 +62,7 @@ namespace Kasim.Core.Model.ConsoleApp
         public decimal? SupplierReturn { get; set; }
         public int? SRSCID { get; set; }
         public bool? ByPurPay { get; set; }
+        public int DetailID { get; set; }
 
         public override string ToString()
         {
