@@ -60,7 +60,7 @@ namespace Kasim.Core.SQLServerDAL.WebApi
             {
                 string query = "SELECT o.StartDate,o.EndDate,o.OfferNotes,o.OfferRemain,o.OfferPrice,t.TypeName,g.GroupNotes "
                     + "FROM dbo.Products_WebOffer o LEFT JOIN dbo.OfferTypes t ON o.OfferTypeID=t.OfferTypeID LEFT JOIN dbo.OfferGroups g ON o.OfferGroupID=g.OfferGroupID "
-                    + "WHERE Enable=1 AND ProductID=@ProductID";
+                    + "WHERE Enable=1 AND (o.EndDate = '永久' OR o.EndDate>=CONVERT(NVARCHAR(10),GETDATE(),120)) AND ProductID=@ProductID";
                 var result = Conn.Query<ProductsWebOffer, OfferTypes, OfferGroups, ProductsWebOffer>(query,
                     (productsWebOffer, offerTypes, offerGroups) =>
                     {
