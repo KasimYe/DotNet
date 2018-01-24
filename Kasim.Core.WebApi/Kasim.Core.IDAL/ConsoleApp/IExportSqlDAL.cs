@@ -32,58 +32,23 @@
 /*----------------------------------------------------------------
 ** Copyright (C) 2017 
 **
-** file：DALFactory
+** file：IExportSqlDAL
 ** desc：
 ** 
 ** auth：KasimYe (KASIM)
-** date：2017-12-05 14:38:38
+** date：2018-01-24 13:18:08
 **
 ** Ver.：V1.0.0
 **----------------------------------------------------------------*/
-
-using Kasim.Core.IDAL;
-using Kasim.Core.IDAL.ConsoleApp;
-using Kasim.Core.IDAL.WebApi;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
+using System.Data;
 using System.Text;
 
-namespace Kasim.Core.Factory
+namespace Kasim.Core.IDAL.ConsoleApp
 {
-    public class DALFactory
+    public interface IExportSqlDAL: IBaseDAL
     {
-        private static readonly string _path = "Kasim.Core.SQLServerDAL";
-        private DALFactory()
-        {
-
-        }
-
-        public static ITaxCostPic28DAL CreateTaxCostPic28DAL()
-        {
-            string className = _path + ".WebApi.TaxCostPic28DAL";
-            return (ITaxCostPic28DAL)Assembly.Load(_path).CreateInstance(className);
-        }
-
-        public static ISupplierReturnDAL CreateSupplierReturnDAL()
-        {
-            string className = _path + ".ConsoleApp.SupplierReturnDAL";
-            return (ISupplierReturnDAL)Assembly.Load(_path).CreateInstance(className);
-        }
-
-        public static IProductOfferDAL CreateProductOfferDAL()
-        {
-            string className = _path + ".WebApi.ProductOfferDAL";
-            return (IProductOfferDAL)Assembly.Load(_path).CreateInstance(className);
-        }
-    }
-
-    static public class DALFactory<T> where T : IBaseDAL
-    {
-        static public T CreateDAL(string _path, string _className)
-        {
-            string className = string.Format("{0}.{1}", _path, _className);
-            return (T)Assembly.Load(_path).CreateInstance(className);
-        }
+        DataTable GetDataTable(string sql);
     }
 }

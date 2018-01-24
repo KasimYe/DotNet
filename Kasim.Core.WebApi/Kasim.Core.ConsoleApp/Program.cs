@@ -21,6 +21,7 @@ namespace Kasim.Core.ConsoleApp
             };
             Console.WriteLine("【1】重新计算后补返利设置");
             Console.WriteLine("【2】爬最新章节^o^!!!");
+            Console.WriteLine("【3】根据SQL语句导出数据到Excel");
             Console.WriteLine("请输入对应菜单数字：");
             var keyCode = Console.ReadLine();
             while (keyCode.ToUpper()!="EXIT")
@@ -47,6 +48,27 @@ namespace Kasim.Core.ConsoleApp
                             IBookTxtBLL bookTxtBLL = new BookTxtBLL();
                             var menuName = Console.ReadLine();
                             bookTxtBLL.DownloadBook(menuName);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
+                        break;
+                    case "3":
+                        try
+                        {
+                            Console.WriteLine("请输入工作簿名称：");
+                            var workSheetName = Console.ReadLine();
+                            Console.WriteLine("请输入查询语句(不能超过26列)：");
+                            var goCode = Console.ReadLine();
+                            var sql = "";
+                            while (goCode.ToUpper()!="GO")
+                            {
+                                sql += " "+goCode;
+                                goCode = Console.ReadLine();
+                            }
+                            IExportSqlBLL exportSqlBLL = new ExportSqlBLL(conSet);                            
+                            exportSqlBLL.ExportBySqlServer(workSheetName, sql);
                         }
                         catch (Exception ex)
                         {

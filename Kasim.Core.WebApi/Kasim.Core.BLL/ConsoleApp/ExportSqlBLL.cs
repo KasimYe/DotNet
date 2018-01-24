@@ -32,58 +32,70 @@
 /*----------------------------------------------------------------
 ** Copyright (C) 2017 
 **
-** file：DALFactory
+** file：ExportSql
 ** desc：
 ** 
 ** auth：KasimYe (KASIM)
-** date：2017-12-05 14:38:38
+** date：2018-01-24 13:10:38
 **
 ** Ver.：V1.0.0
 **----------------------------------------------------------------*/
 
-using Kasim.Core.IDAL;
+using Kasim.Core.Common;
+using Kasim.Core.Factory;
+using Kasim.Core.IBLL.ConsoleApp;
 using Kasim.Core.IDAL.ConsoleApp;
-using Kasim.Core.IDAL.WebApi;
+using Kasim.Core.Model.WebApi;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
+using System.Data;
 using System.Text;
 
-namespace Kasim.Core.Factory
+namespace Kasim.Core.BLL.ConsoleApp
 {
-    public class DALFactory
+    public class ExportSqlBLL : IExportSqlBLL
     {
-        private static readonly string _path = "Kasim.Core.SQLServerDAL";
-        private DALFactory()
-        {
+        IExportSqlDAL dalMySql = DALFactory<IExportSqlDAL>.CreateDAL("Kasim.Core.MySQLDAL", "ConsoleApp.ExportSqlDAL");
+        IExportSqlDAL dalSqlServer = DALFactory<IExportSqlDAL>.CreateDAL("Kasim.Core.SQLServerDAL", "ConsoleApp.ExportSqlDAL");
 
+        public ExportSqlBLL(ConnectionStringOptions connectionStrings)
+        {
+            ConnectionFactory.ConnectionString = connectionStrings.DevConnection;
         }
 
-        public static ITaxCostPic28DAL CreateTaxCostPic28DAL()
+        public void ExportByDataTable(string workSheetName, DataTable dataTable)
         {
-            string className = _path + ".WebApi.TaxCostPic28DAL";
-            return (ITaxCostPic28DAL)Assembly.Load(_path).CreateInstance(className);
+            ExcelExport.ExportByDataTable(dataTable, workSheetName);
+            Console.WriteLine("导出成功");
         }
 
-        public static ISupplierReturnDAL CreateSupplierReturnDAL()
+        public void ExportByMySql(string workSheetName, string sql)
         {
-            string className = _path + ".ConsoleApp.SupplierReturnDAL";
-            return (ISupplierReturnDAL)Assembly.Load(_path).CreateInstance(className);
+            var dt = dalMySql.GetDataTable(sql);
+            ExportByDataTable(workSheetName,dt);
         }
 
-        public static IProductOfferDAL CreateProductOfferDAL()
+        public void ExportBySqlServer(string workSheetName, string sql)
         {
-            string className = _path + ".WebApi.ProductOfferDAL";
-            return (IProductOfferDAL)Assembly.Load(_path).CreateInstance(className);
+            Console.WriteLine("…数据查询中…");
+            var dt = dalSqlServer.GetDataTable(sql);
+            if (dt.Rows.Count>1048575)
+            {
+                Console.WriteLine(string.Format("…数据记录为{0},超过了Excel最大数据行1048576,自动分割请输入命令…", dt.Rows.Count));
+                var goCode = Console.ReadLine();
+                if (goCode.ToUpper() == "YES")
+                {
+                    ExportByDataTable(workSheetName, dt);
+                }
+            }
+            else
+            {
+                ExportByDataTable(workSheetName, dt);
+            }
+            
+            
         }
-    }
 
-    static public class DALFactory<T> where T : IBaseDAL
-    {
-        static public T CreateDAL(string _path, string _className)
-        {
-            string className = string.Format("{0}.{1}", _path, _className);
-            return (T)Assembly.Load(_path).CreateInstance(className);
-        }
+        
     }
 }

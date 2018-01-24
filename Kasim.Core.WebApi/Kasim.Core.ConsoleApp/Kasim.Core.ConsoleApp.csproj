@@ -11,6 +11,9 @@
     <ProjectReference Include="..\Kasim.Core.BLL\Kasim.Core.BLL.csproj" />
     <ProjectReference Include="..\Kasim.Core.IBLL\Kasim.Core.IBLL.csproj" />
     <ProjectReference Include="..\Kasim.Core.Model\Kasim.Core.Model.csproj" />
+    <ProjectReference Include="..\Kasim.Core.MySQLDAL\Kasim.Core.MySQLDAL.csproj" />
+    <ProjectReference Include="..\Kasim.Core.OracleDAL\Kasim.Core.OracleDAL.csproj" />
+    <ProjectReference Include="..\Kasim.Core.SQLServerDAL\Kasim.Core.SQLServerDAL.csproj" />
   </ItemGroup>
 
 </Project>
