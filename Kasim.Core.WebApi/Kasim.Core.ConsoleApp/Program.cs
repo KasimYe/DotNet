@@ -53,12 +53,40 @@ namespace Kasim.Core.ConsoleApp
                             var bookName = Console.ReadLine();
                             Console.WriteLine("请输入章节名称：");
                             var title = Console.ReadLine();
-                            IBookTxtBLL bookTxtBLL = new BookTxtBLL_shubaowa {
-                                MenuUrl=menuUrl,
-                                ContentHeadUrl=contentHeadUrl,
-                                BookName=bookName
-                            };                            
-                            bookTxtBLL.DownloadBook(title);
+                            IBookTxtBLL bookTxtBLL = null;
+                            switch (menuUrl.Split('.')[1].ToUpper())
+                            {
+                                case "SJTXT":
+                                    bookTxtBLL = new BookTxtBLL_sjtxt
+                                    {
+                                        MenuUrl = menuUrl,
+                                        ContentHeadUrl = contentHeadUrl,
+                                        BookName = bookName
+                                    };
+                                    break;
+                                case "PAOMOV":
+                                    bookTxtBLL = new BookTxtBLL_paomov
+                                    {
+                                        MenuUrl = menuUrl,
+                                        ContentHeadUrl = contentHeadUrl,
+                                        BookName = bookName
+                                    };
+                                    break;
+                                case "SHUBAOWA":
+                                    bookTxtBLL = new BookTxtBLL_shubaowa
+                                    {
+                                        MenuUrl = menuUrl,
+                                        ContentHeadUrl = contentHeadUrl,
+                                        BookName = bookName
+                                    };
+                                    break;
+                                default:
+                                    break;
+                            }
+                            if (bookTxtBLL!=null)
+                            {
+                                bookTxtBLL.DownloadBook(title);
+                            }                            
                         }
                         catch (Exception ex)
                         {

@@ -125,7 +125,7 @@ namespace Kasim.Core.BLL.HtmlAgilityPack
         public void DownloadBook(string title)
         {
             var menuList = GetMenuList();            
-            var path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, BookName + ".txt");//"大唐妖孽.txt"
+            var path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TXT", BookName + ".txt");//"大唐妖孽.txt"
             if (string.IsNullOrEmpty(title))
             {                
                 foreach (var book in menuList)

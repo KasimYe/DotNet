@@ -25,11 +25,12 @@ namespace Kasim.Core.BLL.HtmlAgilityPack
         public void DownloadBook(string title)
         {
             var menuList = GetMenuList();
-            var path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, BookName + ".txt");//"家庭幻想.txt"
+            var path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"TXT", BookName + ".txt");//"家庭幻想.txt"
             if (string.IsNullOrEmpty(title))
             {
                 foreach (var book in menuList)
                 {
+                    FileOperate.WriteFile(path, book.Title);
                     FileOperate.WriteFile(path, GetContent(book).Content);
                 }
                 Console.WriteLine(string.Format("全部章节下载完毕，文件地址：{0}", path));
@@ -39,6 +40,7 @@ namespace Kasim.Core.BLL.HtmlAgilityPack
                 menuList.Where(x => x.Title == title).ToList()
                     .ForEach((x) =>
                     {
+                        FileOperate.WriteFile(path, x.Title);
                         FileOperate.WriteFile(path, GetContent(x).Content);
                     });
                 Console.WriteLine(string.Format("最新章节下载完毕，文件地址：{0}", path));
