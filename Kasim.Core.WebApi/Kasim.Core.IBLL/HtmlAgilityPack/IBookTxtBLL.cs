@@ -49,6 +49,9 @@ namespace Kasim.Core.IBLL.HtmlAgilityPack
 {
     public interface IBookTxtBLL
     {
+        string MenuUrl { get; set; }
+        string ContentHeadUrl { get; set; }
+        string BookName { get; set; }
         void DownloadBook(string title);
         List<Book> GetMenuList();
         Book GetContent(Book book);

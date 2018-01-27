@@ -44,10 +44,21 @@ namespace Kasim.Core.ConsoleApp
                     case "2":
                         try
                         {
+
+                            Console.WriteLine("请输入书本目录地址：");
+                            var menuUrl = Console.ReadLine();
+                            Console.WriteLine("请输入书本内容父级地址：");
+                            var contentHeadUrl = Console.ReadLine();
+                            Console.WriteLine("请输入书本名称：");
+                            var bookName = Console.ReadLine();
                             Console.WriteLine("请输入章节名称：");
-                            IBookTxtBLL bookTxtBLL = new BookTxtBLL();
-                            var menuName = Console.ReadLine();
-                            bookTxtBLL.DownloadBook(menuName);
+                            var title = Console.ReadLine();
+                            IBookTxtBLL bookTxtBLL = new BookTxtBLL_shubaowa {
+                                MenuUrl=menuUrl,
+                                ContentHeadUrl=contentHeadUrl,
+                                BookName=bookName
+                            };                            
+                            bookTxtBLL.DownloadBook(title);
                         }
                         catch (Exception ex)
                         {

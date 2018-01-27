@@ -52,11 +52,14 @@ using System.Text;
 
 namespace Kasim.Core.BLL.HtmlAgilityPack
 {
-    public class BookTxtBLL : IBookTxtBLL
+    public class BookTxtBLL_paomov : IBookTxtBLL
     {
-        IWebClientBLL webClientBLL;
+        public string MenuUrl { get; set; }
+        public string ContentHeadUrl { get; set; }
+        public string BookName { get; set; }
 
-        public BookTxtBLL()
+        IWebClientBLL webClientBLL;
+        public BookTxtBLL_paomov()
         {
             webClientBLL = new WebClientBLL();
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -64,8 +67,8 @@ namespace Kasim.Core.BLL.HtmlAgilityPack
 
         public List<Book> GetMenuList()
         {
-            string url = "http://www.paomov.com/txt91435.shtml";
-            string html = webClientBLL.GetWebClient(url, Encoding.GetEncoding("GBK"));
+            //string url = "http://www.paomov.com/txt91435.shtml";
+            string html = webClientBLL.GetWebClient(MenuUrl, Encoding.GetEncoding("GBK"));
             var document = new HtmlDocument();
             document.LoadHtml(html);
             var xPath = @"/html[1]/body[1]/div[1]/div[6]/div[1]/div[2]/ul[1]";
@@ -79,7 +82,8 @@ namespace Kasim.Core.BLL.HtmlAgilityPack
                 {
                     var a = li.SelectNodes(@"a")[0];
                     var name = a.InnerText.Trim();
-                    var uurl = "http://www.paomov.com" + a.Attributes["href"].Value.Trim();
+                    //var uurl = "http://www.paomov.com" + a.Attributes["href"].Value.Trim();
+                    var uurl= ContentHeadUrl+ a.Attributes["href"].Value.Trim();
                     list.Add(new Book()
                     {
                         Id = i,
@@ -121,7 +125,7 @@ namespace Kasim.Core.BLL.HtmlAgilityPack
         public void DownloadBook(string title)
         {
             var menuList = GetMenuList();            
-            var path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "大唐妖孽.txt");
+            var path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, BookName + ".txt");//"大唐妖孽.txt"
             if (string.IsNullOrEmpty(title))
             {                
                 foreach (var book in menuList)
