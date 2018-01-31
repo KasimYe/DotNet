@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kasim.Core.WebApi", "Kasim.Core.WebApi\Kasim.Core.WebApi.csproj", "{E2AAF027-65C5-4199-AAFD-80C2EFD029C7}"
 EndProject
@@ -27,7 +27,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kasim.Core.Common", "Kasim.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kasim.Core.HtmlAgilityPackApp", "Kasim.Core.HtmlAgilityPackApp\Kasim.Core.HtmlAgilityPackApp.csproj", "{70D056BB-B4AD-43C6-AE21-721AC9A569D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kasim.Core.ConsoleApp", "Kasim.Core.ConsoleApp\Kasim.Core.ConsoleApp.csproj", "{79E2C879-9448-4D05-9FC5-A08489EA3EAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kasim.Core.ConsoleApp", "Kasim.Core.ConsoleApp\Kasim.Core.ConsoleApp.csproj", "{79E2C879-9448-4D05-9FC5-A08489EA3EAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kasim.Core.BrPbsWebApp", "Kasim.Core.BrPbsWebApp\Kasim.Core.BrPbsWebApp.csproj", "{B3D6BEC3-4F0D-441B-A5D8-1DEEBEEC7707}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,10 @@ Global
 		{79E2C879-9448-4D05-9FC5-A08489EA3EAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79E2C879-9448-4D05-9FC5-A08489EA3EAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79E2C879-9448-4D05-9FC5-A08489EA3EAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3D6BEC3-4F0D-441B-A5D8-1DEEBEEC7707}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3D6BEC3-4F0D-441B-A5D8-1DEEBEEC7707}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3D6BEC3-4F0D-441B-A5D8-1DEEBEEC7707}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3D6BEC3-4F0D-441B-A5D8-1DEEBEEC7707}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

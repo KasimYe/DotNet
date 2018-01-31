@@ -51,5 +51,6 @@ namespace Kasim.Core.IBLL.HtmlAgilityPack
     {
         string GetWebClient(string url);
         string GetWebClient(string url, Encoding encoding);
+        string GetWordByBaiduAidemo(string url);
     }
 }

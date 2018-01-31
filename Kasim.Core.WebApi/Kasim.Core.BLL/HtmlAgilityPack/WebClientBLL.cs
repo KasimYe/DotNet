@@ -42,6 +42,8 @@
 *
 *=====================================================================*/
 using Kasim.Core.IBLL.HtmlAgilityPack;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -72,6 +74,42 @@ namespace Kasim.Core.BLL.HtmlAgilityPack
             strHTML = sr.ReadToEnd();
             myStream.Close();
             return strHTML;
+        }
+
+        public string GetWordByBaiduAidemo(string imgUrl)
+        {
+            string url = "http://ai.baidu.com/aidemo";
+            string body = "{\"type\":\"commontext\",\"image\":\"\",\"image_url\":\"" + imgUrl + "\"}";
+            body = "{\"type\":\"commontext\",\"action\":\"getHeader\",\"image_url\":\"" + imgUrl + "\"}";
+            Encoding encoding = Encoding.UTF8;
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = "POST";
+            request.Accept = "*/*";
+            request.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
+
+            byte[] buffer = encoding.GetBytes(body);
+            request.ContentLength = buffer.Length;
+            request.GetRequestStream().Write(buffer, 0, buffer.Length);
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            using (StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
+            {
+                var result = reader.ReadToEnd();
+                JObject jObject = (JObject)JsonConvert.DeserializeObject(result);
+                StringBuilder str = new StringBuilder();
+                foreach (var obj in jObject)
+                {
+                    str.Append(string.Format("Key:{0}   Value:{1}\r\n", obj.Key, obj.Value));
+                    if (obj.Value is JObject)
+                    {
+                        foreach (var item in (JObject)obj.Value)
+                        {
+                            str.Append(string.Format("Key:{0}   Value:{1}\r\n", item.Key, item.Value));
+                        }
+                    }
+                }
+                var sb = str.ToString();
+                return sb;
+            }
         }
     }
 }

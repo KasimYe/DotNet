@@ -80,6 +80,14 @@ namespace Kasim.Core.ConsoleApp
                                         BookName = bookName
                                     };
                                     break;
+                                case "7MXS":
+                                    bookTxtBLL = new BookTxtBLL_7mxs
+                                    {
+                                        MenuUrl = menuUrl,
+                                        ContentHeadUrl = contentHeadUrl,
+                                        BookName = bookName
+                                    };
+                                    break;
                                 default:
                                     break;
                             }
@@ -108,6 +116,17 @@ namespace Kasim.Core.ConsoleApp
                             }
                             IExportSqlBLL exportSqlBLL = new ExportSqlBLL(conSet);                            
                             exportSqlBLL.ExportBySqlServer(workSheetName, sql);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
+                        break;
+                    case "test":
+                        try
+                        {
+                            IWebClientBLL webClientBLL = new WebClientBLL();
+                            Console.WriteLine(webClientBLL.GetWordByBaiduAidemo("http://www.7mxs.cc/image/fei.jpg"));
                         }
                         catch (Exception ex)
                         {

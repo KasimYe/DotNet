@@ -1,0 +1,43 @@
+﻿@page
+@model Kasim.Core.BrPbsWebApp.Pages.ClientModel
+@{
+    ViewData["Title"] = "连锁门店列表";
+    Layout = "~/Pages/_Layout.cshtml";
+}
+
+<h2>连锁门店列表</h2>
+
+<div class="row">
+    <div class="col-md-3">
+        <form asp-action="ClientModel">
+            @*<div class="form-group">
+                <label asp-for="Vc">连锁ID</label>
+                <input type="password" class="form-control" asp-for="Vc" placeholder="请输入连锁ID">
+            </div>*@
+            <div class="form-group">
+                <label asp-for="ClientName">客户名称</label>
+                <input type="text" class="form-control" asp-for="ClientName" placeholder="请输入检索名称">
+            </div>
+            <hr />
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" asp-for="ToJson"> JSON格式
+                </label>
+            </div>
+            <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <div class="col-md-9">
+        <form>
+            <div class="form-group">
+                <label asp-for="PostUrl">Url</label>
+                <textarea class="form-control" rows="2" asp-for="PostUrl" readonly="readonly"></textarea>
+            </div>
+            <div class="form-group">
+                <label asp-for="ResponseText">Response</label>
+                <textarea class="form-control" rows="20" asp-for="ResponseText" readonly="readonly"></textarea>
+            </div>
+        </form>
+    </div>
+</div>
+
