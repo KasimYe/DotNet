@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Kasim.Core.BLL.WebApp;
+using Kasim.Core.IBLL.WebApp;
 using Kasim.Core.Model.WebApp;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
@@ -43,7 +46,40 @@ namespace Kasim.Core.BrPbsWebApp.Pages
 
         public void OnGet()
         {
-            EditDate = DateTime.Now;
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("Vc")))
+            {
+                Response.Redirect("/");
+            }
+            else
+            {
+                EditDate = DateTime.Now.AddYears(-1);
+            }
+        }
+
+        public void OnPost()
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    Vc = HttpContext.Session.GetString("Vc");
+                    var id = (IsHYProduct ? "1|" : "0|") + EditDate.ToString("yyyyMMdd") + (IsInv ? "|1|" : "|0|")
+                        + (string.IsNullOrEmpty(PName) ? "" : PName) +(IsZ?"|z":"|f")+(IsStop? "|stop" : "|sure");
+                    
+                    PostUrl = string.Format("{0}Action?n={1}{2}&m=GetProductInfoByPName&p={3}&id={4}",
+                        AppOptions.ServiceUrl, Vc, (ToJson ? "&j=1" : ""), AppOptions.ServiceName, id); ;
+                    var url = string.Format("{0}Action?n={1}{2}&z=1&m=GetProductInfoByPName&p={3}&id={4}",
+                        AppOptions.ServiceUrl, Vc, (ToJson ? "&j=1" : "&j=0"), AppOptions.ServiceName, id);
+
+                    IPbsClientBLL bll = new PbsClientBLL();
+                    var result = bll.GetResponse(url);
+                    ResponseText = result;
+                }
+                catch (Exception ex)
+                {
+                    ResponseText = ex.Message;
+                }
+            }
         }
     }
 }

@@ -11,9 +11,9 @@
     <div class="col-md-3">
         <form asp-action="ClientModel">
             @*<div class="form-group">
-                <label asp-for="Vc">连锁ID</label>
-                <input type="password" class="form-control" asp-for="Vc" placeholder="请输入连锁ID">
-            </div>*@
+            <label asp-for="Vc">连锁ID</label>
+            <input type="password" class="form-control" asp-for="Vc" placeholder="请输入连锁ID">
+        </div>*@
             <div class="form-group">
                 <label asp-for="ClientName">客户名称</label>
                 <input type="text" class="form-control" asp-for="ClientName" placeholder="请输入检索名称">
@@ -25,6 +25,7 @@
                 </label>
             </div>
             <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+            <button type="button" id="format" class="btn btn-success">Format</button>
         </form>
     </div>
     <div class="col-md-9">
@@ -36,6 +37,10 @@
             <div class="form-group">
                 <label asp-for="ResponseText">Response</label>
                 <textarea class="form-control" rows="20" asp-for="ResponseText" readonly="readonly"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="ReqJson">Format</label>
+                <pre id="ReqJson"></pre>
             </div>
         </form>
     </div>

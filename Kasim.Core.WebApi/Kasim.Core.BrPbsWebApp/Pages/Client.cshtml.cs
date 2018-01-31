@@ -34,7 +34,10 @@ namespace Kasim.Core.BrPbsWebApp.Pages
 
         public void OnGet()
         {
-            
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("Vc")))
+            {
+                Response.Redirect("/");
+            }
         }
 
         public void OnPost()

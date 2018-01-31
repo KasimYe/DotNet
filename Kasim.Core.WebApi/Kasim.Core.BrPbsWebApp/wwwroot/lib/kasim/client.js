@@ -1,12 +1,16 @@
 ﻿$(document).ready(function () {
-    $('#submit').click(function () {
-        submit();
+    $('#format').click(function () {
+        format();
     });
 });
 
-function submit() {
-    var url = "/doPost";
-    $.get(url, function (data) {
-        alert(data);
-    });
+function format() {    
+    if ($('#ToJson').prop("checked")) {
+        var result = JSON.parse($("#ResponseText").val());
+        var formatVal = JSON.stringify(result, null, 2);
+        $("#ReqJson").text(formatVal);
+    } else {
+        $("#ReqJson").text(formatXml($('#ResponseText').val()));
+    }
+    
 }
