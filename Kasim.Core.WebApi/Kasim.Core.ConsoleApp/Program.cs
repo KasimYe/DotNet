@@ -88,6 +88,14 @@ namespace Kasim.Core.ConsoleApp
                                         BookName = bookName
                                     };
                                     break;
+                                case "HRSX8":
+                                    bookTxtBLL = new BookTxtBLL_hrsx8
+                                    {
+                                        MenuUrl = menuUrl,
+                                        ContentHeadUrl = contentHeadUrl,
+                                        BookName = bookName
+                                    };
+                                    break;
                                 default:
                                     break;
                             }
