@@ -52,7 +52,7 @@ namespace Kasim.Core.BrPbsWebApp.Pages
             }
             else
             {
-                EditDate = DateTime.Now.AddYears(-1);
+                EditDate = DateTime.Now.AddMonths(-1);
             }
         }
 
@@ -62,6 +62,10 @@ namespace Kasim.Core.BrPbsWebApp.Pages
             {
                 try
                 {
+                    if (EditDate < DateTime.Now.AddMonths(-1) && string.IsNullOrEmpty(PName))
+                    {
+                        EditDate = DateTime.Now.AddMonths(-1);
+                    }
                     Vc = HttpContext.Session.GetString("Vc");
                     var id = (IsHYProduct ? "1|" : "0|") + EditDate.ToString("yyyyMMdd") + (IsInv ? "|1|" : "|0|")
                         + (string.IsNullOrEmpty(PName) ? "" : PName) + (IsZ ? "|z" : "|f") + (IsStop ? "|stop" : "|sure");
