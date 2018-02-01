@@ -13,24 +13,15 @@ using Microsoft.Extensions.Options;
 
 namespace Kasim.Core.BrPbsWebApp.Pages
 {
-    public class ProductModel : PageModel
+    public class SaleBillDetailModel : PageModel
     {
         [BindProperty]
-        public string Vc { get; set; }
+        public string Vc { get; set; }      
+        [DisplayName("单据ID")]
         [BindProperty]
-        public bool IsHYProduct { get; set; }
-        [DisplayName("更新时间")]
+        public string SaleBillID { get; set; }
         [BindProperty]
-        public DateTime EditDate { get; set; }
-        [BindProperty]
-        public bool IsInv { get; set; }
-        [DisplayName("商品名称")]
-        [BindProperty]
-        public string PName { get; set; }
-        [BindProperty]
-        public bool IsZ { get; set; }
-        [BindProperty]
-        public bool IsStop { get; set; }
+        public bool IsZk { get; set; }
 
         [BindProperty]
         public bool ToJson { get; set; }
@@ -39,7 +30,7 @@ namespace Kasim.Core.BrPbsWebApp.Pages
         [BindProperty]
         public string ResponseText { get; set; }
         private AppOptions AppOptions;
-        public ProductModel(IOptions<AppOptions> appOptions)
+        public SaleBillDetailModel(IOptions<AppOptions> appOptions)
         {
             AppOptions = appOptions.Value;
         }
@@ -49,11 +40,7 @@ namespace Kasim.Core.BrPbsWebApp.Pages
             if (string.IsNullOrEmpty(HttpContext.Session.GetString("Vc")))
             {
                 Response.Redirect("/");
-            }
-            else
-            {
-                EditDate = DateTime.Now.AddYears(-1);
-            }
+            }            
         }
 
         public void OnPost()
@@ -63,12 +50,11 @@ namespace Kasim.Core.BrPbsWebApp.Pages
                 try
                 {
                     Vc = HttpContext.Session.GetString("Vc");
-                    var id = (IsHYProduct ? "1|" : "0|") + EditDate.ToString("yyyyMMdd") + (IsInv ? "|1|" : "|0|")
-                        + (string.IsNullOrEmpty(PName) ? "" : PName) + (IsZ ? "|z" : "|f") + (IsStop ? "|stop" : "|sure");
+                    var id = SaleBillID + "|" + (IsZk ? "1" : "");
 
-                    PostUrl = string.Format("{0}Action?n={1}{2}&m=GetProductInfoByPName&p={3}&id={4}",
-                        AppOptions.ServiceUrl, Vc, (ToJson ? "&j=1" : ""), AppOptions.ServiceName, id);
-                    var url = string.Format("{0}Action?n={1}{2}&z=1&m=GetProductInfoByPName&p={3}&id={4}",
+                    PostUrl = string.Format("{0}Action?n={1}{2}&m=GetFormDetailByDetailID&p={3}&id={4}",
+                        AppOptions.ServiceUrl, Vc, (ToJson ? "&j=1" : ""), AppOptions.ServiceName, id); ;
+                    var url = string.Format("{0}Action?n={1}{2}&z=1&m=GetFormDetailByDetailID&p={3}&id={4}",
                         AppOptions.ServiceUrl, Vc, (ToJson ? "&j=1" : "&j=0"), AppOptions.ServiceName, id);
 
                     IPbsClientBLL bll = new PbsClientBLL();

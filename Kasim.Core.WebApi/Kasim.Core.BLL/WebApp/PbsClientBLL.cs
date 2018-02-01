@@ -41,6 +41,7 @@
 ** Ver.：V1.0.0
 **----------------------------------------------------------------*/
 
+using Kasim.Core.Common;
 using Kasim.Core.IBLL.WebApp;
 using System.IO;
 using System.Net;
@@ -63,6 +64,15 @@ namespace Kasim.Core.BLL.WebApp
             {                
                 return reader.ReadToEnd();
             }
-        }        
+        }
+
+        public string PostWebClient(string url,string xml)
+        {
+            var client = new System.Net.WebClient();
+            client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+            var byteArray = System.Text.Encoding.UTF8.GetBytes(xml);
+            var responseArray = client.UploadData(url, "POST", byteArray);
+            return System.Text.Encoding.UTF8.GetString(WebDataZip.Decompress(responseArray));
+        }
     }
 }

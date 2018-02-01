@@ -8,12 +8,14 @@
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link href="~/lib/kasim/dir.css" rel="stylesheet" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link href="~/lib/kasim/dir.css" rel="stylesheet" />
     </environment>
 
     @*把母版脚本放到这里加载，如果放到页末则视图页面无法使用jquery*@
@@ -37,8 +39,9 @@
                     <li><a asp-page="/Product">商品信息</a></li>
                     <li><a asp-page="/Inventory">库存信息</a></li>
                     <li><a asp-page="/SaleBill">配送单据</a></li>
-                    <li><a asp-page="/OrderBill">要货订单</a></li>
+                    <li><a asp-page="/SaleBillDetail">配送明细</a></li>
                     <li><a asp-page="/BillStatus">单据状态</a></li>
+                    <li><a asp-page="/OrderBill">要货订单</a></li>
                 </ul>
             </div>
         </div>

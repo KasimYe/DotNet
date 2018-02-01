@@ -1,19 +1,24 @@
 ﻿@page
-@model Kasim.Core.BrPbsWebApp.Pages.BillStatusModel
+@model Kasim.Core.BrPbsWebApp.Pages.SaleBillDetailModel
 @{
-    ViewData["Title"] = "单据状态";
+    ViewData["Title"] = "单据明细";
     Layout = "~/Pages/_Layout.cshtml";
 }
 
-<h2>配送单状态</h2>
+<h2>单据明细</h2>
 
 <div class="row">
     <div class="col-md-3">
         <form asp-action="SaleBillModel">
             <div class="form-group">
-                <label asp-for="FormNumber"></label>
-                <input type="text" class="form-control" asp-for="FormNumber" placeholder="随货联上的单据号码FormNumber">
-            </div>            
+                <label asp-for="SaleBillID"></label>
+                <input type="text" class="form-control" asp-for="SaleBillID" placeholder="请输入单据SaleBillID">
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" asp-for="IsZk"> 包含折扣明细
+                </label>
+            </div>
             <hr />
             <div class="checkbox">
                 <label>

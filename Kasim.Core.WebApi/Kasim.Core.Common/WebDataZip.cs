@@ -32,23 +32,50 @@
 /*----------------------------------------------------------------
 ** Copyright (C) 2017 
 **
-** file：IPbsClientBLL
+** file：WebDataZip
 ** desc：
 ** 
 ** auth：KasimYe (KASIM)
-** date：2018-01-31 13:11:08
+** date：2018-02-01 14:30:17
 **
 ** Ver.：V1.0.0
 **----------------------------------------------------------------*/
+
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
 using System.Text;
 
-namespace Kasim.Core.IBLL.WebApp
+namespace Kasim.Core.Common
 {
-    public interface IPbsClientBLL
+    static public class WebDataZip
     {
-        string GetResponse(string url);
-        string PostWebClient(string url, string xml);
+        static public byte[] Decompress(byte[] data)
+        {
+            try
+            {
+                var ms = new MemoryStream(data);
+                var zip = new GZipStream(ms, CompressionMode.Decompress, true);
+                var msreader = new MemoryStream();
+                var buffer = new byte[4095];
+                while (true)
+                {
+                    var reader = zip.Read(buffer, 0, buffer.Length);
+                    if (reader <= 0) break;
+                    msreader.Write(buffer, 0, reader);
+                }
+                zip.Close();
+                ms.Close();
+                msreader.Position = 0;
+                buffer = msreader.ToArray();
+                msreader.Close();
+                return buffer;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

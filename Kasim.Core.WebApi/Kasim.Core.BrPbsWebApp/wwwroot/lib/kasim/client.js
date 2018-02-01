@@ -1,16 +1,16 @@
 ﻿$(document).ready(function () {
-    $('#format').click(function () {
+    $('#format').click(function () {        
         format();
     });
 });
 
-function format() {    
+function format() {        
     if ($('#ToJson').prop("checked")) {
-        var result = JSON.parse($("#ResponseText").val());
+        var result = JSON.parse($("#ResponseText").text());
         var formatVal = JSON.stringify(result, null, 2);
-        $("#ReqJson").text(formatVal);
+        $("#ResponseText").text(formatVal);
     } else {
-        $("#ReqJson").text(formatXml($('#ResponseText').val()));
+        $("#ResponseText").text(formatXml($('#ResponseText').text()));
     }
     
 }

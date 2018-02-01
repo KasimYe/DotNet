@@ -33,17 +33,13 @@
     <div class="col-md-9">
         <form>
             <div class="form-group">
-                <label asp-for="PostUrl">Url</label>
-                <textarea class="form-control" rows="2" asp-for="PostUrl" readonly="readonly"></textarea>
+                <label for="PostUrl">Url</label>
+                <pre id="PostUrl">@Model.PostUrl</pre>
             </div>
             <div class="form-group">
-                <label asp-for="ResponseText">Response</label>
-                <textarea class="form-control" rows="20" asp-for="ResponseText" readonly="readonly"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="ReqJson">Format</label>
-                <pre id="ReqJson"></pre>
-            </div>
+                <label for="ResponseText">Response</label>
+                <pre id="ResponseText">@Model.ResponseText</pre>
+            </div>        
         </form>
     </div>
 </div>
