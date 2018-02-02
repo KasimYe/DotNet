@@ -22,6 +22,7 @@ namespace Kasim.Core.ConsoleApp
             Console.WriteLine("【1】重新计算后补返利设置");
             Console.WriteLine("【2】爬最新章节^o^!!!");
             Console.WriteLine("【3】根据SQL语句导出数据到Excel");
+            Console.WriteLine("【4】爬酷我音乐的歌,盗版万岁^o^!!!");
             Console.WriteLine("请输入对应菜单数字：");
             var keyCode = Console.ReadLine();
             while (keyCode.ToUpper()!="EXIT")
@@ -129,6 +130,14 @@ namespace Kasim.Core.ConsoleApp
                         {
                             Console.WriteLine(ex.Message);
                         }
+                        break;
+                    case "4":
+                        Console.WriteLine("请输入歌手名字：");
+                        var artist = Console.ReadLine();
+                        Console.WriteLine("请输入歌名：");
+                        var name = Console.ReadLine();
+                        IMusicDownBLL musicDownBLL = new MusicDownBLL();
+                        musicDownBLL.DownMusic(artist, name);
                         break;
                     case "test":
                         try
