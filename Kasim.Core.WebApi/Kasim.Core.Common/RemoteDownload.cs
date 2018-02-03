@@ -45,6 +45,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 
 namespace Kasim.Core.Common
@@ -52,12 +53,70 @@ namespace Kasim.Core.Common
 
     public class WebDownload
     {
+        public async static void DownLoadAsync(string Url, string FileName)
+        {          
+            
+
+
+            try
+            {
+                HttpClient client = new HttpClient();
+                var response = await client.GetAsync(Url);
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    var stream = await response.Content.ReadAsStreamAsync();
+
+                    try
+                    {
+                        var path = Path.GetDirectoryName(FileName);
+                        if (!Directory.Exists(path))
+                        {
+                            Directory.CreateDirectory(path);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(string.Format("{0} \r\n {1}", FileName, ex.Message));
+                        return;
+                    }
+
+                    byte[] buffer = new byte[1024];
+                    if (File.Exists(FileName))
+                        File.Delete(FileName);
+                    Stream outStream = File.Create(FileName);
+                    int l;
+                    do
+                    {
+                        l = stream.Read(buffer, 0, buffer.Length);
+                        if (l > 0)
+                            outStream.Write(buffer, 0, l);
+                    }
+                    while (l > 0);
+                    outStream.Close();
+                    stream.Close();
+                    Console.WriteLine(string.Format("***** 歌曲下载成功！ *****\r\n{0}", FileName));
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(string.Format("{0} \r\n {1}", FileName, ex.Message));
+            }
+        }
+
         public static void DownLoad(string Url, string FileName)
         {
-            var path = Path.GetDirectoryName(FileName);
-            if (!Directory.Exists(path))
+            try
             {
-                Directory.CreateDirectory(path);
+                var path = Path.GetDirectoryName(FileName);
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(string.Format("{0} \r\n {1}", FileName, ex.Message));
+                return;
             }
             bool Value = false;
             WebResponse response = null;

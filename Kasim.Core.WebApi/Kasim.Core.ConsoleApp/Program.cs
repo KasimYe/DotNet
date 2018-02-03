@@ -10,13 +10,14 @@ namespace Kasim.Core.ConsoleApp
     class Program
     {
         static void Main(string[] args)
-        {            
+        {
             Console.WriteLine("*****************************************************************************************************");
             Console.WriteLine("******************************* Welcome to use Kasim.Core.ConsoleApp! *******************************");
             Console.WriteLine("*****************************************************************************************************");
             Console.WriteLine("************************************************ Menu ***********************************************");
             Console.WriteLine("*****************************************************************************************************");
-            var conSet = new ConnectionStringOptions {
+            var conSet = new ConnectionStringOptions
+            {
                 DevConnection = "Data Source=192.168.0.2,1400;database=Bz_MIS;uid=sa;pwd=abc123"
             };
             Console.WriteLine("【1】重新计算后补返利设置");
@@ -25,7 +26,7 @@ namespace Kasim.Core.ConsoleApp
             Console.WriteLine("【4】爬酷我音乐的歌,盗版万岁^o^!!!");
             Console.WriteLine("请输入对应菜单数字：");
             var keyCode = Console.ReadLine();
-            while (keyCode.ToUpper()!="EXIT")
+            while (keyCode.ToUpper() != "EXIT")
             {
                 switch (keyCode)
                 {
@@ -35,12 +36,12 @@ namespace Kasim.Core.ConsoleApp
                             Console.WriteLine("请输入返利设置ID：");
                             ISupplierReturnBLL supplierReturnBLL = new SupplierReturnBLL(conSet);
                             var sRSCID = int.Parse(Console.ReadLine());
-                            supplierReturnBLL.SupplySupplierReturn(sRSCID);                            
+                            supplierReturnBLL.SupplySupplierReturn(sRSCID);
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine(ex.Message);                            
-                        }                        
+                            Console.WriteLine(ex.Message);
+                        }
                         break;
                     case "2":
                         try
@@ -100,10 +101,10 @@ namespace Kasim.Core.ConsoleApp
                                 default:
                                     break;
                             }
-                            if (bookTxtBLL!=null)
+                            if (bookTxtBLL != null)
                             {
                                 bookTxtBLL.DownloadBook(title);
-                            }                            
+                            }
                         }
                         catch (Exception ex)
                         {
@@ -118,12 +119,12 @@ namespace Kasim.Core.ConsoleApp
                             Console.WriteLine("请输入查询语句(不能超过26列)：");
                             var goCode = Console.ReadLine();
                             var sql = "";
-                            while (goCode.ToUpper()!="GO")
+                            while (goCode.ToUpper() != "GO")
                             {
-                                sql += " "+goCode;
+                                sql += " " + goCode;
                                 goCode = Console.ReadLine();
                             }
-                            IExportSqlBLL exportSqlBLL = new ExportSqlBLL(conSet);                            
+                            IExportSqlBLL exportSqlBLL = new ExportSqlBLL(conSet);
                             exportSqlBLL.ExportBySqlServer(workSheetName, sql);
                         }
                         catch (Exception ex)
@@ -134,10 +135,12 @@ namespace Kasim.Core.ConsoleApp
                     case "4":
                         Console.WriteLine("请输入歌手名字：");
                         var artist = Console.ReadLine();
-                        Console.WriteLine("请输入歌名：");
+                        Console.WriteLine("请输入专辑名(可选)：");
+                        var album = Console.ReadLine();
+                        Console.WriteLine("请输入歌名(可选)：");
                         var name = Console.ReadLine();
                         IMusicDownBLL musicDownBLL = new MusicDownBLL();
-                        musicDownBLL.DownMusic(artist, name);
+                        musicDownBLL.DownMusic(artist, album, name);
                         break;
                     case "test":
                         try
@@ -155,7 +158,7 @@ namespace Kasim.Core.ConsoleApp
                         break;
                 }
                 keyCode = Console.ReadLine();
-            }           
-        }        
+            }
+        }
     }
 }
