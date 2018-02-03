@@ -1,0 +1,1 @@
+start dotnet Kasim.Core.ConsoleApp.dll
