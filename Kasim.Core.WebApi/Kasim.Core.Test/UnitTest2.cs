@@ -48,14 +48,13 @@ using Kasim.Core.Model.WebApi.ProductOffer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Kasim.Core.Test
 {
     [TestClass]
     public class UnitTest2
     {
-        [TestMethod]
+        
         public void TestProductOffer()
         {
             ConnectionStringOptions _conns = new ConnectionStringOptions {
@@ -64,5 +63,80 @@ namespace Kasim.Core.Test
             IProductOfferBLL productOfferBLL = new ProductOfferBLL(_conns);
             List<ProductsWebOffer> list = productOfferBLL.ProductsWebOfferListById(18548);
         }
+
+        /// <summary>
+        /// 获取基础信息、库存信息、单据信息等
+        /// </summary>
+        [TestMethod]
+        public void GetResponse()
+        {
+            var url = "http://115.231.58.130:8033/BRService.asmx/Action?n=45045b3d2a945736&m=GetClientInfoByClientName&p=BrServer&id=";
+            var webRequest = System.Net.WebRequest.Create(url);
+            webRequest.Timeout = 600000;
+            var webResponse = webRequest.GetResponse();
+            var stream = webResponse.GetResponseStream();
+            var sourceBuffer = StreamToBytes(stream);
+            var buffer = Decompress(sourceBuffer);
+            var result = System.Text.Encoding.UTF8.GetString(buffer);
+        }
+
+        /// <summary>
+        /// 提交要货单、返回配送获取状态
+        /// </summary>
+        [TestMethod]
+        public void DoPost()
+        {
+            var url = "http://115.231.58.130:8033/BRService.asmx/Action?n=45045b3d2a945736&m=SubOrders&p=BrServer";
+            var xml = "<?xml version=\"1.0\" encoding=\"utf-8\" ?><order><orderitems>"
+                + "<orderitem><DetailID>1</DetailID><FID>1</FID><ClientID>1</ClientID><StoreID>1</StoreID><PID>1</PID><Quantity>1</Quantity></orderitem>"
+                + "<orderitem><DetailID>2</DetailID><FID>1</FID><ClientID>1</ClientID><StoreID>1</StoreID><PID>2</PID><Quantity>1</Quantity></orderitem>"
+                + "</orderitems></order>";
+            var client = new System.Net.WebClient();
+            client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+            var byteArray = System.Text.Encoding.UTF8.GetBytes(xml);
+            var responseArray = client.UploadData(url, "POST", byteArray);
+            var result = System.Text.Encoding.UTF8.GetString(Decompress(responseArray));
+        }
+        #region "解压缩返回的数据"
+        public byte[] Decompress(byte[] data)
+        {
+            try
+            {
+                var ms = new System.IO.MemoryStream(data);
+                var zip = new System.IO.Compression.GZipStream(ms, System.IO.Compression.CompressionMode.Decompress, true);
+                var msreader = new System.IO.MemoryStream();
+                var buffer = new byte[4095];
+                while (true)
+                {
+                    var reader = zip.Read(buffer, 0, buffer.Length);
+                    if (reader <= 0) break;
+                    msreader.Write(buffer, 0, reader);
+                }
+                zip.Close();
+                ms.Close();
+                msreader.Position = 0;
+                buffer = msreader.ToArray();
+                msreader.Close();
+                return buffer;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public byte[] StreamToBytes(System.IO.Stream stream)
+        {
+            var bytes = new List<byte>();
+            var temp = stream.ReadByte();
+            while (temp != -1)
+            {
+                bytes.Add(Convert.ToByte(temp));
+                temp = stream.ReadByte();
+            }
+            return bytes.ToArray();
+        }
+        #endregion
+
     }
 }

@@ -51,7 +51,8 @@ namespace Kasim.Core.IBLL.HtmlAgilityPack
     public interface IMusicDownBLL
     {       
         void GetParentMusic(string url);
-        void GetMusic(Music music);
-        void DownMusic(string url,string name);
+        bool GetMusic(Music music);
+        void DownMusic(string url,string album, string name);
+        void GetMusicAsync(Music music);
     }
 }

@@ -43,8 +43,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.IO.Compression;
 using System.Text;
 
 namespace Kasim.Core.Common
@@ -55,9 +53,9 @@ namespace Kasim.Core.Common
         {
             try
             {
-                var ms = new MemoryStream(data);
-                var zip = new GZipStream(ms, CompressionMode.Decompress, true);
-                var msreader = new MemoryStream();
+                var ms = new System.IO.MemoryStream(data);
+                var zip = new System.IO.Compression.GZipStream(ms, System.IO.Compression.CompressionMode.Decompress, true);
+                var msreader = new System.IO.MemoryStream();
                 var buffer = new byte[4095];
                 while (true)
                 {
@@ -76,6 +74,18 @@ namespace Kasim.Core.Common
             {
                 throw;
             }
+        }
+
+        static public byte[] StreamToBytes(System.IO.Stream stream)
+        {
+            var bytes = new List<byte>();
+            var temp = stream.ReadByte();
+            while (temp != -1)
+            {
+                bytes.Add(Convert.ToByte(temp));
+                temp = stream.ReadByte();
+            }
+            return bytes.ToArray();
         }
     }
 }

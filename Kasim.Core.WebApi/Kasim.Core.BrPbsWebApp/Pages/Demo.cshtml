@@ -12,11 +12,86 @@
         <form asp-action="Demo">
             <div class="form-group">
                 <label for="PostUrl">C#</label>
-                <pre id="PostUrl">@Model.PostUrl</pre>
-            </div>                
+                <pre id="PostUrl">
+
+        /// &lt;summary&gt;
+        /// 获取基础信息、库存信息、单据信息等
+        /// &lt;/summary&gt;        
+        public void GetResponse()
+        {
+            var url = "http://115.231.58.130:8033/BRService.asmx/Action?n=45045b3d2a945736&m=GetClientInfoByClientName&p=BrServer&id=";
+            var webRequest = System.Net.WebRequest.Create(url);
+            webRequest.Timeout = 600000;
+            var webResponse = webRequest.GetResponse();
+            var stream = webResponse.GetResponseStream();
+            var sourceBuffer = StreamToBytes(stream);
+            var buffer = Decompress(sourceBuffer);
+            var result = System.Text.Encoding.UTF8.GetString(buffer);
+        }
+
+        /// &lt;summary&gt;
+        /// 提交要货单、返回配送单获取状态
+        /// &lt;/summary&gt;        
+        public void DoPost()
+        {
+            var url = "http://115.231.58.130:8033/BRService.asmx/Action?n=45045b3d2a945736&m=SubOrders&p=BrServer";
+            var xml = "&lt;?xml version=\"1.0\" encoding=\"utf-8\" ?&gt;&lt;order&gt;&lt;orderitems&gt;"
+                + "&lt;orderitem&gt;&lt;DetailID&gt;1&lt;/DetailID&gt;&lt;FID&gt;1&lt;/FID&gt;&lt;ClientID&gt;1&lt;/ClientID&gt;&lt;StoreID&gt;1&lt;/StoreID&gt;&lt;PID&gt;1&lt;/PID&gt;&lt;Quantity&gt;1&lt;/Quantity&gt;&lt;/orderitem&gt;"
+                + "&lt;orderitem&gt;&lt;DetailID&gt;2&lt;/DetailID&gt;&lt;FID&gt;1&lt;/FID&gt;&lt;ClientID&gt;1&lt;/ClientID&gt;&lt;StoreID&gt;1&lt;/StoreID&gt;&lt;PID&gt;2&lt;/PID&gt;&lt;Quantity&gt;1&lt;/Quantity&gt;&lt;/orderitem&gt;"
+                + "&lt;/orderitems&gt;&lt;/order&gt;";
+            var client = new System.Net.WebClient();
+            client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+            var byteArray = System.Text.Encoding.UTF8.GetBytes(xml);
+            var responseArray = client.UploadData(url, "POST", byteArray);
+            var result = System.Text.Encoding.UTF8.GetString(Decompress(responseArray));
+        }
+
+        #region "解压缩返回的数据"
+        public byte[] Decompress(byte[] data)
+        {
+            try
+            {
+                var ms = new System.IO.MemoryStream(data);
+                var zip = new System.IO.Compression.GZipStream(ms, System.IO.Compression.CompressionMode.Decompress, true);
+                var msreader = new System.IO.MemoryStream();
+                var buffer = new byte[4095];
+                while (true)
+                {
+                    var reader = zip.Read(buffer, 0, buffer.Length);
+                    if (reader <= 0) break;
+                    msreader.Write(buffer, 0, reader);
+                }
+                zip.Close();
+                ms.Close();
+                msreader.Position = 0;
+                buffer = msreader.ToArray();
+                msreader.Close();
+                return buffer;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public byte[] StreamToBytes(System.IO.Stream stream)
+        {
+            var bytes = new List<byte>();
+            var temp = stream.ReadByte();
+            while (temp != -1)
+            {
+                bytes.Add(Convert.ToByte(temp));
+                temp = stream.ReadByte();
+            }
+            return bytes.ToArray();
+        }
+        #endregion
+
+</pre>
+            </div>
             <div class="form-group">
-                <label for="ResponseText">Response</label>
-                <pre id="ResponseText">@Model.ResponseText</pre>
+                <label for="ResponseText">JAVA</label>
+                <pre id="ResponseText"></pre>
             </div>
         </form>
     </div>

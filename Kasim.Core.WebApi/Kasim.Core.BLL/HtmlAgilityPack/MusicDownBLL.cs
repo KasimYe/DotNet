@@ -65,7 +65,7 @@ namespace Kasim.Core.BLL.HtmlAgilityPack
 
         private ParentMusic parentMusic = null;
         private int errTime = 0;
-        public void DownMusic(string artist, string name)
+        public void DownMusic(string artist, string album, string name)
         {
             var url = "http://www.kuwo.cn/artist/content?name=" + artist;
             string html = webClientBLL.GetWebClient(url, Encoding.UTF8);
@@ -76,6 +76,8 @@ namespace Kasim.Core.BLL.HtmlAgilityPack
             if (reqObj != null)
             {
                 var ul = reqObj.SelectNodes(@"ul")[0];
+                if (string.IsNullOrEmpty(ul.Attributes["data-page"].Value)) return;
+                
                 parentMusic = new ParentMusic
                 {
                     Page = int.Parse(ul.Attributes["data-page"].Value),
@@ -97,14 +99,25 @@ namespace Kasim.Core.BLL.HtmlAgilityPack
                 url = string.Format("http://www.kuwo.cn/artist/contentMusicsAjax?artistId={0}&pn={1}&rn={2}", parentMusic.ArtistId, i, parentMusic.Rn);
                 GetParentMusic(url);
             }
-            foreach (var m in (string.IsNullOrEmpty(name) ? parentMusic.ListMusic : parentMusic.ListMusic.Where(x => x.Name.Contains(name)).ToList()))
+            int cc = 0;
+            List<Music> list = parentMusic.ListMusic;
+            if (!string.IsNullOrEmpty(album))
             {
-                GetMusic(m);
+                list = list.Where(x => x.Album.Contains(album)).ToList();
             }
-            Console.WriteLine(string.Format("下载完毕，共下载歌曲：[{0}]首", parentMusic.Page * parentMusic.Rn));
+            if (!string.IsNullOrEmpty(name))
+            {
+                list = list.Where(x => x.Name.Contains(name)).ToList();
+            }
+
+            foreach (var m in list)
+            {
+                if (GetMusic(m)) cc++;
+            }
+            Console.WriteLine(string.Format("下载完毕，共下载歌曲：[{0}]首", cc));
         }
 
-        public void GetMusic(Music music)
+        public bool GetMusic(Music music)
         {
             try
             {
@@ -112,6 +125,7 @@ namespace Kasim.Core.BLL.HtmlAgilityPack
                 var path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MUSIC", music.Artist, music.Album, string.Format("{0} - {1}.mp3", music.Artist, music.Name));
                 WebDownload.DownLoad(url, path);
                 Console.WriteLine(string.Format("歌曲：[{0}]，专辑：[{1}]，下载成功！", music.Name, music.Album));
+                return true;
             }
             catch
             {
@@ -119,11 +133,26 @@ namespace Kasim.Core.BLL.HtmlAgilityPack
                 {
                     errTime++;
                     GetMusic(music);
+                    return true;
                 }
                 else
                 {
                     errTime = 0;
+                    return false;
                 }
+            }
+        }
+        public void GetMusicAsync(Music music)
+        {
+            try
+            {
+                var url = string.Format("http://antiserver.kuwo.cn/anti.s?format=mp3&rid={0}&type=convert_url&response=res", music.Id);
+                var path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MUSIC", music.Artist, music.Album, string.Format("{0} - {1}.mp3", music.Artist, music.Name));
+                WebDownload.DownLoadAsync(url, path);
+            }
+            catch
+            {
+
             }
         }
 
@@ -168,5 +197,7 @@ namespace Kasim.Core.BLL.HtmlAgilityPack
                 Console.WriteLine(string.Format("获取歌曲列表完毕：共收集[{0}]首歌曲信息", i));
             }
         }
+
+
     }
 }
