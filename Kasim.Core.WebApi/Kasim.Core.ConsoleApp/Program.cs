@@ -17,12 +17,15 @@ namespace Kasim.Core.ConsoleApp
             Console.WriteLine("************************************************ Menu ***********************************************");
             Console.WriteLine("*****************************************************************************************************");
             var conSet = new ConnectionStringOptions {
-                DevConnection = "Data Source=192.168.0.2,1400;database=Bz_MIS;uid=sa;pwd=abc123"
+                DevConnection = "Data Source=192.168.0.210;database=Bz_MIS;uid=sa;pwd=BRYY@abc123",//"Data Source=192.168.0.2,1400;database=Bz_MIS;uid=sa;pwd=abc123",
+                TaxConnection= "Data Source=192.168.0.210;database=Bz_MIS;uid=sa;pwd=BRYY@abc123"
             };
             Console.WriteLine("【1】重新计算后补返利设置");
             Console.WriteLine("【2】爬最新章节^o^!!!");
             Console.WriteLine("【3】根据SQL语句导出数据到Excel");
             Console.WriteLine("【4】爬酷我音乐的歌,盗版万岁^o^!!!");
+            Console.WriteLine("【5】删除主从表大数据");
+            Console.WriteLine("【6】删除临时表T_开头");
             Console.WriteLine("请输入对应菜单数字：");
             var keyCode = Console.ReadLine();
             while (keyCode.ToUpper()!="EXIT")
@@ -138,6 +141,20 @@ namespace Kasim.Core.ConsoleApp
                         var name = Console.ReadLine();
                         IMusicDownBLL musicDownBLL = new MusicDownBLL();
                         musicDownBLL.DownMusic(artist, name);
+                        break;
+                    case "5":
+                        Console.WriteLine("请输入主表名：");
+                        var formTable = Console.ReadLine();
+                        Console.WriteLine("请输入子表名：");
+                        var detailTable = Console.ReadLine();
+                        Console.WriteLine("请输入主键字段名：");
+                        var primaryKey = Console.ReadLine();
+                        IDeleteTableDataBLL deleteTableDataBLL = new DeleteTableDataBLL(conSet);
+                        deleteTableDataBLL.DeleteTable(formTable, detailTable, primaryKey);
+                        break;
+                    case "6":
+                        IDeleteTableDataBLL deleteTableDataBLL2 = new DeleteTableDataBLL(conSet);
+                        deleteTableDataBLL2.DropTable();
                         break;
                     case "test":
                         try

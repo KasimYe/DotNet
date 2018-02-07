@@ -54,6 +54,26 @@ namespace Kasim.Core.SQLServerDAL.ConsoleApp
 {
     public class ExportSqlDAL : IExportSqlDAL
     {
+        public int ExecSql(string sql)
+        {
+            using (SqlConnection Conn = new SqlConnection(ConnectionFactory.ConnectionString))
+            {
+                Conn.Open();
+                var Comm = new SqlCommand
+                {
+                    Connection = Conn,
+                    CommandTimeout = 10 * 60,
+                    CommandType = CommandType.Text,
+                    CommandText = sql
+                };
+                var result = Comm.ExecuteNonQuery();
+                Comm.Dispose();
+                Conn.Close();
+                Conn.Dispose();
+                return result;
+            }
+        }
+
         public DataTable GetDataTable(string sql)
         {
             using (SqlConnection Conn = new SqlConnection(ConnectionFactory.ConnectionString))

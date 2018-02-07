@@ -51,6 +51,11 @@ namespace Kasim.Core.MySQLDAL.ConsoleApp
 {
     public class ExportSqlDAL : IExportSqlDAL
     {
+        public int ExecSql(string sql)
+        {
+            throw new NotImplementedException();
+        }
+
         public DataTable GetDataTable(string sql)
         {
             throw new NotImplementedException();
