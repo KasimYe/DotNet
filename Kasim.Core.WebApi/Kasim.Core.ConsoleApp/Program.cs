@@ -137,10 +137,12 @@ namespace Kasim.Core.ConsoleApp
                     case "4":
                         Console.WriteLine("请输入歌手名字：");
                         var artist = Console.ReadLine();
+                        Console.WriteLine("请输入专辑名字：");
+                        var album = Console.ReadLine();
                         Console.WriteLine("请输入歌名：");
                         var name = Console.ReadLine();
                         IMusicDownBLL musicDownBLL = new MusicDownBLL();
-                        musicDownBLL.DownMusic(artist, name);
+                        musicDownBLL.DownMusic(artist, album, name);
                         break;
                     case "5":
                         Console.WriteLine("请输入主表名：");
