@@ -10,23 +10,25 @@ namespace Kasim.Core.ConsoleApp
     class Program
     {
         static void Main(string[] args)
-        {
+        {            
             Console.WriteLine("*****************************************************************************************************");
             Console.WriteLine("******************************* Welcome to use Kasim.Core.ConsoleApp! *******************************");
             Console.WriteLine("*****************************************************************************************************");
             Console.WriteLine("************************************************ Menu ***********************************************");
             Console.WriteLine("*****************************************************************************************************");
-            var conSet = new ConnectionStringOptions
-            {
-                DevConnection = "Data Source=192.168.0.2,1400;database=Bz_MIS;uid=sa;pwd=abc123"
+            var conSet = new ConnectionStringOptions {
+                DevConnection = "Data Source=192.168.0.210;database=Bz_MIS;uid=sa;pwd=BRYY@abc123",//"Data Source=192.168.0.2,1400;database=Bz_MIS;uid=sa;pwd=abc123",
+                TaxConnection= "Data Source=192.168.0.210;database=Bz_MIS;uid=sa;pwd=BRYY@abc123"
             };
             Console.WriteLine("【1】重新计算后补返利设置");
             Console.WriteLine("【2】爬最新章节^o^!!!");
             Console.WriteLine("【3】根据SQL语句导出数据到Excel");
             Console.WriteLine("【4】爬酷我音乐的歌,盗版万岁^o^!!!");
+            Console.WriteLine("【5】删除主从表大数据");
+            Console.WriteLine("【6】删除临时表T_开头");
             Console.WriteLine("请输入对应菜单数字：");
             var keyCode = Console.ReadLine();
-            while (keyCode.ToUpper() != "EXIT")
+            while (keyCode.ToUpper()!="EXIT")
             {
                 switch (keyCode)
                 {
@@ -36,12 +38,12 @@ namespace Kasim.Core.ConsoleApp
                             Console.WriteLine("请输入返利设置ID：");
                             ISupplierReturnBLL supplierReturnBLL = new SupplierReturnBLL(conSet);
                             var sRSCID = int.Parse(Console.ReadLine());
-                            supplierReturnBLL.SupplySupplierReturn(sRSCID);
+                            supplierReturnBLL.SupplySupplierReturn(sRSCID);                            
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine(ex.Message);
-                        }
+                            Console.WriteLine(ex.Message);                            
+                        }                        
                         break;
                     case "2":
                         try
@@ -101,10 +103,10 @@ namespace Kasim.Core.ConsoleApp
                                 default:
                                     break;
                             }
-                            if (bookTxtBLL != null)
+                            if (bookTxtBLL!=null)
                             {
                                 bookTxtBLL.DownloadBook(title);
-                            }
+                            }                            
                         }
                         catch (Exception ex)
                         {
@@ -119,12 +121,12 @@ namespace Kasim.Core.ConsoleApp
                             Console.WriteLine("请输入查询语句(不能超过26列)：");
                             var goCode = Console.ReadLine();
                             var sql = "";
-                            while (goCode.ToUpper() != "GO")
+                            while (goCode.ToUpper()!="GO")
                             {
-                                sql += " " + goCode;
+                                sql += " "+goCode;
                                 goCode = Console.ReadLine();
                             }
-                            IExportSqlBLL exportSqlBLL = new ExportSqlBLL(conSet);
+                            IExportSqlBLL exportSqlBLL = new ExportSqlBLL(conSet);                            
                             exportSqlBLL.ExportBySqlServer(workSheetName, sql);
                         }
                         catch (Exception ex)
@@ -135,12 +137,26 @@ namespace Kasim.Core.ConsoleApp
                     case "4":
                         Console.WriteLine("请输入歌手名字：");
                         var artist = Console.ReadLine();
-                        Console.WriteLine("请输入专辑名(可选)：");
+                        Console.WriteLine("请输入专辑名字：");
                         var album = Console.ReadLine();
-                        Console.WriteLine("请输入歌名(可选)：");
+                        Console.WriteLine("请输入歌名：");
                         var name = Console.ReadLine();
                         IMusicDownBLL musicDownBLL = new MusicDownBLL();
                         musicDownBLL.DownMusic(artist, album, name);
+                        break;
+                    case "5":
+                        Console.WriteLine("请输入主表名：");
+                        var formTable = Console.ReadLine();
+                        Console.WriteLine("请输入子表名：");
+                        var detailTable = Console.ReadLine();
+                        Console.WriteLine("请输入主键字段名：");
+                        var primaryKey = Console.ReadLine();
+                        IDeleteTableDataBLL deleteTableDataBLL = new DeleteTableDataBLL(conSet);
+                        deleteTableDataBLL.DeleteTable(formTable, detailTable, primaryKey);
+                        break;
+                    case "6":
+                        IDeleteTableDataBLL deleteTableDataBLL2 = new DeleteTableDataBLL(conSet);
+                        deleteTableDataBLL2.DropTable();
                         break;
                     case "test":
                         try
@@ -158,7 +174,7 @@ namespace Kasim.Core.ConsoleApp
                         break;
                 }
                 keyCode = Console.ReadLine();
-            }
-        }
+            }           
+        }        
     }
 }

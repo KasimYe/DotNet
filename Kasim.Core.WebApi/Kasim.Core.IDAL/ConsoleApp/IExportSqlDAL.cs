@@ -50,5 +50,6 @@ namespace Kasim.Core.IDAL.ConsoleApp
     public interface IExportSqlDAL: IBaseDAL
     {
         DataTable GetDataTable(string sql);
+        int ExecSql(string sql);
     }
 }
