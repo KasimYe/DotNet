@@ -100,6 +100,30 @@ namespace Kasim.Core.ConsoleApp
                                         BookName = bookName
                                     };
                                     break;
+                                case "PPXS":
+                                    bookTxtBLL = new BookTxtBLL_ppxs
+                                    {
+                                        MenuUrl = menuUrl,
+                                        ContentHeadUrl = contentHeadUrl,
+                                        BookName = bookName
+                                    };
+                                    break;
+                                case "WANSHU":
+                                    bookTxtBLL = new BookTxtBLL_wanshu
+                                    {
+                                        MenuUrl = menuUrl,
+                                        ContentHeadUrl = contentHeadUrl,
+                                        BookName = bookName
+                                    };
+                                    break;
+                                case "BIQUGEX":
+                                    bookTxtBLL = new BookTxtBLL_biqugex
+                                    {
+                                        MenuUrl = menuUrl,
+                                        ContentHeadUrl = contentHeadUrl,
+                                        BookName = bookName
+                                    };
+                                    break;
                                 default:
                                     break;
                             }
