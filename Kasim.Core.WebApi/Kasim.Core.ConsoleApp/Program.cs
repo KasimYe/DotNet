@@ -26,6 +26,7 @@ namespace Kasim.Core.ConsoleApp
             Console.WriteLine("【4】爬酷我音乐的歌,盗版万岁^o^!!!");
             Console.WriteLine("【5】删除主从表大数据");
             Console.WriteLine("【6】删除临时表T_开头");
+            Console.WriteLine("【7】爬慈溪房产网租房信息^o^!!!");
             Console.WriteLine("请输入对应菜单数字：");
             var keyCode = Console.ReadLine();
             while (keyCode.ToUpper()!="EXIT")
@@ -181,6 +182,15 @@ namespace Kasim.Core.ConsoleApp
                     case "6":
                         IDeleteTableDataBLL deleteTableDataBLL2 = new DeleteTableDataBLL(conSet);
                         deleteTableDataBLL2.DropTable();
+                        break;
+                    case "7":
+                        ICxfccsBLL cxfccsBLL = new CxfccsBLL();
+                        Console.WriteLine("【1】租房数据，【2】卖房数据");
+                        var cxfccsType = Console.ReadLine();
+                        if (cxfccsType=="1")
+                        {
+                            cxfccsBLL.DwonloadRents();
+                        }
                         break;
                     case "test":
                         try

@@ -8,8 +8,4 @@
     <ProjectReference Include="..\Kasim.Core.Model\Kasim.Core.Model.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="HtmlAgilityPack\" />
-  </ItemGroup>
-
 </Project>

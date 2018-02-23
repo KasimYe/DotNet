@@ -66,14 +66,24 @@ namespace Kasim.Core.BLL.HtmlAgilityPack
         }
 
         public string GetWebClient(string url, Encoding encoding)
-        {
-            string strHTML = "";
-            WebClient myWebClient = new WebClient();
-            Stream myStream = myWebClient.OpenRead(url);
-            StreamReader sr = new StreamReader(myStream, encoding);//注意编码
-            strHTML = sr.ReadToEnd();
-            myStream.Close();
-            return strHTML;
+        {            
+            try
+            {
+                string strHTML = "";
+                WebClient myWebClient = new WebClient();
+                Stream myStream = myWebClient.OpenRead(url);
+                StreamReader sr = new StreamReader(myStream, encoding);//注意编码
+                strHTML = sr.ReadToEnd();
+                myStream.Close();
+                return strHTML;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return GetWebClient(url, encoding);                
+            }
+            
+            
         }
 
         public string GetWordByBaiduAidemo(string imgUrl)

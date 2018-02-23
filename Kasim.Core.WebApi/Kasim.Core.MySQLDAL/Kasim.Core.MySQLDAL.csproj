@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="HtmlAgilityPack\" />
+    <PackageReference Include="Dapper" Version="1.50.4" />
+    <PackageReference Include="MySql.Data" Version="6.10.6" />
   </ItemGroup>
 
   <ItemGroup>
