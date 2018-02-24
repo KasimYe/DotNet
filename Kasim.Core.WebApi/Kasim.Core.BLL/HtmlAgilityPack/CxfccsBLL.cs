@@ -80,6 +80,7 @@ namespace Kasim.Core.BLL.HtmlAgilityPack
                 {
                     url = "http://www.cxfccs.com/rent/page" + i.ToString() + ".html";
                     list.AddRange(GetRentList(url));
+                    Console.WriteLine(string.Format("第[{0}]页所有信息内容获取成功", i));
                 }
                 dal.AddList(list);
                 Console.WriteLine("下载完毕");

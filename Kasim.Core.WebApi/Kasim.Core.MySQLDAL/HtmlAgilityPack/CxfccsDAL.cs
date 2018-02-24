@@ -57,7 +57,7 @@ namespace Kasim.Core.MySQLDAL.HtmlAgilityPack
         public void AddList(List<Rent> list)
         {
             
-            using (IDbConnection Conn = new MySqlConnection("Data Source=localhost;port=3306;Initial Catalog=cxfccs;user id=root;password=abc123;Charset=utf8"))
+            using (IDbConnection Conn = new MySqlConnection("Data Source=192.168.0.210;port=3306;Initial Catalog=cxfccs;user id=root;password=BRYY@abc123;Charset=utf8"))
             {
                 Conn.Open();
                 string query = "INSERT INTO `cxfccs`.`rents` (`rentId`,`fromType`,`region`,`rentName`,`houseType`,`houseHold`,`floor`,`floorCount`,`renovation`,"
