@@ -32,59 +32,28 @@
 /*----------------------------------------------------------------
 ** Copyright (C) 2017 
 **
-** file：DALFactory
+** file：ClientProductZc
 ** desc：
 ** 
 ** auth：KasimYe (KASIM)
-** date：2017-12-05 14:38:38
+** date：2018-02-26 10:49:31
 **
 ** Ver.：V1.0.0
 **----------------------------------------------------------------*/
 
-using Kasim.Core.IDAL;
-using Kasim.Core.IDAL.ConsoleApp;
-using Kasim.Core.IDAL.WebApi;
-using Kasim.Core.Model;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Text;
 
-namespace Kasim.Core.Factory
+namespace Kasim.Core.Model.ConsoleApp
 {
-    public class DALFactory
+    public class ClientProductZc
     {
-        private static readonly string _path = "Kasim.Core.SQLServerDAL";
-        private DALFactory()
-        {
+        public int? ZId { get; set; }
+        public int StoreId { get; set; }
+        public int PId { get; set; }
+        public int ClientId { get; set; }
+        public decimal ZContent { get; set; }
 
-        }
-
-        public static ITaxCostPic28DAL CreateTaxCostPic28DAL()
-        {
-            string className = _path + ".WebApi.TaxCostPic28DAL";
-            return (ITaxCostPic28DAL)Assembly.Load(_path).CreateInstance(className);
-        }
-
-        public static ISupplierReturnDAL CreateSupplierReturnDAL()
-        {
-            string className = _path + ".ConsoleApp.SupplierReturnDAL";
-            return (ISupplierReturnDAL)Assembly.Load(_path).CreateInstance(className);
-        }
-
-        public static IProductOfferDAL CreateProductOfferDAL()
-        {
-            string className = _path + ".WebApi.ProductOfferDAL";
-            return (IProductOfferDAL)Assembly.Load(_path).CreateInstance(className);
-        }
-    }
-
-    public class DALFactory<T> where T: IBaseDAL<BaseEntity>
-    {
-        static public T CreateDAL(string _path, string _className)
-        {
-            string className = string.Format("{0}.{1}", _path, _className);
-            return (T)Assembly.Load(_path).CreateInstance(className);
-        }        
     }
 }

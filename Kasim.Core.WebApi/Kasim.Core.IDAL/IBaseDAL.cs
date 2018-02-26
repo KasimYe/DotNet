@@ -46,7 +46,8 @@ using System.Text;
 
 namespace Kasim.Core.IDAL
 {
-    public interface IBaseDAL
+    public interface IBaseDAL<T> where T : class
     {
+        
     }
 }

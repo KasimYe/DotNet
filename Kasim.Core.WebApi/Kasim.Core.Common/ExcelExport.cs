@@ -102,5 +102,48 @@ namespace Kasim.Core.Common
             };
             return abcArr[i];
         }
+
+        public static DataTable GetDataTable(string filePath, int worksheetIndex)
+        {
+            using (ExcelPackage package = new ExcelPackage(new FileStream(filePath, FileMode.Open)))
+            {
+                ExcelWorksheet sheet = package.Workbook.Worksheets[worksheetIndex];
+                DataTable dt = new DataTable();
+                DataRow dr = null;
+                int i = 0;
+                for (int m = sheet.Dimension.Start.Row, n = sheet.Dimension.End.Row; m <= n; m++)
+                {
+                    if (i>0)
+                    {
+                        dr = dt.NewRow();
+                    }
+                    for (int j = sheet.Dimension.Start.Column, k = sheet.Dimension.End.Column; j <= k; j++)
+                    {
+                        string val = sheet.Cells[m, j].Value.ToString();                        
+                        if (i==0)
+                        {
+                            if (string.IsNullOrEmpty(val))
+                            {
+                                k = j;
+                            }
+                            else
+                            {
+                                dt.Columns.Add(val, typeof(string));
+                            }                            
+                        }
+                        else
+                        {
+                            dr[j-1] = val;
+                        }                      
+                    }
+                    if (i>0)
+                    {
+                        dt.Rows.Add(dr);
+                    }
+                    i++;
+                }
+                return dt;
+            }
+        }
     }
 }

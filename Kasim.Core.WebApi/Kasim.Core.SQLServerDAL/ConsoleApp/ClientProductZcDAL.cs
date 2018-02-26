@@ -32,59 +32,75 @@
 /*----------------------------------------------------------------
 ** Copyright (C) 2017 
 **
-** file：DALFactory
+** file：ClientProductZcDAL
 ** desc：
 ** 
 ** auth：KasimYe (KASIM)
-** date：2017-12-05 14:38:38
+** date：2018-02-26 13:36:41
 **
 ** Ver.：V1.0.0
 **----------------------------------------------------------------*/
 
-using Kasim.Core.IDAL;
+using Dapper;
+using Kasim.Core.Factory;
 using Kasim.Core.IDAL.ConsoleApp;
-using Kasim.Core.IDAL.WebApi;
-using Kasim.Core.Model;
+using Kasim.Core.Model.ConsoleApp;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
+using System.Data;
+using System.Linq;
 using System.Text;
 
-namespace Kasim.Core.Factory
+namespace Kasim.Core.SQLServerDAL.ConsoleApp
 {
-    public class DALFactory
+    public class ClientProductZcDAL : IClientProductZcDAL<ClientProductZc>
     {
-        private static readonly string _path = "Kasim.Core.SQLServerDAL";
-        private DALFactory()
+        public int Delete(ClientProductZc t)
         {
-
+            throw new NotImplementedException();
         }
 
-        public static ITaxCostPic28DAL CreateTaxCostPic28DAL()
+        public ClientProductZc GetEntity(object id)
         {
-            string className = _path + ".WebApi.TaxCostPic28DAL";
-            return (ITaxCostPic28DAL)Assembly.Load(_path).CreateInstance(className);
+            throw new NotImplementedException();
         }
 
-        public static ISupplierReturnDAL CreateSupplierReturnDAL()
+        public ClientProductZc GetEntity(ClientProductZc entity)
         {
-            string className = _path + ".ConsoleApp.SupplierReturnDAL";
-            return (ISupplierReturnDAL)Assembly.Load(_path).CreateInstance(className);
+            using (var Conn = ConnectionFactory.Connection)
+            {
+                string query = "SELECT * FROM dbo.ClientProductZC WHERE PID=@PID AND ClientID=@ClientID AND StoreID=@StoreID";
+                var result = Conn.Query<ClientProductZc>(query, new { PID = entity.PId, ClientID = entity.ClientId, StoreID = entity.StoreId }).SingleOrDefault();
+                Conn.Close();
+                Conn.Dispose();
+                return result;
+            }
         }
 
-        public static IProductOfferDAL CreateProductOfferDAL()
+        public List<ClientProductZc> GetList()
         {
-            string className = _path + ".WebApi.ProductOfferDAL";
-            return (IProductOfferDAL)Assembly.Load(_path).CreateInstance(className);
+            throw new NotImplementedException();
         }
-    }
 
-    public class DALFactory<T> where T: IBaseDAL<BaseEntity>
-    {
-        static public T CreateDAL(string _path, string _className)
+        public int Insert(ClientProductZc t)
         {
-            string className = string.Format("{0}.{1}", _path, _className);
-            return (T)Assembly.Load(_path).CreateInstance(className);
-        }        
+            using (var Conn = ConnectionFactory.Connection)
+            {
+                var param = new DynamicParameters();
+                param.Add("@ZContent", t.ZContent, DbType.Decimal);
+                param.Add("@PID", t.PId, DbType.Int32);
+                param.Add("@ClientID", t.ClientId, DbType.Int32);
+                param.Add("@StoreID", t.StoreId, DbType.Int32);
+                var result=Conn.Execute("dbo.SetClientProductZC", param, commandType: CommandType.StoredProcedure);           
+                Conn.Close();
+                Conn.Dispose();
+                return result;
+            }
+        }
+
+        public int Update(ClientProductZc t)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

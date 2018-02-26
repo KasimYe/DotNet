@@ -10,15 +10,16 @@ namespace Kasim.Core.ConsoleApp
     class Program
     {
         static void Main(string[] args)
-        {            
+        {
             Console.WriteLine("*****************************************************************************************************");
             Console.WriteLine("******************************* Welcome to use Kasim.Core.ConsoleApp! *******************************");
             Console.WriteLine("*****************************************************************************************************");
             Console.WriteLine("************************************************ Menu ***********************************************");
             Console.WriteLine("*****************************************************************************************************");
-            var conSet = new ConnectionStringOptions {
-                DevConnection = "Data Source=192.168.0.210;database=Bz_MIS;uid=sa;pwd=BRYY@abc123",//"Data Source=192.168.0.2,1400;database=Bz_MIS;uid=sa;pwd=abc123",
-                TaxConnection= "Data Source=192.168.0.210;database=Bz_MIS;uid=sa;pwd=BRYY@abc123"
+            var conSet = new ConnectionStringOptions
+            {
+                DevConnection = "Data Source=192.168.0.2,1400;database=Bz_MIS;uid=sa;pwd=abc123",
+                TaxConnection = "Data Source=192.168.0.210;database=Bz_MIS;uid=sa;pwd=BRYY@abc123"
             };
             Console.WriteLine("【1】重新计算后补返利设置");
             Console.WriteLine("【2】爬最新章节^o^!!!");
@@ -27,9 +28,10 @@ namespace Kasim.Core.ConsoleApp
             Console.WriteLine("【5】删除主从表大数据");
             Console.WriteLine("【6】删除临时表T_开头");
             Console.WriteLine("【7】爬慈溪房产网租房信息^o^!!!");
+            Console.WriteLine("【8】商品业务设置考核政策导入考核成本");
             Console.WriteLine("请输入对应菜单数字：");
             var keyCode = Console.ReadLine();
-            while (keyCode.ToUpper()!="EXIT")
+            while (keyCode.ToUpper() != "EXIT")
             {
                 switch (keyCode)
                 {
@@ -39,12 +41,12 @@ namespace Kasim.Core.ConsoleApp
                             Console.WriteLine("请输入返利设置ID：");
                             ISupplierReturnBLL supplierReturnBLL = new SupplierReturnBLL(conSet);
                             var sRSCID = int.Parse(Console.ReadLine());
-                            supplierReturnBLL.SupplySupplierReturn(sRSCID);                            
+                            supplierReturnBLL.SupplySupplierReturn(sRSCID);
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine(ex.Message);                            
-                        }                        
+                            Console.WriteLine(ex.Message);
+                        }
                         break;
                     case "2":
                         try
@@ -128,10 +130,10 @@ namespace Kasim.Core.ConsoleApp
                                 default:
                                     break;
                             }
-                            if (bookTxtBLL!=null)
+                            if (bookTxtBLL != null)
                             {
                                 bookTxtBLL.DownloadBook(title);
-                            }                            
+                            }
                         }
                         catch (Exception ex)
                         {
@@ -146,12 +148,12 @@ namespace Kasim.Core.ConsoleApp
                             Console.WriteLine("请输入查询语句(不能超过26列)：");
                             var goCode = Console.ReadLine();
                             var sql = "";
-                            while (goCode.ToUpper()!="GO")
+                            while (goCode.ToUpper() != "GO")
                             {
-                                sql += " "+goCode;
+                                sql += " " + goCode;
                                 goCode = Console.ReadLine();
                             }
-                            IExportSqlBLL exportSqlBLL = new ExportSqlBLL(conSet);                            
+                            IExportSqlBLL exportSqlBLL = new ExportSqlBLL(conSet);
                             exportSqlBLL.ExportBySqlServer(workSheetName, sql);
                         }
                         catch (Exception ex)
@@ -187,9 +189,27 @@ namespace Kasim.Core.ConsoleApp
                         ICxfccsBLL cxfccsBLL = new CxfccsBLL();
                         Console.WriteLine("【1】租房数据，【2】卖房数据");
                         var cxfccsType = Console.ReadLine();
-                        if (cxfccsType=="1")
+                        if (cxfccsType == "1")
                         {
                             cxfccsBLL.DwonloadRents();
+                        }
+                        break;
+                    case "8":
+                        IClientProductZcBLL clientProductZcBLL = new ClientProductZcBLL(conSet);
+                        Console.WriteLine("输入Excel路径");
+                        var filePath = Console.ReadLine();
+                        Console.WriteLine("StoreID");
+                        var storeid = Console.ReadLine();
+                        Console.WriteLine("PID");
+                        var pid = Console.ReadLine();
+                        Console.WriteLine("考核成本");
+                        var cost = Console.ReadLine();
+                        var clientProductZcList = clientProductZcBLL.GetListFromExcel(filePath, int.Parse(storeid), int.Parse(pid), decimal.Parse(cost));
+                        Console.WriteLine("输入【YES】开始导入");
+                        var keyCode2= Console.ReadLine();
+                        if (keyCode2.ToUpper()=="YES")
+                        {
+                            clientProductZcBLL.ImportList(clientProductZcList);
                         }
                         break;
                     case "test":
@@ -208,7 +228,7 @@ namespace Kasim.Core.ConsoleApp
                         break;
                 }
                 keyCode = Console.ReadLine();
-            }           
-        }        
+            }
+        }
     }
 }

@@ -32,59 +32,70 @@
 /*----------------------------------------------------------------
 ** Copyright (C) 2017 
 **
-** file：DALFactory
+** file：ClientDAL
 ** desc：
 ** 
 ** auth：KasimYe (KASIM)
-** date：2017-12-05 14:38:38
+** date：2018-02-26 11:27:13
 **
 ** Ver.：V1.0.0
 **----------------------------------------------------------------*/
 
-using Kasim.Core.IDAL;
+using Dapper;
+using Kasim.Core.Factory;
 using Kasim.Core.IDAL.ConsoleApp;
-using Kasim.Core.IDAL.WebApi;
-using Kasim.Core.Model;
+using Kasim.Core.Model.ConsoleApp;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
+using System.Linq;
 using System.Text;
 
-namespace Kasim.Core.Factory
+namespace Kasim.Core.SQLServerDAL.ConsoleApp
 {
-    public class DALFactory
+    public class ClientDAL : IClientDAL<Client>
     {
-        private static readonly string _path = "Kasim.Core.SQLServerDAL";
-        private DALFactory()
+        public int Delete(Client t)
         {
-
+            throw new NotImplementedException();
         }
 
-        public static ITaxCostPic28DAL CreateTaxCostPic28DAL()
+        public Client GetEntity(object id)
         {
-            string className = _path + ".WebApi.TaxCostPic28DAL";
-            return (ITaxCostPic28DAL)Assembly.Load(_path).CreateInstance(className);
+            using (var Conn = ConnectionFactory.Connection)
+            {
+                string query = "SELECT * FROM dbo.Clients WHERE ClientID=@ClientID";
+                var result = Conn.Query<Client>(query, new { ClientID = id }).SingleOrDefault();
+                Conn.Close();
+                Conn.Dispose();
+                return result;
+            }
         }
 
-        public static ISupplierReturnDAL CreateSupplierReturnDAL()
+        public Client GetEntityByCode(string clientCode)
         {
-            string className = _path + ".ConsoleApp.SupplierReturnDAL";
-            return (ISupplierReturnDAL)Assembly.Load(_path).CreateInstance(className);
+            using (var Conn = ConnectionFactory.Connection)
+            {
+                string query = "SELECT * FROM dbo.Clients WHERE ClientCode=@ClientCode";
+                var result = Conn.Query<Client>(query, new { ClientCode = clientCode }).SingleOrDefault();
+                Conn.Close();
+                Conn.Dispose();
+                return result;
+            }
         }
 
-        public static IProductOfferDAL CreateProductOfferDAL()
+        public List<Client> GetList()
         {
-            string className = _path + ".WebApi.ProductOfferDAL";
-            return (IProductOfferDAL)Assembly.Load(_path).CreateInstance(className);
+            throw new NotImplementedException();
         }
-    }
 
-    public class DALFactory<T> where T: IBaseDAL<BaseEntity>
-    {
-        static public T CreateDAL(string _path, string _className)
+        public int Insert(Client t)
         {
-            string className = string.Format("{0}.{1}", _path, _className);
-            return (T)Assembly.Load(_path).CreateInstance(className);
-        }        
+            throw new NotImplementedException();
+        }
+
+        public int Update(Client t)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

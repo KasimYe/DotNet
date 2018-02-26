@@ -44,11 +44,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Kasim.Core.Model;
 using Kasim.Core.Model.HtmlAgilityPack;
 
 namespace Kasim.Core.IDAL.HtmlAgilityPack
 {
-    public interface ICxfccsDAL : IBaseDAL
+    public interface ICxfccsDAL : IBaseDAL<BaseEntity>
     {
         void AddList(List<Rent> list);
     }

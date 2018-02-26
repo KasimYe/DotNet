@@ -29,25 +29,26 @@
  **                   别人笑我忒疯癫，我笑自己命太贱；              **
  **                   不见满街漂亮妹，哪个归得程序员？              **
  *********************************************************************/
- /*=====================================================================
- * Copyright (c) 2018 All Rights Reserved.
- * CLRVer.:4.0.30319.42000
- * machinenameDESKTOP-U288O1H
- * namespace:Kasim.Core.IDAL.ConsoleApp
- * filename:IDeleteTableDataDAL
- * guid:8959ee51-d461-4879-a9c4-b105a62ddfd7
- * auth:lip86
- * date:2018-02-07 19:31:42
- * desc:
- *
- *=====================================================================*/
+/*=====================================================================
+* Copyright (c) 2018 All Rights Reserved.
+* CLRVer.:4.0.30319.42000
+* machinenameDESKTOP-U288O1H
+* namespace:Kasim.Core.IDAL.ConsoleApp
+* filename:IDeleteTableDataDAL
+* guid:8959ee51-d461-4879-a9c4-b105a62ddfd7
+* auth:lip86
+* date:2018-02-07 19:31:42
+* desc:
+*
+*=====================================================================*/
+using Kasim.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Kasim.Core.IDAL.ConsoleApp
 {
-    public interface IDeleteTableDataDAL : IBaseDAL
+    public interface IDeleteTableDataDAL : IBaseDAL<BaseEntity>
     {
         int ClearTable(string tableName,string primaryKey,string id);
     }

@@ -40,6 +40,7 @@
 **
 ** Ver.：V1.0.0
 **----------------------------------------------------------------*/
+using Kasim.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -47,7 +48,7 @@ using System.Text;
 
 namespace Kasim.Core.IDAL.ConsoleApp
 {
-    public interface IExportSqlDAL: IBaseDAL
+    public interface IExportSqlDAL: IBaseDAL<BaseEntity>
     {
         DataTable GetDataTable(string sql);
         int ExecSql(string sql);
