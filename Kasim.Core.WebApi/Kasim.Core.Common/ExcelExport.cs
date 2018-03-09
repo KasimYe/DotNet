@@ -119,7 +119,7 @@ namespace Kasim.Core.Common
                     }
                     for (int j = sheet.Dimension.Start.Column, k = sheet.Dimension.End.Column; j <= k; j++)
                     {
-                        string val = sheet.Cells[m, j].Value.ToString();                        
+                        string val =Convert.ToString(sheet.Cells[m, j].Value);                        
                         if (i==0)
                         {
                             if (string.IsNullOrEmpty(val))

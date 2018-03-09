@@ -70,17 +70,21 @@ namespace Kasim.Core.BLL.ConsoleApp
             var list = new List<ClientProductZc>();
             foreach (DataRow dr in dt.Rows)
             {
-                var entity = dal.GetEntityByCode(dr["客户编码"].ToString());
-                if (list!=null && list.Where(x => x.ClientId == entity.ClientId).ToList().Count == 0)
+                var ccode = Convert.ToString(dr["客户编码"]);
+                if (!string.IsNullOrEmpty(ccode))
                 {
-                    list.Add(new ClientProductZc
+                    var entity = dal.GetEntityByCode(ccode);
+                    if (list != null && entity!=null && list.Where(x => x.ClientId == entity.ClientId).ToList().Count == 0)
                     {
-                        StoreId = storeId,
-                        PId = pid,
-                        ClientId = entity.ClientId,
-                        ZContent = cost,
-                    });
-                }                
+                        list.Add(new ClientProductZc
+                        {
+                            StoreId = storeId,
+                            PId = pid,
+                            ClientId = entity.ClientId,
+                            ZContent = cost,
+                        });
+                    }
+                }                              
             }
             Console.WriteLine(string.Format("客户[{0}]家,StoreID={1},PID={2},考核成本[{3}]",list.Count,storeId,pid,cost));
             return list;

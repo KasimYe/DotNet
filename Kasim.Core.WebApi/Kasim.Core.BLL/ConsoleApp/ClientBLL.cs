@@ -41,7 +41,10 @@
 ** Ver.：V1.0.0
 **----------------------------------------------------------------*/
 
+using Kasim.Core.Factory;
 using Kasim.Core.IBLL.ConsoleApp;
+using Kasim.Core.IDAL.ConsoleApp;
+using Kasim.Core.Model.ConsoleApp;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -50,5 +53,6 @@ namespace Kasim.Core.BLL.ConsoleApp
 {
     public class ClientBLL : IClientBLL
     {
+        IClientDAL<Client> dal = DALFactory<IClientDAL<Client>>.CreateDAL("Kasim.FrameworkLow.SQLServerDAL", "MIS.ClientDAL");
     }
 }

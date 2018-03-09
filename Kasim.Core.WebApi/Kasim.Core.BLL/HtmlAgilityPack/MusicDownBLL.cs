@@ -77,7 +77,7 @@ namespace Kasim.Core.BLL.HtmlAgilityPack
             {
                 var ul = reqObj.SelectNodes(@"ul")[0];
                 if (string.IsNullOrEmpty(ul.Attributes["data-page"].Value)) return;
-                
+
                 parentMusic = new ParentMusic
                 {
                     Page = int.Parse(ul.Attributes["data-page"].Value),
@@ -170,21 +170,28 @@ namespace Kasim.Core.BLL.HtmlAgilityPack
                 var i = 0;
                 foreach (var li in parentNodeList)
                 {
-                    var a = li.SelectNodes("div")[0].SelectNodes("a")[0];
-                    var uurl = "http://www.kuwo.cn" + a.Attributes["href"].Value.Trim();
-                    var div = li.SelectNodes("div")[3].SelectNodes("div")[0];
-                    var musicJson = div.Attributes["data-music"].Value;
-                    JObject jObject = (JObject)JsonConvert.DeserializeObject(musicJson);
-                    list.Add(new Music()
+                    try
                     {
-                        Id = jObject["id"].ToString(),
-                        Name = jObject["name"].ToString(),
-                        Artist = jObject["artist"].ToString(),
-                        Album = jObject["album"].ToString(),
-                        Pay = jObject["pay"].ToString(),
-                        Url = uurl
-                    });
-                    i++;
+                        var a = li.SelectNodes("div")[0].SelectNodes("a")[0];
+                        var uurl = "http://www.kuwo.cn" + a.Attributes["href"].Value.Trim();
+                        var div = li.SelectNodes("div")[3].SelectNodes("div")[0];
+                        var musicJson = div.Attributes["data-music"].Value;
+                        JObject jObject = (JObject)JsonConvert.DeserializeObject(musicJson);
+                        list.Add(new Music()
+                        {
+                            Id = jObject["id"].ToString(),
+                            Name = jObject["name"].ToString(),
+                            Artist = jObject["artist"].ToString(),
+                            Album = jObject["album"].ToString(),
+                            Pay = jObject["pay"].ToString(),
+                            Url = uurl
+                        });
+                        i++;
+                    }
+                    catch
+                    {
+                        continue;
+                    }
                 }
                 if (parentMusic.ListMusic == null)
                 {

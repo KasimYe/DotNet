@@ -47,7 +47,7 @@ using System.Text;
 
 namespace Kasim.Core.Model.ConsoleApp
 {
-    public class Client
+    public class Client : BaseEntity
     {
         public int ClientId { get; set; }
         public string ClientName { get; set; }
