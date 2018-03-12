@@ -9,8 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Kasim.Core.WebApi.Controllers
 {
-    [Produces("application/json")]
-    [Consumes("application/json", "multipart/form-data")]//设置前端发送的请求Content-Type为multipart/form-data
+    [Produces("application/json")]    
     [Route("api/FileUpload")]
     public class FileUploadController : Controller
     {
@@ -20,14 +19,7 @@ namespace Kasim.Core.WebApi.Controllers
         {
             return new string[] { "value1", "value2" };
         }
-
-        // GET: api/FileUpload/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
+        
         // POST: api/FileUpload
         [HttpPost("UploadFiles")]
         public async Task<IActionResult> Post(List<IFormFile> files)

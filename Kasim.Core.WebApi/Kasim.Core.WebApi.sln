@@ -37,7 +37,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{881088A1-97B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Main", "Main", "{FE6A9779-1FFB-4B4C-B93D-C8C4D9F014EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kasim.Core.WebApp", "Kasim.Core.WebApp\Kasim.Core.WebApp.csproj", "{79267947-AB93-439E-A87A-4C7151E1854F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kasim.Core.WebApp", "Kasim.Core.WebApp\Kasim.Core.WebApp.csproj", "{79267947-AB93-439E-A87A-4C7151E1854F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kasim.Core.FileUploadWebApp", "Kasim.Core.FileUploadWebApp\Kasim.Core.FileUploadWebApp.csproj", "{6038809F-688C-4B4A-8EBD-504BE8956BDF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +107,10 @@ Global
 		{79267947-AB93-439E-A87A-4C7151E1854F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79267947-AB93-439E-A87A-4C7151E1854F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79267947-AB93-439E-A87A-4C7151E1854F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6038809F-688C-4B4A-8EBD-504BE8956BDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6038809F-688C-4B4A-8EBD-504BE8956BDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6038809F-688C-4B4A-8EBD-504BE8956BDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6038809F-688C-4B4A-8EBD-504BE8956BDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -122,6 +128,7 @@ Global
 		{79E2C879-9448-4D05-9FC5-A08489EA3EAD} = {FE6A9779-1FFB-4B4C-B93D-C8C4D9F014EA}
 		{B3D6BEC3-4F0D-441B-A5D8-1DEEBEEC7707} = {FE6A9779-1FFB-4B4C-B93D-C8C4D9F014EA}
 		{79267947-AB93-439E-A87A-4C7151E1854F} = {FE6A9779-1FFB-4B4C-B93D-C8C4D9F014EA}
+		{6038809F-688C-4B4A-8EBD-504BE8956BDF} = {FE6A9779-1FFB-4B4C-B93D-C8C4D9F014EA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1854391F-B9D7-4155-8350-028C2B609A80}
