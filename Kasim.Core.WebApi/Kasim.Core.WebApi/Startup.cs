@@ -89,9 +89,7 @@ namespace Kasim.Core.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseMvc();
-
+                       
             app.UseSwagger();
             // 指定站点
             app.UseSwaggerUI(x =>
@@ -99,8 +97,10 @@ namespace Kasim.Core.WebApi
                 //做出一个限制信息 描述
                 x.SwaggerEndpoint("/swagger/v1/swagger.json", "Kasim.Core API V1");
                 //显示在发出请求时发送的标题
-                x.ShowRequestHeaders();
+                //x.ShowRequestHeaders();
             });
+
+            app.UseMvc();
         }
     }
 }
