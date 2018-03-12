@@ -22,6 +22,8 @@ namespace Kasim.Core.FileUploadWebApp.Controllers
         }
         public IActionResult Index()
         {
+            ViewData["Title"] = "图片上传";
+            ViewData["Message"] = Request.QueryString.Value;
             return View();
         }
 
@@ -44,28 +46,37 @@ namespace Kasim.Core.FileUploadWebApp.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        [HttpPost("AddFile")]
-        public async Task<IActionResult> FileSave(List<IFormFile> files)
+        [HttpPost]
+        public async Task<IActionResult> FileSave()
         {
-            //var files = Request.Form.Files;
+            var now = DateTime.Now;
+            var files = Request.Form.Files;
             long size = files.Sum(f => f.Length);
             string webRootPath = _hostingEnvironment.WebRootPath;
             string contentRootPath = _hostingEnvironment.ContentRootPath;
+            var filePathList = new List<string>();
             foreach (var formFile in files)
             {
                 if (formFile.Length > 0)
                 {
-                    string fileExt = FileOperate.GetPostfixStr(formFile.FileName).Remove(0,1); //文件扩展名，不含“.”
+                    string fileExt = FileOperate.GetPostfixStr(formFile.FileName).Remove(0, 1); //文件扩展名，不含“.”
                     long fileSize = formFile.Length; //获得文件大小，以字节为单位
                     string newFileName = Guid.NewGuid().ToString() + "." + fileExt; //随机生成新的文件名
-                    var filePath = webRootPath + "/upload/" + newFileName;
-                    FileOperate.FolderCreate(webRootPath + "/upload/");
-                    using (var stream = new FileStream(filePath, FileMode.Create))                    
-                        await formFile.CopyToAsync(stream);                    
+                    var foldPath = "upload/" + now.Year + "/" + now.Month + "/" + now.Day;
+                    var filePath = Path.Combine(webRootPath, foldPath, newFileName);
+                    FileOperate.FolderCreate(Path.Combine(webRootPath, foldPath));
+                    filePathList.Add(Path.Combine(foldPath, newFileName));
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                        await formFile.CopyToAsync(stream);
                 }
             }
+            return Ok(new { count = files.Count, size, filePathList });
+        }
 
-            return Ok(new { count = files.Count, size });
+        [HttpPost]
+        public JsonResult Preview()
+        {
+            return null;
         }
     }
 }

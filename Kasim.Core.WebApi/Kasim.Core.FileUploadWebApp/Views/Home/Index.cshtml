@@ -1,24 +1,42 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    Layout = null;
 }
-<h1>Upload Files</h1>
-<div class="row">
-    <section>
-        <form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index">
-            <div class="form-group">
-                <div class="col-md-10">
-                    <p>Upload one or more files using this form:</p>
-                    <input type="file" name="files" multiple />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" type="text/css" href="~/Scripts/webuploader/webuploader.css" />
+    <link rel="stylesheet" type="text/css" href="~/Scripts/style.css" />
+</head>
+<body>
+    <h3>@ViewData["Message"]</h3>
+    <div id="wrapper">
+        <div id="container">
+            <!--头部，相册选择和格式选择-->
+            <div id="uploader">
+                <div class="queueList">
+                    <div id="dndArea" class="placeholder">
+                        <div id="filePicker"></div>
+                        <p>或将照片拖到这里，单次最多可选300张</p>
+                    </div>
+                </div>
+                <div class="statusBar" style="display:none;">
+                    <div class="progress">
+                        <span class="text">0%</span>
+                        <span class="percentage"></span>
+                    </div><div class="info"></div>
+                    <div class="btns">
+                        <div id="filePicker2"></div><div class="uploadBtn">开始上传</div>
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <div class="col-md-10">
-                    <input type="submit" value="Upload" />
-                </div>
-            </div>
-        </form>
-    </section>
-</div>
-<hr />
-<h3>Other Samples</h3>
-<div id="upfliediv"></div>
+        </div>
+        <div id="imgList"><ul id="ulImgList"></ul></div>
+    </div>
+    
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="~/Scripts/webuploader/webuploader.js"></script>
+    <script type="text/javascript" src="~/Scripts/upload.js"></script>
+</body>
+</html>
