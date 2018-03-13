@@ -144,7 +144,7 @@
                 label: '点击选择图片'
             },
             formData: {
-                uid: 123
+                uid: window.location.search
             },
             dnd: '#dndArea',
             paste: '#uploader',
@@ -210,8 +210,9 @@
             window.uploader = uploader;
         });
 
-        uploader.on('uploadSuccess', function (file, response) {           
-            var $img = ('<li><img src="' + response.filePathList[0] + '" alt="Alternate Text" /></li>');
+        uploader.on('uploadSuccess', function (file, response) {
+            //debugger;
+            var $img = ('<li><img src="' + response.fileMode.fileList[0].url + '" alt="Alternate Text" /></li>');
             $("#ulImgList").prepend($img);
         });
 

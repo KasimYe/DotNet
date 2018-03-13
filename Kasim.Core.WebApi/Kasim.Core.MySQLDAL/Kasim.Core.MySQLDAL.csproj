@@ -13,4 +13,8 @@
     <ProjectReference Include="..\Kasim.Core.IDAL\Kasim.Core.IDAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="FileUploadWebApp\" />
+  </ItemGroup>
+
 </Project>

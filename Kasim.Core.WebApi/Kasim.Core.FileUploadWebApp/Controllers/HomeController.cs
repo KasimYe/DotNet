@@ -10,6 +10,7 @@ using System.IO;
 using System.Net.Http.Headers;
 using Kasim.Core.Common;
 using Microsoft.AspNetCore.Hosting;
+using Newtonsoft.Json;
 
 namespace Kasim.Core.FileUploadWebApp.Controllers
 {
@@ -23,21 +24,25 @@ namespace Kasim.Core.FileUploadWebApp.Controllers
         public IActionResult Index()
         {
             ViewData["Title"] = "图片上传";
-            ViewData["Message"] = Request.QueryString.Value;
+            if (Request != null && !string.IsNullOrEmpty(Request.QueryString.Value))
+            {
+                var req = Request.QueryString.Value.Remove(0, 1).Trim();
+                var json = MySecurity.SDecryptString(req, "yss.yh");
+                var _fileMode = JsonConvert.DeserializeObject<Model.FileUploadWebApp.FileModel>(json);
+                ViewData["Message"] = _fileMode.Message;
+            }            
             return View();
         }
 
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
-
             return View();
         }
 
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
-
             return View();
         }
 
@@ -49,12 +54,23 @@ namespace Kasim.Core.FileUploadWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> FileSave()
         {
+            Model.FileUploadWebApp.FileModel fileMode = null;
+            if (!string.IsNullOrEmpty(Request.Form["uid"]))
+            {
+                var req = Request.Form["uid"].ToString().Remove(0, 1).Trim();
+                var json = MySecurity.SDecryptString(req, "yss.yh");
+                fileMode = JsonConvert.DeserializeObject<Model.FileUploadWebApp.FileModel>(json);
+                fileMode.FileList = new List<Model.FileUploadWebApp.File>();
+            }
+            else
+            {
+                return BadRequest("非法参数");
+            }
             var now = DateTime.Now;
-            var files = Request.Form.Files;
+            var files = Request.Form.Files;            
             long size = files.Sum(f => f.Length);
             string webRootPath = _hostingEnvironment.WebRootPath;
-            string contentRootPath = _hostingEnvironment.ContentRootPath;
-            var filePathList = new List<string>();
+            string contentRootPath = _hostingEnvironment.ContentRootPath;            
             foreach (var formFile in files)
             {
                 if (formFile.Length > 0)
@@ -65,12 +81,18 @@ namespace Kasim.Core.FileUploadWebApp.Controllers
                     var foldPath = "upload/" + now.Year + "/" + now.Month + "/" + now.Day;
                     var filePath = Path.Combine(webRootPath, foldPath, newFileName);
                     FileOperate.FolderCreate(Path.Combine(webRootPath, foldPath));
-                    filePathList.Add(Path.Combine(foldPath, newFileName));
+                    fileMode.FileList.Add(new Model.FileUploadWebApp.File {
+                        Name= newFileName,
+                        Url= Path.Combine(foldPath, newFileName),
+                        Time=now
+                    });
                     using (var stream = new FileStream(filePath, FileMode.Create))
+                    { 
                         await formFile.CopyToAsync(stream);
+                    }
                 }
             }
-            return Ok(new { count = files.Count, size, filePathList });
+            return Ok(new { count = files.Count, size, fileMode });
         }
 
         [HttpPost]

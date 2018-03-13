@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Kasim.Core.Common\Kasim.Core.Common.csproj" />
+    <ProjectReference Include="..\Kasim.Core.Model\Kasim.Core.Model.csproj" />
   </ItemGroup>
 
 </Project>
