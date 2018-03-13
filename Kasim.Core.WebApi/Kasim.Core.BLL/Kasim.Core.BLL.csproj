@@ -19,8 +19,4 @@
     <ProjectReference Include="..\Kasim.Core.SQLServerDAL\Kasim.Core.SQLServerDAL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="FileUploadWebApp\" />
-  </ItemGroup>
-
 </Project>

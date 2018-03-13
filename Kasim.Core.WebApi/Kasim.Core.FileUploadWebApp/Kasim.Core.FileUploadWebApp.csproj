@@ -14,8 +14,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Kasim.Core.BLL\Kasim.Core.BLL.csproj" />
     <ProjectReference Include="..\Kasim.Core.Common\Kasim.Core.Common.csproj" />
+    <ProjectReference Include="..\Kasim.Core.IBLL\Kasim.Core.IBLL.csproj" />
     <ProjectReference Include="..\Kasim.Core.Model\Kasim.Core.Model.csproj" />
+    <ProjectReference Include="..\Kasim.Core.MySQLDAL\Kasim.Core.MySQLDAL.csproj" />
   </ItemGroup>
 
 </Project>

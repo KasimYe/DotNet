@@ -16,10 +16,10 @@ _#/|##########/\######(   /\   )######/\##########|\#_
                    __\ | |  | | /__
                   (vvv(VVV)(VVV)vvv)                  
 
-* Filename: FileModel
-* Namespace: Kasim.Core.Model.FileUploadWebApp
-* Classname: FileModel
-* Created: 2018-03-13 10:19:26
+* Filename: IFileBLL
+* Namespace: Kasim.Core.IBLL.FileUploadWebApp
+* Classname: IFileBLL
+* Created: 2018-03-13 13:26:16
 * Author: KasimYe
 * Ps: For My Son YH
 * Description: 
@@ -28,18 +28,12 @@ _#/|##########/\######(   /\   )######/\##########|\#_
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Kasim.Core.Model.FileUploadWebApp;
 
-namespace Kasim.Core.Model.FileUploadWebApp
+namespace Kasim.Core.IBLL.FileUploadWebApp
 {
-    public class FileModel : BaseEntity
+    public interface IFileBLL
     {
-        public int? Id { get; set; }
-        public int TypeId { get; set; }
-        public string Message { get; set; }
-        public string Table { get; set; }
-        public string[] Keys { get; set; }
-        public string[] Vals { get; set; }
-        public List<File> FileList { get; set; }
-
+        FileModel AddFiles(FileModel fileMode);
     }
 }

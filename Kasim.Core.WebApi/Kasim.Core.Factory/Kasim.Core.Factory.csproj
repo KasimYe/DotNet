@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="6.10.6" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Kasim.Core.IDAL\Kasim.Core.IDAL.csproj" />
   </ItemGroup>
 

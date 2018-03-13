@@ -16,10 +16,10 @@ _#/|##########/\######(   /\   )######/\##########|\#_
                    __\ | |  | | /__
                   (vvv(VVV)(VVV)vvv)                  
 
-* Filename: FileModel
+* Filename: ConnectionStringOptions
 * Namespace: Kasim.Core.Model.FileUploadWebApp
-* Classname: FileModel
-* Created: 2018-03-13 10:19:26
+* Classname: ConnectionStringOptions
+* Created: 2018-03-13 16:16:43
 * Author: KasimYe
 * Ps: For My Son YH
 * Description: 
@@ -31,15 +31,10 @@ using System.Text;
 
 namespace Kasim.Core.Model.FileUploadWebApp
 {
-    public class FileModel : BaseEntity
+    public class ConnectionStringOptions
     {
-        public int? Id { get; set; }
-        public int TypeId { get; set; }
-        public string Message { get; set; }
-        public string Table { get; set; }
-        public string[] Keys { get; set; }
-        public string[] Vals { get; set; }
-        public List<File> FileList { get; set; }
+        public string DefaultConnection { get; set; }
+        public string DevConnection { get; set; }
 
     }
 }

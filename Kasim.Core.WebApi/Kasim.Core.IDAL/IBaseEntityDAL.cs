@@ -51,8 +51,8 @@ namespace Kasim.Core.IDAL
     {
         T GetEntity(object id);
         List<T> GetList();
-        int Update(T t);
-        int Insert(T t);
-        int Delete(T t);
+        int Update(T entity);
+        int Insert(T entity);
+        int Delete(T entity);
     }
 }

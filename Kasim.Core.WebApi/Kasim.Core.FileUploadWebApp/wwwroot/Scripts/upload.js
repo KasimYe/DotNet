@@ -212,8 +212,18 @@
 
         uploader.on('uploadSuccess', function (file, response) {
             //debugger;
-            var $img = ('<li><img src="' + response.fileMode.fileList[0].url + '" alt="Alternate Text" /></li>');
-            $("#ulImgList").prepend($img);
+            //var $img = ('<li><img src="' + response.fileMode.fileList[0].url + '" alt="Alternate Text" /></li>');
+            //$("#ulImgList").prepend($img);
+            var formData = 'uid=' + JSON.stringify(response.fileMode);
+            $.ajax({
+                type: "POST",
+                url: '/Home/SaveData',             
+                data: formData,
+                dataType: "json",
+                success: function (data) {
+                    
+                } 
+            });  
         });
 
         // 当有文件添加进来时执行，负责view的创建

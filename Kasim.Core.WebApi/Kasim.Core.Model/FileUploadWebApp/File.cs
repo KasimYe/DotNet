@@ -33,9 +33,11 @@ namespace Kasim.Core.Model.FileUploadWebApp
 {
     public class File : BaseEntity
     {
+        public int? Id { get; set; }
         public string Url { get; set; }
         public string Name { get; set; }
-        public DateTime Time { get; set; }
+        public string Time { get; set; }
         public string Md5 { get; set; }
+        public string FullPath { get; set; }
     }
 }
