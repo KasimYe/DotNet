@@ -30,6 +30,7 @@ using Kasim.Core.Factory;
 using Kasim.Core.IDAL.FileUploadWebApp;
 using Kasim.Core.Model.FileUploadWebApp;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -50,15 +51,32 @@ namespace Kasim.Core.MySQLDAL.FileUploadWebApp
             throw new NotImplementedException();
         }
 
-        public File GetFileEntity(File file)
+        public File GetFileEntity(File file, int fModelId)
         {
             using (var Conn = ConnectionFactory.MySqlConnection)
             {
-                var query = "SELECT `FId`,`FTypeId`,`FModelId`,`FName`,`FUrl`,`FTime`,`FMd5`,`FUser` FROM `filedb`.`file` WHERE FMd5=@FMd5;";
-                var result = Conn.Query<File>(query, file).SingleOrDefault();
+                var query = "SELECT `FId` AS Id,`FTypeId`,`FModelId`,`FName` AS `Name`,`FUrl` AS Url,`FTime` AS `Time`,`FMd5` AS `Md5`,`FUser` FROM `filedb`.`file` WHERE FMd5=@Md5 AND FModelId=@FModelId;";
+                var result = Conn.Query<File>(query, new { file.Md5, FModelId = fModelId }).SingleOrDefault();
+                Conn.Close();
+                Conn.Dispose();          
+                return result ?? file;
+            }
+        }
+
+        public int? GetFileModelId(FileModel fileMode)
+        {
+            using (var Conn = ConnectionFactory.MySqlConnection)
+            {
+                var query = "SELECT `FModelId` FROM `filedb`.`filemodel` WHERE `CTypeId`=@TypeId AND `Source`=@Table AND `Keys`=@Keys AND `Values`=@Vals;";                
+                var result = Conn.ExecuteScalar(query, new {
+                    fileMode.TypeId,
+                    fileMode.Table,
+                    Keys = JsonConvert.SerializeObject(fileMode.Keys),
+                    Vals = JsonConvert.SerializeObject(fileMode.Vals)
+                });
                 Conn.Close();
                 Conn.Dispose();
-                return result ?? file;
+                return (int?)result;
             }
         }
 
@@ -82,7 +100,7 @@ namespace Kasim.Core.MySQLDAL.FileUploadWebApp
                     FMd5 = file.Md5,
                     FUser = "YH"
                 });
-                file.Id =Convert.ToInt32(result);
+                file.Id = Convert.ToInt32(result);
                 Conn.Close();
                 Conn.Dispose();
                 return file;
@@ -93,17 +111,13 @@ namespace Kasim.Core.MySQLDAL.FileUploadWebApp
         {
             using (var Conn = ConnectionFactory.MySqlConnection)
             {
-                var query = "INSERT INTO `filedb`.`filemodel` (`CTypeId`,`Source`,`Keys`,`Values`)VALUES(@TypeId,@Table,@Keys,@Vals);SELECT @@IDENTITY;";
-                var keys = "";
-                entity.Keys.AsList().ForEach(x => keys += x);
-                var vals = "";
-                entity.Vals.AsList().ForEach(x => vals += x);
+                var query = "INSERT INTO `filedb`.`filemodel` (`CTypeId`,`Source`,`Keys`,`Values`)VALUES(@TypeId,@Table,@Keys,@Vals);SELECT @@IDENTITY;";       
                 var result = Conn.ExecuteScalar(query, new
                 {
                     entity.TypeId,
                     entity.Table,
-                    Keys = keys,
-                    Vals = vals
+                    Keys = JsonConvert.SerializeObject(entity.Keys),
+                    Vals = JsonConvert.SerializeObject(entity.Vals)
                 });
                 Conn.Close();
                 Conn.Dispose();

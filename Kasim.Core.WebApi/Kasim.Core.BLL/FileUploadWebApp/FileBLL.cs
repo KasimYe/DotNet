@@ -39,15 +39,33 @@ namespace Kasim.Core.BLL.FileUploadWebApp
     public class FileBLL : IFileBLL
     {
         IFileDAL<FileModel> dal = DALFactory<IFileDAL<FileModel>>.CreateDAL("Kasim.Core.MySQLDAL", "FileUploadWebApp.FileDAL");
+        
+        public FileBLL(ConnectionStringOptions connectionStrings)
+        {
+            ConnectionFactory.MySqlConnectionString = connectionStrings.DefaultConnection;
+        }
+
         public FileModel AddFiles(FileModel fileMode)
         {
-            fileMode.Id = dal.Insert(fileMode);
+            fileMode.Id = dal.GetFileModelId(fileMode);
+            if (fileMode.Id==null)
+            {
+                fileMode.Id = dal.Insert(fileMode);
+            }            
             for (int i = 0; i < fileMode.FileList.Count; i++)
             {
                 var file = fileMode.FileList[i];
-                file.Md5 = MD5.GetFileMd5(file.FullPath);
-                file = dal.GetFileEntity(file);
-                file = dal.Insert(fileMode, file);
+                var _fullPath = file.FullPath;
+                file.Md5 = MD5.GetFileMd5(_fullPath);
+                file = dal.GetFileEntity(file,(int)fileMode.Id);
+                if (file.Id==null)
+                {
+                    file = dal.Insert(fileMode, file);
+                }
+                else
+                {
+                    FileOperate.FileDel(_fullPath);
+                }
             }
             return fileMode;
         }

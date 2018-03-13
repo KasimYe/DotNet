@@ -34,7 +34,8 @@ namespace Kasim.Core.IDAL.FileUploadWebApp
 {
     public interface IFileDAL<T> : IBaseEntityDAL<FileModel>
     {
-        File GetFileEntity(File file);
+        File GetFileEntity(File file, int fModelId);
         File Insert(FileModel fileMode, File file);
+        int? GetFileModelId(FileModel fileMode);
     }
 }

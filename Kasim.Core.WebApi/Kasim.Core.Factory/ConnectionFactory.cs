@@ -96,7 +96,7 @@ namespace Kasim.Core.Factory
                     _connection.Dispose();
                     _connection = null;
                 }
-                return _connection = CreateConnection(connString);
+                return _connection = CreateMySqlConnection(connString);
             }
         }
 

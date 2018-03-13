@@ -27,7 +27,7 @@ namespace Kasim.Core.FileUploadWebApp.Controllers
         {
             _conns = connsOptions.Value;
             _hostingEnvironment = hostingEnvironment;
-            bll = new FileBLL();
+            bll = new FileBLL(_conns);
         }
 
         public IActionResult Index()
