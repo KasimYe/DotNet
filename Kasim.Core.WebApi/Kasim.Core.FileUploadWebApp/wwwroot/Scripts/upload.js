@@ -151,7 +151,7 @@
             swf: '/webuploader/Uploader.swf',
             chunked: false,
             chunkSize: 512 * 1024,
-            server: '/Home/FileSave',
+            server: '/Home/FileSaveAsync',
             // runtimeOrder: 'flash',
 
             // accept: {
@@ -211,19 +211,21 @@
         });
 
         uploader.on('uploadSuccess', function (file, response) {
-            //debugger;
-            //var $img = ('<li><img src="' + response.fileMode.fileList[0].url + '" alt="Alternate Text" /></li>');
+            //debugger;      
+            //var $img = ('<li><img src="' + response.list[0].url + '" alt="Alternate Text" /></li>');
             //$("#ulImgList").prepend($img);
+            //服务端异步调用下面，同步调用上面
             var formData = 'uid=' + JSON.stringify(response.fileMode);
-            $.ajax({
-                type: "POST",
-                url: '/Home/SaveData',             
+            $.ajax('/Home/SaveData', {
+                method: 'POST',
                 data: formData,
-                dataType: "json",
-                success: function (data) {
-                    
-                } 
-            });  
+                dataType: 'json'
+            }).done(function (retData) {
+                var $img = ('<li><img src="' + retData.list[0].url + '" alt="Alternate Text" /></li>');
+                $("#ulImgList").prepend($img);
+            });
+
+       
         });
 
         // 当有文件添加进来时执行，负责view的创建

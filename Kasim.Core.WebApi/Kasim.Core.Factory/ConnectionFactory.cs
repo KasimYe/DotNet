@@ -80,33 +80,7 @@ namespace Kasim.Core.Factory
             conn = new SqlConnection(connString);
             conn.Open();
             return conn;
-        }
-
-        public static IDbConnection MySqlConnection
-        {
-            get
-            {
-                var connString = MySqlConnectionString;
-                if (_connection != null)
-                {
-                    if (_connection.State != ConnectionState.Closed)
-                    {
-                        _connection.Close();
-                    }
-                    _connection.Dispose();
-                    _connection = null;
-                }
-                return _connection = CreateMySqlConnection(connString);
-            }
-        }
-
-        public static string MySqlConnectionString { get; set; }
-        public static IDbConnection CreateMySqlConnection(string connString)
-        {
-            IDbConnection conn = null;
-            conn = new MySqlConnection(connString);
-            conn.Open();
-            return conn;
-        }
+        }  
+        public static string MySqlConnectionString { get; set; }   
     }
 }

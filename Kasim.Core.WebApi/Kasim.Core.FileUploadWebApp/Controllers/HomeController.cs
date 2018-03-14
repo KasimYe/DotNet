@@ -41,7 +41,7 @@ namespace Kasim.Core.FileUploadWebApp.Controllers
                 ViewData["Message"] = _fileMode.Message;
             }
             return View();
-        }
+        }                
 
         public IActionResult About()
         {
@@ -60,8 +60,12 @@ namespace Kasim.Core.FileUploadWebApp.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        /// <summary>
+        /// 异步上传写入数据库时会重复写入相同数据，无法解决
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> FileSave()
+        public async Task<IActionResult> FileSaveAsync()
         {
             FileModel fileMode = null;
             if (!string.IsNullOrEmpty(Request.Form["uid"]))
@@ -109,18 +113,80 @@ namespace Kasim.Core.FileUploadWebApp.Controllers
         }
 
         [HttpPost]
+        public IActionResult FileSave()
+        {
+            FileModel fileMode = null;
+            if (!string.IsNullOrEmpty(Request.Form["uid"]))
+            {
+                var req = Request.Form["uid"].ToString().Remove(0, 1).Trim();
+                var json = MySecurity.SDecryptString(req, "yss.yh");
+                fileMode = JsonConvert.DeserializeObject<FileModel>(json);
+                fileMode.FileList = new List<Model.FileUploadWebApp.File>();
+            }
+            else
+            {
+                return BadRequest("非法参数");
+            }
+            var now = DateTime.Now;
+            var files = Request.Form.Files;
+            long size = files.Sum(f => f.Length);
+            string webRootPath = _hostingEnvironment.WebRootPath;
+            string contentRootPath = _hostingEnvironment.ContentRootPath;
+            foreach (var formFile in files)
+            {
+                if (formFile.Length > 0)
+                {
+                    string fileExt = FileOperate.GetPostfixStr(formFile.FileName).Remove(0, 1); //文件扩展名，不含“.”
+                    long fileSize = formFile.Length; //获得文件大小，以字节为单位
+                    string newFileName = Guid.NewGuid().ToString() + "." + fileExt; //随机生成新的文件名
+                    var foldPath = "upload/" + now.Year + "/" + now.Month + "/" + now.Day;
+                    var filePath = Path.Combine(webRootPath, foldPath, newFileName);
+                    FileOperate.FolderCreate(Path.Combine(webRootPath, foldPath));
+                    fileMode.FileList.Add(new Model.FileUploadWebApp.File
+                    {
+                        Name = newFileName,
+                        Url = Path.Combine(foldPath, newFileName),
+                        Time = now.ToString("yyyy-MM-dd HH:mm:ss"),
+                        FullPath = filePath
+                        //Md5 = MD5.GetFileMd5(filePath)
+                    });
+                    //fileMode = bll.AddFiles(fileMode);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        formFile.CopyTo(stream);
+                    }
+                }
+            }
+            fileMode = bll.AddFiles(fileMode);
+            return Ok(new { list = fileMode.FileList });
+            //return Ok(new { count = files.Count, size, fileMode });
+        }
+
+        [HttpPost]
         public IActionResult SaveData()
         {
             var json = Request.Form["uid"];
             var fileMode = JsonConvert.DeserializeObject<FileModel>(json);
             fileMode = bll.AddFiles(fileMode);
-            return Ok(new { });
+            return Ok(new { list = fileMode.FileList });
         }
 
         [HttpPost]
-        public JsonResult Preview()
+        public IActionResult GetData()
         {
-            return null;
+            var json = MySecurity.SDecryptString(Request.Form["uid"], "yss.yh");
+            var fileModel = JsonConvert.DeserializeObject<FileModel>(json);
+            fileModel = bll.GetFiles(fileModel);
+            return Ok(new { fileModel });
+        }
+
+        [HttpPost]
+        public IActionResult Preview()
+        {
+            var json = MySecurity.SDecryptString(Request.Form["uid"], "yss.yh");
+            var fileModel = JsonConvert.DeserializeObject<FileModel>(json);
+            fileModel = bll.GetFiles(fileModel);
+            return Ok(new { fileModel });
         }
     }
 }

@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Kasim.Core.Common\Kasim.Core.Common.csproj" />
     <ProjectReference Include="..\Kasim.Core.Factory\Kasim.Core.Factory.csproj" />
     <ProjectReference Include="..\Kasim.Core.IDAL\Kasim.Core.IDAL.csproj" />
   </ItemGroup>

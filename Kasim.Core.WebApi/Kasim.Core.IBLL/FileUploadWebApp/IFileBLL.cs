@@ -35,5 +35,6 @@ namespace Kasim.Core.IBLL.FileUploadWebApp
     public interface IFileBLL
     {
         FileModel AddFiles(FileModel fileMode);
+        FileModel GetFiles(FileModel fileMode);
     }
 }
