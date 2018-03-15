@@ -170,7 +170,7 @@ namespace Kasim.Core.MySQLDAL.FileUploadWebApp
                     return result;
                 }
                 catch (Exception ex)
-                {
+                {                    
                     Tran.Rollback();
                     return 0;
                 }

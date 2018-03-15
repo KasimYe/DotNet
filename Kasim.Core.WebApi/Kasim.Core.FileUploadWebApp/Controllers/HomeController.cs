@@ -6,6 +6,7 @@ using Kasim.Core.Model.FileUploadWebApp;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
@@ -19,12 +20,13 @@ namespace Kasim.Core.FileUploadWebApp.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ILogger<HomeController> _logger;
         private readonly ConnectionStringOptions _conns;
         private readonly IHostingEnvironment _hostingEnvironment;
         private IFileBLL bll = null;
-
-        public HomeController(IOptions<ConnectionStringOptions> connsOptions, IHostingEnvironment hostingEnvironment)
+        public HomeController(ILogger<HomeController> logger, IOptions<ConnectionStringOptions> connsOptions, IHostingEnvironment hostingEnvironment)
         {
+            _logger = logger;
             _conns = connsOptions.Value;
             _hostingEnvironment = hostingEnvironment;
             bll = new FileBLL(_conns);
@@ -41,7 +43,7 @@ namespace Kasim.Core.FileUploadWebApp.Controllers
                 ViewData["Message"] = _fileMode.Message;
             }
             return View();
-        }                
+        }
 
         public IActionResult About()
         {
@@ -77,6 +79,7 @@ namespace Kasim.Core.FileUploadWebApp.Controllers
             }
             else
             {
+                _logger.LogError("非法参数");
                 return BadRequest("非法参数");
             }
             var now = DateTime.Now;
@@ -84,30 +87,37 @@ namespace Kasim.Core.FileUploadWebApp.Controllers
             long size = files.Sum(f => f.Length);
             string webRootPath = _hostingEnvironment.WebRootPath;
             string contentRootPath = _hostingEnvironment.ContentRootPath;
-            foreach (var formFile in files)
+            try
             {
-                if (formFile.Length > 0)
+                foreach (var formFile in files)
                 {
-                    string fileExt = FileOperate.GetPostfixStr(formFile.FileName).Remove(0, 1); //文件扩展名，不含“.”
-                    long fileSize = formFile.Length; //获得文件大小，以字节为单位
-                    string newFileName = Guid.NewGuid().ToString() + "." + fileExt; //随机生成新的文件名
-                    var foldPath = "upload/" + now.Year + "/" + now.Month + "/" + now.Day;
-                    var filePath = Path.Combine(webRootPath, foldPath, newFileName);
-                    FileOperate.FolderCreate(Path.Combine(webRootPath, foldPath));
-                    fileMode.FileList.Add(new Model.FileUploadWebApp.File
+                    if (formFile.Length > 0)
                     {
-                        Name = newFileName,
-                        Url = Path.Combine(foldPath, newFileName),
-                        Time = now.ToString("yyyy-MM-dd HH:mm:ss"),
-                        FullPath = filePath
-                        //Md5 = MD5.GetFileMd5(filePath)
-                    });
-                    //fileMode = bll.AddFiles(fileMode);
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await formFile.CopyToAsync(stream);
+                        string fileExt = FileOperate.GetPostfixStr(formFile.FileName).Remove(0, 1); //文件扩展名，不含“.”
+                        long fileSize = formFile.Length; //获得文件大小，以字节为单位
+                        string newFileName = Guid.NewGuid().ToString() + "." + fileExt; //随机生成新的文件名
+                        var foldPath = "upload/" + now.Year + "/" + now.Month + "/" + now.Day;
+                        var filePath = Path.Combine(webRootPath, foldPath, newFileName);
+                        FileOperate.FolderCreate(Path.Combine(webRootPath, foldPath));
+                        fileMode.FileList.Add(new Model.FileUploadWebApp.File
+                        {
+                            Name = newFileName,
+                            Url = Path.Combine(foldPath, newFileName),
+                            Time = now.ToString("yyyy-MM-dd HH:mm:ss"),
+                            FullPath = filePath
+                            //Md5 = MD5.GetFileMd5(filePath)
+                        });
+                        //fileMode = bll.AddFiles(fileMode);
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await formFile.CopyToAsync(stream);
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
             }
             return Ok(new { count = files.Count, size, fileMode });
         }
@@ -125,39 +135,47 @@ namespace Kasim.Core.FileUploadWebApp.Controllers
             }
             else
             {
+                _logger.LogError("非法参数");
                 return BadRequest("非法参数");
             }
-            var now = DateTime.Now;
-            var files = Request.Form.Files;
-            long size = files.Sum(f => f.Length);
-            string webRootPath = _hostingEnvironment.WebRootPath;
-            string contentRootPath = _hostingEnvironment.ContentRootPath;
-            foreach (var formFile in files)
+            try
             {
-                if (formFile.Length > 0)
+                var now = DateTime.Now;
+                var files = Request.Form.Files;
+                long size = files.Sum(f => f.Length);
+                string webRootPath = _hostingEnvironment.WebRootPath;
+                string contentRootPath = _hostingEnvironment.ContentRootPath;
+                foreach (var formFile in files)
                 {
-                    string fileExt = FileOperate.GetPostfixStr(formFile.FileName).Remove(0, 1); //文件扩展名，不含“.”
-                    long fileSize = formFile.Length; //获得文件大小，以字节为单位
-                    string newFileName = Guid.NewGuid().ToString() + "." + fileExt; //随机生成新的文件名
-                    var foldPath = "upload/" + now.Year + "/" + now.Month + "/" + now.Day;
-                    var filePath = Path.Combine(webRootPath, foldPath, newFileName);
-                    FileOperate.FolderCreate(Path.Combine(webRootPath, foldPath));
-                    fileMode.FileList.Add(new Model.FileUploadWebApp.File
+                    if (formFile.Length > 0)
                     {
-                        Name = newFileName,
-                        Url = Path.Combine(foldPath, newFileName),
-                        Time = now.ToString("yyyy-MM-dd HH:mm:ss"),
-                        FullPath = filePath
-                        //Md5 = MD5.GetFileMd5(filePath)
-                    });
-                    //fileMode = bll.AddFiles(fileMode);
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        formFile.CopyTo(stream);
+                        string fileExt = FileOperate.GetPostfixStr(formFile.FileName).Remove(0, 1); //文件扩展名，不含“.”
+                        long fileSize = formFile.Length; //获得文件大小，以字节为单位
+                        string newFileName = Guid.NewGuid().ToString() + "." + fileExt; //随机生成新的文件名
+                        var foldPath = "upload/" + now.Year + "/" + now.Month + "/" + now.Day;
+                        var filePath = Path.Combine(webRootPath, foldPath, newFileName);
+                        FileOperate.FolderCreate(Path.Combine(webRootPath, foldPath));
+                        fileMode.FileList.Add(new Model.FileUploadWebApp.File
+                        {
+                            Name = newFileName,
+                            Url = Path.Combine(foldPath, newFileName),
+                            Time = now.ToString("yyyy-MM-dd HH:mm:ss"),
+                            FullPath = filePath
+                            //Md5 = MD5.GetFileMd5(filePath)
+                        });
+                        //fileMode = bll.AddFiles(fileMode);
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            formFile.CopyTo(stream);
+                        }
                     }
                 }
+                fileMode = bll.AddFiles(fileMode);
             }
-            fileMode = bll.AddFiles(fileMode);
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
             return Ok(new { list = fileMode.FileList });
             //return Ok(new { count = files.Count, size, fileMode });
         }
@@ -167,7 +185,14 @@ namespace Kasim.Core.FileUploadWebApp.Controllers
         {
             var json = Request.Form["uid"];
             var fileMode = JsonConvert.DeserializeObject<FileModel>(json);
-            fileMode = bll.AddFiles(fileMode);
+            try
+            {
+                fileMode = bll.AddFiles(fileMode);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
             return Ok(new { list = fileMode.FileList });
         }
 
@@ -176,7 +201,15 @@ namespace Kasim.Core.FileUploadWebApp.Controllers
         {
             var json = MySecurity.SDecryptString(Request.Form["uid"], "yss.yh");
             var fileModel = JsonConvert.DeserializeObject<FileModel>(json);
-            fileModel = bll.GetFiles(fileModel);
+            try
+            {
+                fileModel = bll.GetFiles(fileModel);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+
             return Ok(new { fileModel });
         }
 
