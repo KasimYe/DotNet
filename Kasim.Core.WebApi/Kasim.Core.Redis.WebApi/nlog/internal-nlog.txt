@@ -1,0 +1,324 @@
+2018-03-20 20:54:13.7619 Info Adding target File Target[allfile]
+2018-03-20 20:54:13.7735 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 20:54:13.8231 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 20:54:13.8231 Info Adding target File Target[ownFile-web]
+2018-03-20 20:54:13.8271 Info Adding target Null Target[blackhole]
+2018-03-20 20:54:13.8271 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-03-20 20:54:13.8518 Info Found 53 configuration items
+2018-03-20 20:54:13.8601 Info Found 53 configuration items
+2018-03-20 20:54:50.5375 Info Adding target File Target[allfile]
+2018-03-20 20:54:50.5474 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 20:54:50.5774 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 20:54:50.5774 Info Adding target File Target[ownFile-web]
+2018-03-20 20:54:50.5774 Info Adding target Null Target[blackhole]
+2018-03-20 20:54:50.5774 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-03-20 20:54:50.5959 Info Found 53 configuration items
+2018-03-20 20:54:50.6143 Info Found 53 configuration items
+2018-03-20 20:56:57.4959 Info Adding target File Target[allfile]
+2018-03-20 20:56:57.5059 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 20:56:57.5408 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 20:56:57.5461 Info Adding target File Target[ownFile-web]
+2018-03-20 20:56:57.5461 Info Adding target Null Target[blackhole]
+2018-03-20 20:56:57.5461 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-03-20 20:56:57.5687 Info Found 53 configuration items
+2018-03-20 20:56:57.5886 Info Found 53 configuration items
+2018-03-20 20:57:59.2420 Info Adding target File Target[allfile]
+2018-03-20 20:57:59.2539 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 20:57:59.2903 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 20:57:59.2903 Info Adding target File Target[ownFile-web]
+2018-03-20 20:57:59.2962 Info Adding target Null Target[blackhole]
+2018-03-20 20:57:59.2962 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-03-20 20:57:59.3150 Info Found 53 configuration items
+2018-03-20 20:57:59.3337 Info Found 53 configuration items
+2018-03-20 20:58:23.3552 Info Adding target File Target[allfile]
+2018-03-20 20:58:23.3626 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 20:58:23.3976 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 20:58:23.3976 Info Adding target File Target[ownFile-web]
+2018-03-20 20:58:23.3976 Info Adding target Null Target[blackhole]
+2018-03-20 20:58:23.4133 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-03-20 20:58:23.4311 Info Found 53 configuration items
+2018-03-20 20:58:23.4382 Info Found 53 configuration items
+2018-03-20 20:59:09.2597 Info Adding target File Target[allfile]
+2018-03-20 20:59:09.2741 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 20:59:09.3269 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 20:59:09.3269 Info Adding target File Target[ownFile-web]
+2018-03-20 20:59:09.3269 Info Adding target Null Target[blackhole]
+2018-03-20 20:59:09.3269 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-03-20 20:59:09.3562 Info Found 53 configuration items
+2018-03-20 20:59:09.3748 Info Found 53 configuration items
+2018-03-20 20:59:40.5874 Info Adding target File Target[allfile]
+2018-03-20 20:59:40.6109 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 20:59:40.6483 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 20:59:40.6483 Info Adding target File Target[ownFile-web]
+2018-03-20 20:59:40.6555 Info Adding target Null Target[blackhole]
+2018-03-20 20:59:40.6555 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-03-20 20:59:40.6723 Info Found 53 configuration items
+2018-03-20 20:59:40.6921 Info Found 53 configuration items
+2018-03-20 21:01:30.8318 Info Adding target File Target[allfile]
+2018-03-20 21:01:30.8440 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 21:01:30.8773 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 21:01:30.8773 Info Adding target File Target[ownFile-web]
+2018-03-20 21:01:30.8773 Info Adding target Null Target[blackhole]
+2018-03-20 21:01:30.8773 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-03-20 21:01:30.8959 Info Found 53 configuration items
+2018-03-20 21:01:30.9121 Info Found 53 configuration items
+2018-03-20 21:03:01.4745 Info Adding target File Target[allfile]
+2018-03-20 21:03:01.4833 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 21:03:01.5110 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 21:03:01.5110 Info Adding target File Target[ownFile-web]
+2018-03-20 21:03:01.5110 Info Adding target Null Target[blackhole]
+2018-03-20 21:03:01.5179 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-03-20 21:03:01.5308 Info Found 53 configuration items
+2018-03-20 21:03:01.5474 Info Found 53 configuration items
+2018-03-20 21:05:15.7596 Info Adding target File Target[allfile]
+2018-03-20 21:05:15.7688 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 21:05:15.8017 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 21:05:15.8017 Info Adding target File Target[ownFile-web]
+2018-03-20 21:05:15.8017 Info Adding target Null Target[blackhole]
+2018-03-20 21:05:15.8017 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-03-20 21:05:15.8252 Info Found 53 configuration items
+2018-03-20 21:05:15.8434 Info Found 53 configuration items
+2018-03-20 21:06:57.6929 Info Adding target File Target[allfile]
+2018-03-20 21:06:57.7048 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 21:06:57.7501 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 21:06:57.7501 Info Adding target File Target[ownFile-web]
+2018-03-20 21:06:57.7501 Info Adding target Null Target[blackhole]
+2018-03-20 21:06:57.7501 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-03-20 21:06:57.7719 Info Found 53 configuration items
+2018-03-20 21:06:57.7900 Info Found 53 configuration items
+2018-03-20 21:07:33.3712 Info Adding target File Target[allfile]
+2018-03-20 21:07:33.3798 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 21:07:33.4135 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 21:07:33.4135 Info Adding target File Target[ownFile-web]
+2018-03-20 21:07:33.4135 Info Adding target Null Target[blackhole]
+2018-03-20 21:07:33.4205 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-03-20 21:07:33.4205 Info Found 53 configuration items
+2018-03-20 21:07:33.4382 Info Found 53 configuration items
+2018-03-20 21:08:32.8568 Info Adding target File Target[allfile]
+2018-03-20 21:08:32.8945 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 21:08:32.9233 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 21:08:32.9233 Info Adding target File Target[ownFile-web]
+2018-03-20 21:08:32.9233 Info Adding target Null Target[blackhole]
+2018-03-20 21:08:32.9233 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-03-20 21:08:32.9420 Info Found 53 configuration items
+2018-03-20 21:08:32.9581 Info Found 53 configuration items
+2018-03-20 21:09:26.4702 Info Adding target File Target[allfile]
+2018-03-20 21:09:26.5067 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 21:09:26.5375 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 21:09:26.5375 Info Adding target File Target[ownFile-web]
+2018-03-20 21:09:26.5375 Info Adding target Null Target[blackhole]
+2018-03-20 21:09:26.5455 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-03-20 21:09:26.5455 Info Found 53 configuration items
+2018-03-20 21:09:26.5645 Info Found 53 configuration items
+2018-03-20 21:12:34.4580 Info Adding target File Target[allfile]
+2018-03-20 21:12:34.4863 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 21:12:34.5156 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 21:12:34.5156 Info Adding target File Target[ownFile-web]
+2018-03-20 21:12:34.5156 Info Adding target Null Target[blackhole]
+2018-03-20 21:12:34.5156 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-03-20 21:12:34.5351 Info Found 53 configuration items
+2018-03-20 21:12:34.5522 Info Found 53 configuration items
+2018-03-20 21:12:54.4154 Info Adding target File Target[allfile]
+2018-03-20 21:12:54.4225 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 21:12:54.4515 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 21:12:54.4515 Info Adding target File Target[ownFile-web]
+2018-03-20 21:12:54.4515 Info Adding target Null Target[blackhole]
+2018-03-20 21:12:54.4515 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-03-20 21:12:54.4874 Info Found 53 configuration items
+2018-03-20 21:12:54.5081 Info Found 53 configuration items
+2018-03-20 21:16:07.4398 Info Adding target File Target[allfile]
+2018-03-20 21:16:07.4583 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 21:16:07.5022 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 21:16:07.5022 Info Adding target File Target[ownFile-web]
+2018-03-20 21:16:07.5022 Info Adding target Null Target[blackhole]
+2018-03-20 21:16:07.5022 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-03-20 21:16:07.5215 Info Found 53 configuration items
+2018-03-20 21:16:07.5375 Info Found 53 configuration items
+2018-03-20 21:17:23.4092 Info Adding target File Target[allfile]
+2018-03-20 21:17:23.4308 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 21:17:23.4683 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 21:17:23.4683 Info Adding target File Target[ownFile-web]
+2018-03-20 21:17:23.4683 Info Adding target Null Target[blackhole]
+2018-03-20 21:17:23.4683 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-03-20 21:17:23.4880 Info Found 53 configuration items
+2018-03-20 21:17:23.5042 Info Found 53 configuration items
+2018-03-20 21:18:04.9106 Info Adding target File Target[allfile]
+2018-03-20 21:18:04.9106 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 21:18:04.9519 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 21:18:04.9519 Info Adding target File Target[ownFile-web]
+2018-03-20 21:18:04.9519 Info Adding target Null Target[blackhole]
+2018-03-20 21:18:04.9519 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-03-20 21:18:04.9731 Info Found 53 configuration items
+2018-03-20 21:18:04.9914 Info Found 53 configuration items
+2018-03-20 21:21:28.4432 Info Adding target File Target[allfile]
+2018-03-20 21:21:28.4536 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 21:21:28.4807 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 21:21:28.4832 Info Adding target File Target[ownFile-web]
+2018-03-20 21:21:28.4832 Info Adding target Null Target[blackhole]
+2018-03-20 21:21:28.4832 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-03-20 21:21:28.5010 Info Found 53 configuration items
+2018-03-20 21:21:28.5175 Info Found 53 configuration items
+2018-03-20 22:23:19.0191 Info Adding target File Target[allfile]
+2018-03-20 22:23:19.0191 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 22:23:19.0597 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 22:23:19.0644 Info Adding target File Target[ownFile-web]
+2018-03-20 22:23:19.0644 Info Adding target Null Target[blackhole]
+2018-03-20 22:23:19.0644 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-03-20 22:23:19.0854 Info Found 53 configuration items
+2018-03-20 22:23:19.1013 Info Found 53 configuration items
+2018-03-20 22:24:03.6169 Info Adding target File Target[allfile]
+2018-03-20 22:24:03.6245 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 22:24:03.6595 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 22:24:03.6595 Info Adding target File Target[ownFile-web]
+2018-03-20 22:24:03.6595 Info Adding target Null Target[blackhole]
+2018-03-20 22:24:03.6595 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-03-20 22:24:03.6785 Info Found 53 configuration items
+2018-03-20 22:24:03.6946 Info Found 53 configuration items
+2018-03-20 22:36:31.1705 Info Adding target File Target[allfile]
+2018-03-20 22:36:31.1871 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 22:36:31.2394 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 22:36:31.2394 Info Adding target File Target[ownFile-web]
+2018-03-20 22:36:31.2394 Info Adding target Null Target[blackhole]
+2018-03-20 22:36:31.2516 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-03-20 22:36:31.2652 Info Found 53 configuration items
+2018-03-20 22:36:31.2838 Info Found 53 configuration items
+2018-03-20 22:58:30.6395 Info Adding target File Target[allfile]
+2018-03-20 22:58:30.6562 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 22:58:30.7561 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 22:58:30.7677 Info Adding target File Target[ownFile-web]
+2018-03-20 22:58:30.7677 Info Adding target Null Target[blackhole]
+2018-03-20 22:58:30.7677 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-03-20 22:58:30.7935 Info Found 53 configuration items
+2018-03-20 22:58:30.8119 Info Found 53 configuration items
+2018-03-20 23:07:01.5358 Info Adding target File Target[allfile]
+2018-03-20 23:07:01.5530 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 23:07:01.5853 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 23:07:01.5853 Info Adding target File Target[ownFile-web]
+2018-03-20 23:07:01.5853 Info Adding target Null Target[blackhole]
+2018-03-20 23:07:01.5936 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-03-20 23:07:01.5936 Info Found 53 configuration items
+2018-03-20 23:07:01.6250 Info Found 53 configuration items
+2018-03-20 23:09:05.0424 Info Adding target File Target[allfile]
+2018-03-20 23:09:05.1008 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 23:09:05.1729 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 23:09:05.1729 Info Adding target File Target[ownFile-web]
+2018-03-20 23:09:05.1729 Info Adding target Null Target[blackhole]
+2018-03-20 23:09:05.1729 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-03-20 23:09:05.1994 Info Found 53 configuration items
+2018-03-20 23:09:05.2193 Info Found 53 configuration items
+2018-03-20 23:10:29.9555 Info Adding target File Target[allfile]
+2018-03-20 23:10:29.9912 Error Error parsing layout aspnet-request-url will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-request-url'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 23:10:30.0472 Error Error parsing layout aspnet-mvc-action will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-mvc-action'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr)
+2018-03-20 23:10:30.0472 Info Adding target File Target[ownFile-web]
+2018-03-20 23:10:30.0472 Info Adding target Null Target[blackhole]
+2018-03-20 23:10:30.0472 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-03-20 23:10:30.0693 Info Found 53 configuration items
+2018-03-20 23:10:30.0877 Info Found 53 configuration items

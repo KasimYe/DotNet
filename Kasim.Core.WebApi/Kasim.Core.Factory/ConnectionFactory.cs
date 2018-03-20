@@ -52,9 +52,8 @@ using System.Text;
 namespace Kasim.Core.Factory
 {
     public class ConnectionFactory
-    {
+    {   
         private static IDbConnection _connection;
-
         public static IDbConnection Connection
         {
             get
