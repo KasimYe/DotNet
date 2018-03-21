@@ -37,9 +37,10 @@ namespace Kasim.Core.Redis.WebApi.BLL
     public class ClientBLL
     {
         DAL.Redis.ClientDAL dal;
-        public ClientBLL(ConnectionStringOptions value)
+        public ClientBLL(ConnectionStringOptions cso, RedisConfig rc)
         {
-            Conf.ConStrOps = value;
+            Conf.ConStrOps = cso;
+            Conf.ExpiryDate = new TimeSpan(rc.TsDays, rc.TsHours, rc.TsMinutes, rc.TsSeconds);
             dal = new DAL.Redis.ClientDAL();
         }
 

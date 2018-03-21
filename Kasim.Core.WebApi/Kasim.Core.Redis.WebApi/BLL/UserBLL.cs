@@ -36,10 +36,11 @@ namespace Kasim.Core.Redis.WebApi.BLL
 {
     public class UserBLL
     {
-        DAL.Redis.UserDAL dal; 
-        public UserBLL(ConnectionStringOptions value)
+        DAL.Redis.UserDAL dal;
+        public UserBLL(ConnectionStringOptions cso, RedisConfig rc)
         {
-            Conf.ConStrOps = value;
+            Conf.ConStrOps = cso;
+            Conf.ExpiryDate = new TimeSpan(rc.TsDays, rc.TsHours, rc.TsMinutes, rc.TsSeconds);
             dal = new DAL.Redis.UserDAL();
         }
 
@@ -56,6 +57,11 @@ namespace Kasim.Core.Redis.WebApi.BLL
         public List<User> GetUsersByGroups(int[] userGroupIds)
         {
             return dal.GetListByGroupIds(userGroupIds);
+        }
+
+        internal List<User> GetUsers()
+        {
+            return dal.GetList();
         }
     }
 }

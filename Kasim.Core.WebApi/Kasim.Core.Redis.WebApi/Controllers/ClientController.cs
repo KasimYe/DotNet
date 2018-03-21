@@ -17,10 +17,10 @@ namespace Kasim.Core.Redis.WebApi.Controllers
     {
         private readonly ILogger<ClientController> _logger;
         private ClientBLL bll;
-        public ClientController(ILogger<ClientController> logger, IOptions<ConnectionStringOptions> connsOptions)
+        public ClientController(ILogger<ClientController> logger, IOptions<ConnectionStringOptions> connsOptions, IOptions<RedisConfig> redisConf)
         {
             _logger = logger;
-            bll = new ClientBLL(connsOptions.Value);
+            bll = new ClientBLL(connsOptions.Value, redisConf.Value);
         }
 
         // GET api/values

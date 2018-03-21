@@ -17,17 +17,17 @@ namespace Kasim.Core.Redis.WebApi.Controllers
     {
         private readonly ILogger<UserController> _logger;
         private UserBLL bll;
-        public UserController(ILogger<UserController> logger, IOptions<ConnectionStringOptions> connsOptions)
+        public UserController(ILogger<UserController> logger, IOptions<ConnectionStringOptions> connsOptions,IOptions<RedisConfig> redisConf)
         {
             _logger = logger;
-            bll = new UserBLL(connsOptions.Value);
+            bll = new UserBLL(connsOptions.Value, redisConf.Value);
         }
 
         // GET: api/User
         [HttpGet]
         public IActionResult Get()
         {
-            var list = bll.GetUsersByGroups(new int[] { 5, 6 });
+            var list = bll.GetUsers();
             return new JsonResult(list);
         }
 

@@ -59,5 +59,10 @@ namespace Kasim.Core.Redis.WebApi.DAL.Redis
                 return list;
             }
         }
+
+        internal Product GetEntity(int id)
+        {
+            return GetList().Where(x => x.PID == id).SingleOrDefault();
+        }
     }
 }

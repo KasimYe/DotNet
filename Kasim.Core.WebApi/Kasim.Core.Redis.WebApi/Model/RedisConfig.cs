@@ -16,10 +16,10 @@ _#/|##########/\######(   /\   )######/\##########|\#_
                    __\ | |  | | /__
                   (vvv(VVV)(VVV)vvv)                  
 
-* Filename: User
+* Filename: RedisConfig
 * Namespace: Kasim.Core.Redis.WebApi.Model
-* Classname: User
-* Created: 2018-03-20 22:07:44
+* Classname: RedisConfig
+* Created: 2018-03-21 14:52:32
 * Author: KasimYe
 * Ps: For My Son YH
 * Description: 
@@ -32,11 +32,11 @@ using System.Threading.Tasks;
 
 namespace Kasim.Core.Redis.WebApi.Model
 {
-    public class User
+    public class RedisConfig
     {
-        public int UserId { get; set; }
-        public string UserName { get; set; }
-        public int UserGroupId { get; set; }
-        public byte Status { get; set; }
+        public int TsDays { get; set; }
+        public int TsHours { get; set; }
+        public int TsMinutes { get; set; }
+        public int TsSeconds { get; set; }
     }
 }

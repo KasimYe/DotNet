@@ -36,6 +36,6 @@ namespace Kasim.Core.Redis.WebApi.Factory
     {
         static public Model.ConnectionStringOptions ConStrOps;
         static public string RedisKey;
-        static public TimeSpan ExpiryDate = new TimeSpan(1, 5, 30);
+        static public TimeSpan ExpiryDate;
     }
 }

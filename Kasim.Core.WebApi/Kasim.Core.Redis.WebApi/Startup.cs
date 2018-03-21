@@ -21,7 +21,9 @@ namespace Kasim.Core.Redis.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOptions();
             services.Configure<ConnectionStringOptions>(Configuration.GetSection("ConnectionStrings"));
+            services.Configure<RedisConfig>(Configuration.GetSection("RedisConfig"));
             services.AddMvc();        
         }
 

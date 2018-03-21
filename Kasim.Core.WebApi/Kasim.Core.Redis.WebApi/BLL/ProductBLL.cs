@@ -37,9 +37,10 @@ namespace Kasim.Core.Redis.WebApi.BLL
     public class ProductBLL
     {
         DAL.Redis.ProductDAL dal;
-        public ProductBLL(ConnectionStringOptions value)
+        public ProductBLL(ConnectionStringOptions cso, RedisConfig rc)
         {
-            Conf.ConStrOps = value;
+            Conf.ConStrOps = cso;
+            Conf.ExpiryDate = new TimeSpan(rc.TsDays, rc.TsHours, rc.TsMinutes, rc.TsSeconds);
             dal = new DAL.Redis.ProductDAL();
         }
 
@@ -48,9 +49,9 @@ namespace Kasim.Core.Redis.WebApi.BLL
             return dal.GetList();
         }
 
-        internal object GetProduct(int id)
+        internal Product GetProduct(int id)
         {
-            throw new NotImplementedException();
+            return dal.GetEntity(id);
         }
     }
 }

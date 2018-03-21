@@ -43,7 +43,7 @@ namespace Kasim.Core.Redis.WebApi.DAL.Sql
         {
             using (IDbConnection Conn = new SqlConnection(Conf.ConStrOps.DevConnection))
             {
-                string query = "SELECT UserId,UserName,UserGroupId FROM Users";
+                string query = "SELECT UserId,UserName,UserGroupId,Status FROM Users";
                 var result = Conn.Query<User>(query).ToList();
                 Conn.Close();
                 Conn.Dispose();
