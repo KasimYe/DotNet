@@ -213,15 +213,11 @@ namespace Kasim.Core.ConsoleApp
                         }
                         break;
                     case "test":
-                        try
-                        {
-                            IWebClientBLL webClientBLL = new WebClientBLL();
-                            Console.WriteLine(webClientBLL.GetWordByBaiduAidemo("http://www.7mxs.cc/image/fei.jpg"));
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine(ex.Message);
-                        }
+                        TestBLL testBLL = new TestBLL();
+                        //Console.WriteLine("Test1:");
+                        //testBLL.Test1();
+                        Console.WriteLine("\r\n\r\nTest2:\r\n");
+                        testBLL.Test2();
                         break;
                     default:
                         Console.WriteLine("请输入对应菜单数字：");
