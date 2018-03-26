@@ -161,11 +161,29 @@ namespace Kasim.Core.BLL.InvoiceWebApp
             var rc = jsonData["code"].Value<string>();
             if (rc != "0000")
             {
-                return GetSjm(iv,sp + 100);
+                if (sp<4000)
+                {
+                    return GetSjm(iv, sp + 100);
+                }
+                else
+                {
+                    return "TimeOut";
+                }                
             }
             else
             {
-                return jsonData["message"].Value<string>();
+                //获取pdf
+                var sjm = jsonData["message"].Value<string>();
+                parameters = new Dictionary<string, string>
+            {
+                { "serviceName", "QtPdfcxNew" },
+                { "content", "{\"sjm\":\""+sjm+"\",\"appid\":\"\"}" }
+            };
+                result = GetResponseReadToEnd(url, parameters, encoding);
+                Console.WriteLine("发票pdf:\r\n" + result);
+                jsonData = (JObject)JsonConvert.DeserializeObject(result);
+                var msg= jsonData["message"].Value<string>();
+                return msg;
             }
         }
     }

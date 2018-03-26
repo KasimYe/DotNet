@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Kasim.Core.BLL.InvoiceWebApp;
+using Kasim.Core.Common;
 using Kasim.Core.IBLL.InvoiceWebApp;
 using Kasim.Core.Model.InvoiceWebApp;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Kasim.Core.InvoiceWebApp.Controllers
 {
@@ -19,16 +23,17 @@ namespace Kasim.Core.InvoiceWebApp.Controllers
         public InvoiceController(ILogger<InvoiceController> logger, IOptions<ConnectionStringOptions> connsOptions)
         {
             _logger = logger;
-            _conns = connsOptions.Value;           
+            _conns = connsOptions.Value;
         }
         // GET: Invoice
         public ActionResult Index()
         {
             IInvoiceBLL bll = new InvoiceBLL(_conns); ;
             DateTime startDate, endDate;
-            startDate = DateTime.Now.AddDays(-1);
-            endDate = DateTime.Now;
+            startDate = DateTime.Parse("2018-03-22");
+            endDate = DateTime.Parse("2018-03-22");
             List<Invoice> list = bll.GetInvoices(startDate, endDate);
+            var json = JsonConvert.SerializeObject(list);
             return View(list);
         }
 
@@ -37,8 +42,22 @@ namespace Kasim.Core.InvoiceWebApp.Controllers
         {
             IInvoiceBLL bll = new InvoiceBLL(_conns);
             string sjm = bll.GetFiveOneFp(id);
-            var url = "http://www.51fapiao-nb.com/tycx-jg.html?user_type=&appid=&sjm="+sjm;
-            return Redirect(url);
+            if (sjm == "TimeOut")
+            {
+                return Content("查询超时，请稍后重新尝试");
+            }
+            else
+            {
+                var jsonData = (JObject)JsonConvert.DeserializeObject(sjm);
+                var xzm = jsonData["xzm"].Value<string>();
+                var url = "http://pdf.51fapiao-nb.com/" + xzm;
+                var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "pdf/");
+                var filename = WebDownload.DownLoad2(url, path);
+                FileStream fs = new FileStream(path+filename, FileMode.Open, FileAccess.Read);
+                byte[] buffer = new byte[Convert.ToInt32(fs.Length)];
+                fs.Read(buffer, 0, Convert.ToInt32(fs.Length));
+                return File(buffer, "application/pdf");
+            }
         }
 
         // GET: Invoice/Create

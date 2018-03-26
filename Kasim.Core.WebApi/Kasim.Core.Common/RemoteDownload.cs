@@ -138,6 +138,50 @@ namespace Kasim.Core.Common
             }
         }
         /// <summary>
+        /// 下载不重命名
+        /// </summary>
+        /// <param name="Url"></param>
+        /// <param name="DirName">文件夹路径</param>
+        public static string DownLoad2(string Url, string DirName)
+        {
+            try
+            {
+                var path = Path.GetDirectoryName(DirName);
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(string.Format("{0} \r\n {1}", DirName, ex.Message));
+                return ex.Message;
+            }
+            bool Value = false;
+            WebResponse response = null;
+            Stream stream = null;
+            try
+            {
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
+                response = request.GetResponse();
+                stream = response.GetResponseStream();
+                var cD = response.Headers["Content-Disposition"];
+                var filename = cD.Substring(cD.IndexOf("filename=")+9);
+                if (!response.ContentType.ToLower().StartsWith("text/"))
+                {
+                    Value = SaveBinaryFile(response,Path.Combine(DirName, filename));
+                    return filename;
+                }
+                return "";
+            }
+            catch (Exception err)
+            {
+                string aa = err.ToString();
+                return err.Message;
+            }
+        }
+
+        /// <summary>
         /// Save a binary file to disk.
         /// </summary>
         /// <param name="response">The response used to save the file</param>

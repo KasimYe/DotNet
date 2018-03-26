@@ -16,10 +16,10 @@ _#/|##########/\######(   /\   )######/\##########|\#_
                    __\ | |  | | /__
                   (vvv(VVV)(VVV)vvv)                  
 
-* Filename: Invoice
-* Namespace: Kasim.Core.Model.InvoiceWebApp
-* Classname: Invoice
-* Created: 2018-03-22 20:57:01
+* Filename: SaleTaxBill
+* Namespace: Kasim.Core.Model.WebApi
+* Classname: SaleTaxBill
+* Created: 2018-03-26 12:46:03
 * Author: KasimYe
 * Ps: For My Son YH
 * Description: 
@@ -27,30 +27,27 @@ _#/|##########/\######(   /\   )######/\##########|\#_
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Kasim.Core.Model.InvoiceWebApp
+namespace Kasim.Core.Model.WebApi
 {
-    public class Invoice
-    {        
-        [DisplayName("流水号")]
+    public class SaleTaxBill:BaseEntity
+    {
+        public int BillID { get; set; }
         public string FormNumber { get; set; }
-        [DisplayName("流水日期")]
-        [DataType(DataType.Date)]
+        public int ClientID { get; set; }
+        public string BankName { get; set; }
+        public string AccountNumber { get; set; }
+        public string TaxNumber { get; set; }
+        public string Address { get; set; }
+        public string Telephone { get; set; }
         public DateTime SystemDate { get; set; }
-        [DisplayName("客户名称")]
-        public string ClientName { get; set; }
-        [DisplayName("发票号码")]
-        public string InvoiceCode { get; set; }
-        [DisplayName("发票代码")]
-        public string InvoiceId { get; set; }
-        [DisplayName("开票日期")]
-        [DataType(DataType.Date)]
-        public DateTime InvoiceDate { get; set; }
-        [DisplayName("发票金额")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
-        public decimal InvoiceSum { get; set; }
+        public string FormTypeName { get; set; }
+        public string StatusTypeName { get; set; }
+        public string FPHM { get; set; }
+        public string FPDM { get; set; }
+        public DateTime KPRQ { get; set; }
+        public decimal TaxPaidSum { get; set; }
+        public string Notes { get; set; }
     }
 }

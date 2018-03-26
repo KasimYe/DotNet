@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<Kasim.Core.Model.InvoiceWebApp.Invoice>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "销售发票列表";
 }
 
-<h2>Index</h2>
+<h2>销售发票列表</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -60,10 +60,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.InvoiceSum)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new {  id=item.FormNumber }, new { target = "_blank" }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            <td>              
+                @Html.ActionLink("发票详情", "Details", new {  id=item.FormNumber }, new { target = "_blank" })
             </td>
         </tr>
 }
