@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Kasim.Core.BLL.WebApi;
-using Kasim.Core.IBLL.WebApi;
+﻿using Kasim.Core.BLL.WebApi.MIS;
+using Kasim.Core.IBLL.WebApi.MIS;
 using Kasim.Core.Model.WebApi;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System;
 
 namespace Kasim.Core.WebApi.Controllers
 {

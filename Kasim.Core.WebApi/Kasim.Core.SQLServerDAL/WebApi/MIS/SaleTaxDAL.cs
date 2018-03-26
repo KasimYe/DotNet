@@ -26,15 +26,16 @@ _#/|##########/\######(   /\   )######/\##########|\#_
 */
 
 using Dapper;
-using Kasim.Core.IDAL.WebApi;
+using Kasim.Core.IDAL.WebApi.MIS;
 using Kasim.Core.Model.WebApi;
+using Kasim.Core.Model.WebApi.MIS;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 
-namespace Kasim.Core.SQLServerDAL.WebApi
+namespace Kasim.Core.SQLServerDAL.WebApi.MIS
 {
     public class SaleTaxDAL : ISaleTaxDAL<SaleTaxBill>
     {

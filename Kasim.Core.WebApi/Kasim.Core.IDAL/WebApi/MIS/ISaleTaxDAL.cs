@@ -25,12 +25,11 @@ _#/|##########/\######(   /\   )######/\##########|\#_
 * Description: 
 */
 
-using Kasim.Core.Model.WebApi;
+using Kasim.Core.Model.WebApi.MIS;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Kasim.Core.IDAL.WebApi
+namespace Kasim.Core.IDAL.WebApi.MIS
 {
     public interface ISaleTaxDAL<T> : IBaseDAL<SaleTaxBill>
     {

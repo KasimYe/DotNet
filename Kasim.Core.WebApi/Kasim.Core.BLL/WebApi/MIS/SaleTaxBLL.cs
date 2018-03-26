@@ -25,15 +25,15 @@ _#/|##########/\######(   /\   )######/\##########|\#_
 * Description: 
 */
 
+using Kasim.Core.IBLL.WebApi.MIS;
+using Kasim.Core.IDAL.WebApi.MIS;
+using Kasim.Core.Model.WebApi;
+using Kasim.Core.Model.WebApi.MIS;
+using Kasim.Core.SQLServerDAL.WebApi.MIS;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Kasim.Core.IBLL.WebApi;
-using Kasim.Core.IDAL.WebApi;
-using Kasim.Core.Model.WebApi;
-using Kasim.Core.SQLServerDAL.WebApi;
 
-namespace Kasim.Core.BLL.WebApi
+namespace Kasim.Core.BLL.WebApi.MIS
 {
     public class SaleTaxBLL: ISaleTaxBLL
     {
