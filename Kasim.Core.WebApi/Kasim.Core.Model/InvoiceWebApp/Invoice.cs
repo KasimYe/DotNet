@@ -52,5 +52,7 @@ namespace Kasim.Core.Model.InvoiceWebApp
         [DisplayName("发票金额")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
         public decimal InvoiceSum { get; set; }
+        [DisplayName("文件名")]
+        public string PdfFileName { get; set; }
     }
 }

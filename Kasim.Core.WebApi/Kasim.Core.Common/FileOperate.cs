@@ -137,6 +137,8 @@ namespace Kasim.Core.Common
         }
         #endregion
 
+
+
         #region 追加文件
         /****************************************
          * 函数名称：FileAdd

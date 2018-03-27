@@ -36,5 +36,6 @@ namespace Kasim.Core.IDAL.InvoiceWebApp
     {
         List<Invoice> GetList(DateTime startDate, DateTime endDate);
         Invoice GetEntity(string id);
+        int SetEntity(string id, string filename);
     }
 }

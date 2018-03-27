@@ -47,9 +47,9 @@ namespace Kasim.Core.SQLServerDAL.InvoiceWebApp
 
         public Invoice GetEntity(string id)
         {
-            using (var Conn = new SqlConnection(_connsOptions.DefaultConnection))
+            using (var Conn = new SqlConnection(_connsOptions.DevConnection))
             {
-                string query = "SELECT DJH AS FormNumber,DJRQ SystemDate,KHMC AS ClientName,FPHM AS InvoiceCode,FPDM AS InvoiceId,FPKPRQ AS InvoiceDate,SUM(HSJE) AS InvoiceSum FROM dbo.JSKPXX WHERE DJH=@id AND DJZT=11 GROUP BY DJH,DJRQ,KHMC,FPHM,FPDM,FPKPRQ ORDER BY DJH";
+                string query = "SELECT FormNumber,SystemDate,FPHM AS InvoiceCode,FPDM AS InvoiceId,KPRQ AS InvoiceDate,TaxPaidSum AS InvoiceSum,PdfFileName FROM dbo.SaleTaxBill WHERE FormNumber=@id AND Status=11";
                 var result = Conn.Query<Invoice>(query, new { id }).SingleOrDefault();
                 Conn.Close();
                 Conn.Dispose();
@@ -63,6 +63,18 @@ namespace Kasim.Core.SQLServerDAL.InvoiceWebApp
             {
                 string query = "SELECT TOP 30 DJH AS FormNumber,DJRQ SystemDate,KHMC AS ClientName,FPHM AS InvoiceCode,FPDM AS InvoiceId,FPKPRQ AS InvoiceDate,SUM(HSJE) AS InvoiceSum FROM dbo.JSKPXX WHERE DJRQ>=@startDate AND DJRQ<=@endDate AND DJZT=11 GROUP BY DJH,DJRQ,KHMC,FPHM,FPDM,FPKPRQ ORDER BY DJH";
                 var result = Conn.Query<Invoice>(query,new { startDate, endDate }).ToList();
+                Conn.Close();
+                Conn.Dispose();
+                return result;
+            }
+        }
+
+        public int SetEntity(string id, string filename)
+        {
+            using (var Conn = new SqlConnection(_connsOptions.DevConnection))
+            {
+                string query = "UPDATE dbo.SaleTaxBill SET PdfFileName=@filename WHERE FormNumber=@id";
+                var result = Conn.Execute(query, new { filename, id });
                 Conn.Close();
                 Conn.Dispose();
                 return result;

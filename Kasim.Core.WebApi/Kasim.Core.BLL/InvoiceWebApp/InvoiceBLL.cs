@@ -53,7 +53,19 @@ namespace Kasim.Core.BLL.InvoiceWebApp
         public string GetFiveOneFp(string id)
         {
             var entity = GetInvoice(id);
-            return GetSjm(entity, 2500);
+            if (entity==null)
+            {
+                return "null";
+            }
+            if (string.IsNullOrEmpty(entity.PdfFileName))
+            {
+                return GetSjm(entity, 2500);
+            }
+            else
+            {
+                return entity.PdfFileName;
+            }
+           
         }
 
         public Invoice GetInvoice(string id)
@@ -129,7 +141,7 @@ namespace Kasim.Core.BLL.InvoiceWebApp
                 { "content", "{\"appid\":\"\"}" }
             };
             var result = GetResponseReadToEnd(url, parameters, encoding);
-            Console.WriteLine("发票验证码Key:\r\n" + result);
+            //Console.WriteLine("发票验证码Key:\r\n" + result);
             //获取验证码
             var jsonData = (JObject)JsonConvert.DeserializeObject(result);
             var yzm_key = jsonData["message"].Value<string>();
@@ -139,7 +151,7 @@ namespace Kasim.Core.BLL.InvoiceWebApp
                 { "content", "{\"appid\":\"\",\"yzm_key\":\"" + yzm_key + "\"}" }
             };
             result = GetResponseReadToEnd(url, parameters, encoding);
-            Console.WriteLine("发票验证码Val:\r\n" + result);
+            //Console.WriteLine("发票验证码Val:\r\n" + result);
             System.Threading.Thread.Sleep(sp);
             //获取发票
             jsonData = (JObject)JsonConvert.DeserializeObject(result);
@@ -156,7 +168,7 @@ namespace Kasim.Core.BLL.InvoiceWebApp
                 "\"yzm_value\":\"" + yzm_value + "\"}" }
             };
             result = GetResponseReadToEnd(url, parameters, encoding);
-            Console.WriteLine("发票密码:\r\n" + result);
+            //Console.WriteLine("发票密码:\r\n" + result);
             jsonData = (JObject)JsonConvert.DeserializeObject(result);
             var rc = jsonData["code"].Value<string>();
             if (rc != "0000")
@@ -180,11 +192,16 @@ namespace Kasim.Core.BLL.InvoiceWebApp
                 { "content", "{\"sjm\":\""+sjm+"\",\"appid\":\"\"}" }
             };
                 result = GetResponseReadToEnd(url, parameters, encoding);
-                Console.WriteLine("发票pdf:\r\n" + result);
+                //Console.WriteLine("发票pdf:\r\n" + result);
                 jsonData = (JObject)JsonConvert.DeserializeObject(result);
                 var msg= jsonData["message"].Value<string>();
                 return msg;
             }
+        }
+
+        public int SetInvoice(string id, string filename)
+        {
+            return dal.SetEntity(id, filename);
         }
     }
 }

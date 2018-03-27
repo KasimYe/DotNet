@@ -37,5 +37,6 @@ namespace Kasim.Core.IBLL.InvoiceWebApp
         List<Invoice> GetInvoices(DateTime startDate, DateTime endDate);
         string GetFiveOneFp(string id);
         Invoice GetInvoice(string id);
+        int SetInvoice(string id, string filename);
     }
 }

@@ -40,24 +40,57 @@ namespace Kasim.Core.InvoiceWebApp.Controllers
         // GET: Invoice/Details/5
         public ActionResult Details(string id)
         {
-            IInvoiceBLL bll = new InvoiceBLL(_conns);
-            string sjm = bll.GetFiveOneFp(id);
-            if (sjm == "TimeOut")
+            try
             {
-                return Content("查询超时，请稍后重新尝试");
+                IInvoiceBLL bll = new InvoiceBLL(_conns);
+                string sjm = bll.GetFiveOneFp(id);
+                if (sjm == "null")
+                {
+                    return Content("未找到电子发票，请确定此为电子发票");
+                }
+                else if (sjm == "TimeOut")
+                {
+                    return Content("查询超时，请稍后重新尝试");
+                }
+                else if (sjm.IndexOf(".pdf") > 0)
+                {
+                    var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "pdf/");
+                    var filename = sjm;
+                    if (System.IO.File.Exists(Path.Combine(path, filename)))
+                    {
+                        FileStream fs = new FileStream(path + filename, FileMode.Open, FileAccess.Read);
+                        byte[] buffer = new byte[Convert.ToInt32(fs.Length)];
+                        fs.Read(buffer, 0, Convert.ToInt32(fs.Length));
+                        return File(buffer, "application/pdf");
+                    }
+                    else
+                    {
+                        return File(DownPdf(bll, id, sjm), "application/pdf");
+                    }
+                }
+                else
+                {
+                    return File(DownPdf(bll, id, sjm), "application/pdf");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                var jsonData = (JObject)JsonConvert.DeserializeObject(sjm);
-                var xzm = jsonData["xzm"].Value<string>();
-                var url = "http://pdf.51fapiao-nb.com/" + xzm;
-                var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "pdf/");
-                var filename = WebDownload.DownLoad2(url, path);
-                FileStream fs = new FileStream(path+filename, FileMode.Open, FileAccess.Read);
-                byte[] buffer = new byte[Convert.ToInt32(fs.Length)];
-                fs.Read(buffer, 0, Convert.ToInt32(fs.Length));
-                return File(buffer, "application/pdf");
+                return Content(ex.Message);
             }
+        }
+
+        private byte[] DownPdf(IInvoiceBLL bll, string id, string sjm)
+        {
+            var jsonData = (JObject)JsonConvert.DeserializeObject(sjm);
+            var xzm = jsonData["xzm"].Value<string>();
+            var url = "http://pdf.51fapiao-nb.com/" + xzm;
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "pdf/");
+            var filename = WebDownload.DownLoad2(url, path);
+            bll.SetInvoice(id, filename);
+            FileStream fs = new FileStream(path + filename, FileMode.Open, FileAccess.Read);
+            byte[] buffer = new byte[Convert.ToInt32(fs.Length)];
+            fs.Read(buffer, 0, Convert.ToInt32(fs.Length));
+            return buffer;
         }
 
         // GET: Invoice/Create
