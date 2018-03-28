@@ -43,7 +43,8 @@ namespace Kasim.Core.InvoiceWebApp.Controllers
             try
             {
                 IInvoiceBLL bll = new InvoiceBLL(_conns);
-                string sjm = bll.GetFiveOneFp(id);
+
+                string sjm = bll.GetFiveOneFp(id, out Invoice invoice);
                 if (sjm == "null")
                 {
                     return Content("未找到电子发票，请确定此为电子发票");
@@ -54,7 +55,8 @@ namespace Kasim.Core.InvoiceWebApp.Controllers
                 }
                 else if (sjm.IndexOf(".pdf") > 0)
                 {
-                    var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "pdf/");
+                    var datePath = string.Format("{0}/{1}/{2}/", invoice.InvoiceDate.Year, invoice.InvoiceDate.Month, invoice.InvoiceDate.ToString("yyyy-MM-dd"));
+                    var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "pdf/", datePath);
                     var filename = sjm;
                     if (System.IO.File.Exists(Path.Combine(path, filename)))
                     {
@@ -65,28 +67,30 @@ namespace Kasim.Core.InvoiceWebApp.Controllers
                     }
                     else
                     {
-                        return File(DownPdf(bll, id, sjm), "application/pdf");
+                        return File(DownPdf(bll, invoice, sjm), "application/pdf");
                     }
                 }
                 else
                 {
-                    return File(DownPdf(bll, id, sjm), "application/pdf");
+                    return File(DownPdf(bll, invoice, sjm), "application/pdf");
                 }
             }
             catch (Exception ex)
             {
+                _logger.LogError("Invoice Exception:{0}", ex.Message);
                 return Content(ex.Message);
             }
         }
 
-        private byte[] DownPdf(IInvoiceBLL bll, string id, string sjm)
+        private byte[] DownPdf(IInvoiceBLL bll, Invoice invoice, string sjm)
         {
             var jsonData = (JObject)JsonConvert.DeserializeObject(sjm);
             var xzm = jsonData["xzm"].Value<string>();
             var url = "http://pdf.51fapiao-nb.com/" + xzm;
-            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "pdf/");
+            var datePath = string.Format("{0}/{1}/{2}/", invoice.InvoiceDate.Year, invoice.InvoiceDate.Month, invoice.InvoiceDate.ToString("yyyy-MM-dd"));
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "pdf/", datePath);
             var filename = WebDownload.DownLoad2(url, path);
-            bll.SetInvoice(id, filename);
+            bll.SetInvoice(invoice.FormNumber, filename);
             FileStream fs = new FileStream(path + filename, FileMode.Open, FileAccess.Read);
             byte[] buffer = new byte[Convert.ToInt32(fs.Length)];
             fs.Read(buffer, 0, Convert.ToInt32(fs.Length));

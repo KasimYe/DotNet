@@ -16,29 +16,31 @@ _#/|##########/\######(   /\   )######/\##########|\#_
                    __\ | |  | | /__
                   (vvv(VVV)(VVV)vvv)                  
 
-* Filename: IInvoiceBLL
-* Namespace: Kasim.Core.IBLL.InvoiceWebApp
-* Classname: IInvoiceBLL
-* Created: 2018-03-22 21:06:57
+* Filename: HangfireJobBLL
+* Namespace: Kasim.Core.BLL.InvoiceWebApp
+* Classname: HangfireJobBLL
+* Created: 2018-03-28 13:11:02
 * Author: KasimYe
 * Ps: For My Son YH
 * Description: 
 */
 
+using Kasim.Core.IBLL.InvoiceWebApp;
+using Kasim.Core.Model.InvoiceWebApp;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Kasim.Core.Model.InvoiceWebApp;
 
-namespace Kasim.Core.IBLL.InvoiceWebApp
+namespace Kasim.Core.BLL.InvoiceWebApp
 {
-    public interface IInvoiceBLL
+    public class HangfireJobBLL : IHangfireJobBLL
     {
-        List<Invoice> GetInvoices(DateTime startDate, DateTime endDate);
-        string GetFiveOneFp(string id, out Invoice invoice);
-        Invoice GetInvoice(string id);
-        int SetInvoice(string id, string filename);
-        Invoice GetNewInvoice();
-        string DownloadInvoicePdf(Invoice invoice);
+        public static ConnectionStringOptions conns;
+        public void DownloadInvoices()
+        {
+            IInvoiceBLL bll = new InvoiceBLL(conns);
+            var invoice = bll.GetNewInvoice();
+            bll.DownloadInvoicePdf(invoice);
+        }
     }
 }

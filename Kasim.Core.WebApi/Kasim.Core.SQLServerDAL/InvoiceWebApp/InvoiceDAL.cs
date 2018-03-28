@@ -57,11 +57,23 @@ namespace Kasim.Core.SQLServerDAL.InvoiceWebApp
             }
         }
 
+        public Invoice GetLastEntity()
+        {
+            using (var Conn = new SqlConnection(_connsOptions.DevConnection))
+            {
+                string query = "SELECT TOP 1 FormNumber,SystemDate,FPHM AS InvoiceCode,FPDM AS InvoiceId,KPRQ AS InvoiceDate,TaxPaidSum AS InvoiceSum,PdfFileName FROM dbo.SaleTaxBill WHERE Status=11 AND PdfFileName IS NULL ORDER BY BillID DESC";
+                var result = Conn.Query<Invoice>(query).SingleOrDefault();
+                Conn.Close();
+                Conn.Dispose();
+                return result;
+            }
+        }
+
         public List<Invoice> GetList(DateTime startDate, DateTime endDate)
         {            
-            using (var Conn = new SqlConnection(_connsOptions.DefaultConnection))
+            using (var Conn = new SqlConnection(_connsOptions.DevConnection))
             {
-                string query = "SELECT TOP 30 DJH AS FormNumber,DJRQ SystemDate,KHMC AS ClientName,FPHM AS InvoiceCode,FPDM AS InvoiceId,FPKPRQ AS InvoiceDate,SUM(HSJE) AS InvoiceSum FROM dbo.JSKPXX WHERE DJRQ>=@startDate AND DJRQ<=@endDate AND DJZT=11 GROUP BY DJH,DJRQ,KHMC,FPHM,FPDM,FPKPRQ ORDER BY DJH";
+                string query = "SELECT TOP 10 FormNumber,SystemDate,FPHM AS InvoiceCode,FPDM AS InvoiceId,KPRQ AS InvoiceDate,TaxPaidSum AS InvoiceSum,PdfFileName FROM dbo.SaleTaxBill WHERE SystemDate>=@startDate AND SystemDate<=@endDate AND Status=11 ORDER BY FormNumber";
                 var result = Conn.Query<Invoice>(query,new { startDate, endDate }).ToList();
                 Conn.Close();
                 Conn.Dispose();

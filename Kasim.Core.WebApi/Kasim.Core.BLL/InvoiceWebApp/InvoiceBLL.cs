@@ -25,6 +25,7 @@ _#/|##########/\######(   /\   )######/\##########|\#_
 * Description: 
 */
 
+using Kasim.Core.Common;
 using Kasim.Core.IBLL.InvoiceWebApp;
 using Kasim.Core.IDAL.InvoiceWebApp;
 using Kasim.Core.Model.InvoiceWebApp;
@@ -41,7 +42,7 @@ using System.Text;
 
 namespace Kasim.Core.BLL.InvoiceWebApp
 {
-    public class InvoiceBLL: IInvoiceBLL
+    public class InvoiceBLL : IInvoiceBLL
     {
         IInvoiceDAL dal;
 
@@ -50,10 +51,10 @@ namespace Kasim.Core.BLL.InvoiceWebApp
             dal = new InvoiceDAL(connsOptions);
         }
 
-        public string GetFiveOneFp(string id)
+        public string GetFiveOneFp(string id, out Invoice entity)
         {
-            var entity = GetInvoice(id);
-            if (entity==null)
+            entity = GetInvoice(id);
+            if (entity == null)
             {
                 return "null";
             }
@@ -65,12 +66,17 @@ namespace Kasim.Core.BLL.InvoiceWebApp
             {
                 return entity.PdfFileName;
             }
-           
+
         }
 
         public Invoice GetInvoice(string id)
         {
             return dal.GetEntity(id);
+        }
+
+        public Invoice GetNewInvoice()
+        {
+            return dal.GetLastEntity();
         }
 
         public List<Invoice> GetInvoices(DateTime startDate, DateTime endDate)
@@ -130,7 +136,7 @@ namespace Kasim.Core.BLL.InvoiceWebApp
             return html;
         }
 
-        private string GetSjm(Invoice iv,int sp)
+        private string GetSjm(Invoice iv, int sp)
         {
             string url = "http://www.51fapiao-nb.com/DZFPQT";
             Encoding encoding = Encoding.GetEncoding("utf-8");
@@ -173,14 +179,14 @@ namespace Kasim.Core.BLL.InvoiceWebApp
             var rc = jsonData["code"].Value<string>();
             if (rc != "0000")
             {
-                if (sp<4000)
+                if (sp < 4000)
                 {
                     return GetSjm(iv, sp + 100);
                 }
                 else
                 {
                     return "TimeOut";
-                }                
+                }
             }
             else
             {
@@ -194,7 +200,7 @@ namespace Kasim.Core.BLL.InvoiceWebApp
                 result = GetResponseReadToEnd(url, parameters, encoding);
                 //Console.WriteLine("发票pdf:\r\n" + result);
                 jsonData = (JObject)JsonConvert.DeserializeObject(result);
-                var msg= jsonData["message"].Value<string>();
+                var msg = jsonData["message"].Value<string>();
                 return msg;
             }
         }
@@ -202,6 +208,44 @@ namespace Kasim.Core.BLL.InvoiceWebApp
         public int SetInvoice(string id, string filename)
         {
             return dal.SetEntity(id, filename);
+        }
+
+        public string DownloadInvoicePdf(Invoice invoice)
+        {
+            try
+            {
+                var sjm = GetSjm(invoice, 2500);
+                if (sjm == "null")
+                {
+                    return "未找到电子发票，请确定此为电子发票";
+                }
+                else if (sjm == "TimeOut")
+                {
+                    return "查询超时，请稍后重新尝试";
+                }
+                else 
+                {
+                    var datePath = string.Format("{0}/{1}/{2}/", invoice.InvoiceDate.Year, invoice.InvoiceDate.Month, invoice.InvoiceDate.ToString("yyyy-MM-dd"));
+                    var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "pdf/", datePath);                    
+                    return DownPdf(invoice, sjm, path);
+
+                }               
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+
+        }
+
+        private string DownPdf(Invoice invoice, string sjm, string path)
+        {
+            var jsonData = (JObject)JsonConvert.DeserializeObject(sjm);
+            var xzm = jsonData["xzm"].Value<string>();
+            var url = "http://pdf.51fapiao-nb.com/" + xzm;
+            var filename = WebDownload.DownLoad2(url, path);
+            SetInvoice(invoice.FormNumber, filename);
+            return filename;
         }
     }
 }
