@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Hangfire.Dashboard;
 using Kasim.Core.BLL.InvoiceWebApp;
 using Kasim.Core.Common;
 using Kasim.Core.IBLL.InvoiceWebApp;
 using Kasim.Core.Model.InvoiceWebApp;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -97,73 +100,15 @@ namespace Kasim.Core.InvoiceWebApp.Controllers
             return buffer;
         }
 
-        // GET: Invoice/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Invoice/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
         // GET: Invoice/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
+        public async Task<ActionResult> AdminAsync(string id)
+        {           
+            ClaimsPrincipal principal = HttpContext.User as ClaimsPrincipal;
+            principal.AddIdentity(new ClaimsIdentity { Label = id });
+            await HttpContext.SignInAsync("MyCookieAuthenticationScheme", principal);
+            return Redirect("/hangfire");
         }
 
-        // POST: Invoice/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Invoice/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Invoice/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }
