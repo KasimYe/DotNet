@@ -5,6 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Kasim.Core.InvoiceWebApp.Models;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Kasim.Core.InvoiceWebApp.Controllers
 {
@@ -12,14 +15,24 @@ namespace Kasim.Core.InvoiceWebApp.Controllers
     {
         public IActionResult Index()
         {
+
             return View();
         }
 
-        public IActionResult About()
+        [HttpPost]
+        public async Task<IActionResult> Login(User model)
         {
-            ViewData["Message"] = "Your application description page.";
+            var user = TestUserStorage.UserList.FirstOrDefault(m => m.UserName == model.UserName && m.Password == model.Password);
 
-            return View();
+            if (user != null)
+            {
+                Startup.HangfireAuthorizationFilter.bAuthorize = true;
+                var identity = new ClaimsIdentity("Basic");
+                identity.AddClaim(new Claim(ClaimTypes.Name, user.UserName));
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+                return RedirectToAction("", "hangfire");
+            }            
+            return View("Index");
         }
 
         public IActionResult Contact()

@@ -10,6 +10,7 @@ using Kasim.Core.Common;
 using Kasim.Core.IBLL.InvoiceWebApp;
 using Kasim.Core.Model.InvoiceWebApp;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -29,6 +30,7 @@ namespace Kasim.Core.InvoiceWebApp.Controllers
             _conns = connsOptions.Value;
         }
         // GET: Invoice
+        [Authorize]
         public ActionResult Index()
         {
             IInvoiceBLL bll = new InvoiceBLL(_conns); ;

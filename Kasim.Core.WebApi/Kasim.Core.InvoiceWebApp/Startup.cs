@@ -7,6 +7,7 @@ using Hangfire.Dashboard;
 using Kasim.Core.BLL.InvoiceWebApp;
 using Kasim.Core.IBLL.InvoiceWebApp;
 using Kasim.Core.Model.InvoiceWebApp;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -35,15 +36,18 @@ namespace Kasim.Core.InvoiceWebApp
 
             services.AddHangfire(x =>
             {
-                x.UseRedisStorage(Configuration.GetConnectionString("HangFireRedis"));                
+                x.UseRedisStorage(Configuration.GetConnectionString("HangFireRedis"));
             });
             services.AddTransient<IHangfireJobBLL, HangfireJobBLL>();
 
-            services.AddAuthentication("MyCookieAuthenticationScheme")
-            .AddCookie("MyCookieAuthenticationScheme", options => {
-                options.AccessDeniedPath = "/Account/Forbidden/";
-                options.LoginPath = "/Account/Unauthorized/";
-            });
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, o =>
+                {
+                    o.LoginPath = new PathString("/Account/Index");
+                    o.AccessDeniedPath = new PathString("/Home/Error");
+                });
+
+
             services.AddMvc();
         }
 
@@ -70,7 +74,7 @@ namespace Kasim.Core.InvoiceWebApp
                 Queues = new[] { "invoice", "default" },//队列名称，只能为小写 
                 WorkerCount = Environment.ProcessorCount * 5, //并发任务数 
                 ServerName = "hangfire_invoice",//服务器名称
-            });          
+            });
             app.UseHangfireDashboard("/hangfire", new DashboardOptions
             {
                 Authorization = new[] { new HangfireAuthorizationFilter() }
@@ -83,17 +87,18 @@ namespace Kasim.Core.InvoiceWebApp
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Invoice}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
 
         public class HangfireAuthorizationFilter : IDashboardAuthorizationFilter
         {
+            public static bool bAuthorize=false;
             //这里需要配置权限规则 
             public bool Authorize(DashboardContext context)
             {
                 var httpContext = context.GetHttpContext();
-                return httpContext.Session.GetString("login")=="52033";
+                return bAuthorize;
             }
         }
 
@@ -102,7 +107,7 @@ namespace Kasim.Core.InvoiceWebApp
             public static void JobStart(ConnectionStringOptions conns)
             {
                 HangfireJobBLL.conns = conns;
-                //RecurringJob.AddOrUpdate<IHangfireJobBLL>(x => x.DownloadInvoices(), Cron.Minutely(), queue: "invoice");
+                RecurringJob.AddOrUpdate<IHangfireJobBLL>(x => x.DownloadInvoices(), Cron.Minutely(), queue: "invoice");
             }
         }
     }
