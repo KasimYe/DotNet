@@ -86,6 +86,7 @@ namespace Kasim.Core.BLL.ConsoleApp
         public void DropTable()
         {
             var dt = dalSql.GetDataTable("EXEC dbo.GetTableSpace @columnName = 'data',@sort = 'desc'");
+            
             foreach (DataRow dr in dt.Rows)
             {
                 if (dr["name"].ToString().ToUpper().Substring(0,2)=="T_")

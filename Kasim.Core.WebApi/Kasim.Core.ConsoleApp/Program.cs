@@ -61,6 +61,7 @@ namespace Kasim.Core.ConsoleApp
                             Console.WriteLine("请输入章节名称：");
                             var title = Console.ReadLine();
                             IBookTxtBLL bookTxtBLL = null;
+                            #region 各种书网
                             switch (menuUrl.Split('.')[1].ToUpper())
                             {
                                 case "SJTXT":
@@ -130,6 +131,7 @@ namespace Kasim.Core.ConsoleApp
                                 default:
                                     break;
                             }
+                            #endregion
                             if (bookTxtBLL != null)
                             {
                                 bookTxtBLL.DownloadBook(title);

@@ -85,11 +85,11 @@ namespace Kasim.Core.SQLServerDAL.ConsoleApp
                 param.Add("@ClientID", entity.ClientID, DbType.Int32);
                 param.Add("@TaxPrice", entity.TaxPrice, DbType.Decimal);
                 param.Add("@Quantity", entity.Quantity, DbType.Decimal);
-                param.Add("@SupplierReturn", 0, DbType.Decimal, ParameterDirection.Output);
+                param.Add("@SupplierReturn", 0, DbType.Decimal, ParameterDirection.Output,36, 18, 4);
                 param.Add("@SRSCID", 0, DbType.Int32, ParameterDirection.Output);
                 param.Add("@ByPurPay", false, DbType.Boolean, ParameterDirection.Output);
-                Conn.Execute("dbo.GetSupplierReturn", param, commandType: CommandType.StoredProcedure);
-                entity.SupplierReturn = param.Get<decimal?>("@SupplierReturn");
+                Conn.Execute("dbo.GetSupplierReturn", param, commandType: CommandType.StoredProcedure);               
+                entity.SupplierReturn =param.Get<decimal?>("@SupplierReturn");
                 entity.SRSCID = param.Get<int?>("@SRSCID");
                 entity.ByPurPay = param.Get<bool?>("@ByPurPay");
                 Conn.Close();
