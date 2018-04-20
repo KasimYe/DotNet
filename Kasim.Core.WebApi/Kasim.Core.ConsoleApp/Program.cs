@@ -29,6 +29,7 @@ namespace Kasim.Core.ConsoleApp
             Console.WriteLine("【6】删除临时表T_开头");
             Console.WriteLine("【7】爬慈溪房产网租房信息^o^!!!");
             Console.WriteLine("【8】商品业务设置考核政策导入考核成本");
+            Console.WriteLine("【9】仓储系统初始化入库生成手持终端上架数据");
             Console.WriteLine("请输入对应菜单数字：");
             var keyCode = Console.ReadLine();
             while (keyCode.ToUpper() != "EXIT")
@@ -213,6 +214,12 @@ namespace Kasim.Core.ConsoleApp
                         {
                             clientProductZcBLL.ImportList(clientProductZcList);
                         }
+                        break;
+                    case "9":
+                        IRfInitBLL rfInitBLL = new RfInitBLL();
+                        Console.WriteLine("按任意键开始");
+                        Console.ReadLine();
+                        rfInitBLL.InitStock();
                         break;
                     case "test":
                         TestBLL testBLL = new TestBLL();
