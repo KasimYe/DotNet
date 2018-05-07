@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Senparc.WebSocket" Version="0.4.0" />
+    <PackageReference Include="Senparc.Weixin" Version="4.20.3" />
+    <PackageReference Include="Senparc.Weixin.Cache.Memcached" Version="1.4.1" />
+    <PackageReference Include="Senparc.Weixin.Cache.Redis" Version="1.6.1" />
+    <PackageReference Include="Senparc.Weixin.MP" Version="14.12.3" />
+    <PackageReference Include="Senparc.Weixin.Open" Version="2.9.2" />
+    <PackageReference Include="Senparc.Weixin.Work" Version="1.3.1" />
+    <PackageReference Include="Senparc.Weixin.WxOpen" Version="1.9.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Kasim.Core.BLL\Kasim.Core.BLL.csproj" />
+    <ProjectReference Include="..\Kasim.Core.IBLL\Kasim.Core.IBLL.csproj" />
+    <ProjectReference Include="..\Kasim.Core.Model\Kasim.Core.Model.csproj" />
+  </ItemGroup>
+
+</Project>
