@@ -372,3 +372,105 @@
 2018-03-26 16:01:21.9653 Info Configured from an XML element in D:\Kasim\WebApi\WebApi\Kasim.Core.WebApi\Kasim.Core.WebApi\nlog.config...
 2018-03-26 16:01:22.0177 Info Found 53 configuration items
 2018-03-26 16:01:22.0696 Info Found 53 configuration items
+2018-05-07 22:25:45.3935 Info Message Template Auto Format enabled
+2018-05-07 22:25:45.5114 Info Adding target File Target[allfile]
+2018-05-07 22:25:45.5114 Info Adding target File Target[ownFile-web]
+2018-05-07 22:25:45.5114 Info Adding target Null Target[blackhole]
+2018-05-07 22:25:45.5216 Info Configured from an XML element in D:\Workspaces\Br\MaiSiKangLai\WebApi\WebApi\Kasim.Core.WebApi\Kasim.Core.WebApi\nlog.config...
+2018-05-07 22:25:45.5375 Info Found 56 configuration items
+2018-05-07 23:00:06.5459 Info Message Template Auto Format enabled
+2018-05-07 23:00:06.6323 Info Adding target File Target[allfile]
+2018-05-07 23:00:06.6323 Info Adding target File Target[ownFile-web]
+2018-05-07 23:00:06.6323 Info Adding target Null Target[blackhole]
+2018-05-07 23:00:06.6463 Info Configured from an XML element in D:\Workspaces\Br\MaiSiKangLai\WebApi\WebApi\Kasim.Core.WebApi\Kasim.Core.WebApi\nlog.config...
+2018-05-07 23:00:06.6626 Info Found 56 configuration items
+2018-05-08 22:17:52.7758 Info Message Template Auto Format enabled
+2018-05-08 22:17:52.8744 Info Adding target File Target[allfile]
+2018-05-08 22:17:52.8744 Info Adding target File Target[ownFile-web]
+2018-05-08 22:17:52.8744 Info Adding target Null Target[blackhole]
+2018-05-08 22:17:52.8837 Info Configured from an XML element in D:\Workspaces\Br\MaiSiKangLai\WebApi\WebApi\Kasim.Core.WebApi\Kasim.Core.WebApi\nlog.config...
+2018-05-08 22:17:52.8968 Info Found 56 configuration items
+2018-05-08 22:36:22.9885 Info Message Template Auto Format enabled
+2018-05-08 22:36:23.0726 Info Adding target File Target[allfile]
+2018-05-08 22:36:23.0726 Info Adding target File Target[ownFile-web]
+2018-05-08 22:36:23.0726 Info Adding target Null Target[blackhole]
+2018-05-08 22:36:23.0817 Info Configured from an XML element in D:\Workspaces\Br\MaiSiKangLai\WebApi\WebApi\Kasim.Core.WebApi\Kasim.Core.WebApi\nlog.config...
+2018-05-08 22:36:23.0817 Info Found 56 configuration items
+2018-05-08 23:33:41.8070 Info Message Template Auto Format enabled
+2018-05-08 23:33:41.9025 Info Adding target File Target[allfile]
+2018-05-08 23:33:41.9025 Info Adding target File Target[ownFile-web]
+2018-05-08 23:33:41.9025 Info Adding target Null Target[blackhole]
+2018-05-08 23:33:41.9121 Info Configured from an XML element in D:\Workspaces\Br\MaiSiKangLai\WebApi\WebApi\Kasim.Core.WebApi\Kasim.Core.WebApi\nlog.config...
+2018-05-08 23:33:41.9272 Info Found 56 configuration items
+2018-05-08 23:35:01.6869 Info Message Template Auto Format enabled
+2018-05-08 23:35:01.7669 Info Adding target File Target[allfile]
+2018-05-08 23:35:01.7701 Info Adding target File Target[ownFile-web]
+2018-05-08 23:35:01.7701 Info Adding target Null Target[blackhole]
+2018-05-08 23:35:01.7701 Info Configured from an XML element in D:\Workspaces\Br\MaiSiKangLai\WebApi\WebApi\Kasim.Core.WebApi\Kasim.Core.WebApi\nlog.config...
+2018-05-08 23:35:01.7928 Info Found 56 configuration items
+2018-05-10 16:04:46.7073 Info Message Template Auto Format enabled
+2018-05-10 16:04:46.8273 Info Adding target File Target[allfile]
+2018-05-10 16:04:46.8273 Info Adding target File Target[ownFile-web]
+2018-05-10 16:04:46.8273 Info Adding target Null Target[blackhole]
+2018-05-10 16:04:46.8369 Info Configured from an XML element in D:\Workspaces\Br\MaiSiKangLai\WebApi\WebApi\Kasim.Core.WebApi\Kasim.Core.WebApi\nlog.config...
+2018-05-10 16:04:46.8503 Info Found 56 configuration items
+2018-05-11 08:47:15.0409 Info Message Template Auto Format enabled
+2018-05-11 08:47:15.1637 Info Adding target File Target[allfile]
+2018-05-11 08:47:15.1637 Info Adding target File Target[ownFile-web]
+2018-05-11 08:47:15.1637 Info Adding target Null Target[blackhole]
+2018-05-11 08:47:15.1637 Info Configured from an XML element in D:\Workspaces\Br\MaiSiKangLai\WebApi\WebApi\Kasim.Core.WebApi\Kasim.Core.WebApi\nlog.config...
+2018-05-11 08:47:15.1873 Info Found 56 configuration items
+2018-05-11 10:57:30.1343 Info Message Template Auto Format enabled
+2018-05-11 10:57:30.2276 Info Adding target File Target[allfile]
+2018-05-11 10:57:30.2276 Info Adding target File Target[ownFile-web]
+2018-05-11 10:57:30.2276 Info Adding target Null Target[blackhole]
+2018-05-11 10:57:30.2377 Info Configured from an XML element in D:\Workspaces\Br\MaiSiKangLai\WebApi\WebApi\Kasim.Core.WebApi\Kasim.Core.WebApi\nlog.config...
+2018-05-11 10:57:30.2377 Info Found 56 configuration items
+2018-05-11 13:42:56.5130 Info Message Template Auto Format enabled
+2018-05-11 13:42:56.6048 Info Adding target File Target[allfile]
+2018-05-11 13:42:56.6048 Info Adding target File Target[ownFile-web]
+2018-05-11 13:42:56.6048 Info Adding target Null Target[blackhole]
+2018-05-11 13:42:56.6164 Info Configured from an XML element in D:\Workspaces\Br\MaiSiKangLai\WebApi\WebApi\Kasim.Core.WebApi\Kasim.Core.WebApi\nlog.config...
+2018-05-11 13:42:56.6358 Info Found 56 configuration items
+2018-05-11 13:45:29.3613 Info Message Template Auto Format enabled
+2018-05-11 13:45:29.4572 Info Adding target File Target[allfile]
+2018-05-11 13:45:29.4572 Info Adding target File Target[ownFile-web]
+2018-05-11 13:45:29.4572 Info Adding target Null Target[blackhole]
+2018-05-11 13:45:29.4743 Info Configured from an XML element in D:\Workspaces\Br\MaiSiKangLai\WebApi\WebApi\Kasim.Core.WebApi\Kasim.Core.WebApi\nlog.config...
+2018-05-11 13:45:29.4908 Info Found 56 configuration items
+2018-05-11 14:36:17.4554 Info Message Template Auto Format enabled
+2018-05-11 14:36:17.5489 Info Adding target File Target[allfile]
+2018-05-11 14:36:17.5521 Info Adding target File Target[ownFile-web]
+2018-05-11 14:36:17.5521 Info Adding target Null Target[blackhole]
+2018-05-11 14:36:17.5521 Info Configured from an XML element in D:\Workspaces\Br\MaiSiKangLai\WebApi\WebApi\Kasim.Core.WebApi\Kasim.Core.WebApi\nlog.config...
+2018-05-11 14:36:17.5726 Info Found 56 configuration items
+2018-05-11 14:37:39.0784 Info Message Template Auto Format enabled
+2018-05-11 14:37:39.1635 Info Adding target File Target[allfile]
+2018-05-11 14:37:39.1635 Info Adding target File Target[ownFile-web]
+2018-05-11 14:37:39.1635 Info Adding target Null Target[blackhole]
+2018-05-11 14:37:39.1635 Info Configured from an XML element in D:\Workspaces\Br\MaiSiKangLai\WebApi\WebApi\Kasim.Core.WebApi\Kasim.Core.WebApi\nlog.config...
+2018-05-11 14:37:39.1883 Info Found 56 configuration items
+2018-05-11 14:46:46.3978 Info Message Template Auto Format enabled
+2018-05-11 14:46:46.4823 Info Adding target File Target[allfile]
+2018-05-11 14:46:46.4823 Info Adding target File Target[ownFile-web]
+2018-05-11 14:46:46.4823 Info Adding target Null Target[blackhole]
+2018-05-11 14:46:46.4935 Info Configured from an XML element in D:\Workspaces\Br\MaiSiKangLai\WebApi\WebApi\Kasim.Core.WebApi\Kasim.Core.WebApi\nlog.config...
+2018-05-11 14:46:46.5078 Info Found 56 configuration items
+2018-05-14 08:36:14.2836 Info Message Template Auto Format enabled
+2018-05-14 08:36:14.4000 Info Adding target File Target[allfile]
+2018-05-14 08:36:14.4000 Info Adding target File Target[ownFile-web]
+2018-05-14 08:36:14.4000 Info Adding target Null Target[blackhole]
+2018-05-14 08:36:14.4150 Info Configured from an XML element in D:\Workspaces\Br\MaiSiKangLai\WebApi\WebApi\Kasim.Core.WebApi\Kasim.Core.WebApi\nlog.config...
+2018-05-14 08:36:14.4299 Info Found 56 configuration items
+2018-05-14 08:49:55.1833 Info Message Template Auto Format enabled
+2018-05-14 08:49:55.2686 Info Adding target File Target[allfile]
+2018-05-14 08:49:55.2722 Info Adding target File Target[ownFile-web]
+2018-05-14 08:49:55.2722 Info Adding target Null Target[blackhole]
+2018-05-14 08:49:55.2722 Info Configured from an XML element in D:\Workspaces\Br\MaiSiKangLai\WebApi\WebApi\Kasim.Core.WebApi\Kasim.Core.WebApi\nlog.config...
+2018-05-14 08:49:55.2957 Info Found 56 configuration items
+2018-05-15 14:31:02.4008 Info Message Template Auto Format enabled
+2018-05-15 14:31:02.5054 Info Adding target File Target[allfile]
+2018-05-15 14:31:02.5054 Info Adding target File Target[ownFile-web]
+2018-05-15 14:31:02.5054 Info Adding target Null Target[blackhole]
+2018-05-15 14:31:02.5054 Info Configured from an XML element in D:\Workspaces\Br\MaiSiKangLai\WebApi\WebApi\Kasim.Core.WebApi\Kasim.Core.WebApi\nlog.config...
+2018-05-15 14:31:02.5297 Info Found 56 configuration items

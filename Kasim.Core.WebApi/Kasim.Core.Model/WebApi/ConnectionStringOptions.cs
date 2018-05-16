@@ -53,5 +53,6 @@ namespace Kasim.Core.Model.WebApi
         public string TaxConnection { get; set; }
         public string B2bConnection { get; set; }
         public string DevBakConnection { get; set; }
+        public string FlowImportConnection { get; set; }
     }
 }
