@@ -30,6 +30,7 @@ namespace Kasim.Core.ConsoleApp
             Console.WriteLine("【7】爬慈溪房产网租房信息^o^!!!");
             Console.WriteLine("【8】商品业务设置考核政策导入考核成本");
             Console.WriteLine("【9】仓储系统初始化入库生成手持终端上架数据");
+            Console.WriteLine("【10】麦斯康莱出库单生成弘瑞合同与到货");
             Console.WriteLine("请输入对应菜单数字：");
             var keyCode = Console.ReadLine();
             while (keyCode.ToUpper() != "EXIT")
@@ -220,6 +221,12 @@ namespace Kasim.Core.ConsoleApp
                         Console.WriteLine("按任意键开始");
                         Console.ReadLine();
                         rfInitBLL.InitStock();
+                        break;
+                    case "10":
+                        IHongRuiBLL hongRuiBLL = new HongRuiBLL();
+                        Console.WriteLine("按任意键开始");
+                        Console.ReadLine();
+                        hongRuiBLL.Start();
                         break;
                     case "test":
                         TestBLL testBLL = new TestBLL();
