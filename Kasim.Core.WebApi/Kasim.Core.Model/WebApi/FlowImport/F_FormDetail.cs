@@ -38,7 +38,7 @@ namespace Kasim.Core.Model.WebApi.FlowImport
         public int PID { get; set; }
         public int RelatedID { get; set; }
         public string Batch { get; set; }
-        public DateTime ExpiryDate { get; set; }
+        public DateTime? ExpiryDate { get; set; }
         public decimal Quantity { get; set; }
         public decimal Quantity2 { get; set; }
         public decimal Quantity3 { get; set; }
@@ -53,12 +53,12 @@ namespace Kasim.Core.Model.WebApi.FlowImport
         public decimal PaidNoTaxTotal { get; set; }
         public decimal PaidTaxTotal { get; set; }
         public int ReviewerID { get; set; }
-        public DateTime ReviewDate { get; set; }
-        public int WarehouseID3 { get; set; }
+        public DateTime? ReviewDate { get; set; }
+        public int? WarehouseID3 { get; set; }
         public string Place { get; set; }
-        public int Checked { get; set; }
-        public int SubStatus { get; set; }
+        public int? Checked { get; set; }
+        public int? SubStatus { get; set; }
         public string Note { get; set; }
-        public decimal MDPrice { get; set; }
+        public decimal? MDPrice { get; set; }
     }
 }

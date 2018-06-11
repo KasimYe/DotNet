@@ -63,15 +63,15 @@ namespace Kasim.Core.WeiXin.MP.CommonService.TemplateMessage
 
         public WeixinTemplate_TaxBill(string saler, string cleintName, string taxTotal, string fpdm, string kqrq,
             string _remark, string url = null, string templateId = TEMPLATE_ID)
-            : base(templateId, url, "电子发票开具通知")
+            : base(templateId, url, "发票开具通知")
         {
-            first = new TemplateDataItem(saler);
-            keyword1 = new TemplateDataItem(cleintName);
-            keyword2 = new TemplateDataItem("浙江麦斯康莱医药有限公司");
-            keyword3 = new TemplateDataItem(taxTotal);
-            keyword4 = new TemplateDataItem(fpdm);
-            keyword5 = new TemplateDataItem(kqrq);
-            remark = new TemplateDataItem(_remark);
+            first = new TemplateDataItem(saler, "#698B22");
+            keyword1 = new TemplateDataItem(cleintName, "#698B22");
+            keyword2 = new TemplateDataItem("浙江弘瑞医药有限公司", "#698B22");
+            keyword3 = new TemplateDataItem(taxTotal, "#698B22");
+            keyword4 = new TemplateDataItem(fpdm, "#698B22");
+            keyword5 = new TemplateDataItem(kqrq, "#698B22");
+            remark = new TemplateDataItem(_remark, "#698B22");
         }
     }
 }

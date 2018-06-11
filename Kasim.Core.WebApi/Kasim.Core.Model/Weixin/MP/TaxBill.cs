@@ -42,5 +42,6 @@ namespace Kasim.Core.Model.Weixin.MP
         public decimal TaxTotal { get; set; }
         public decimal NoTaxTotal { get; set; }
         public decimal PuTotal { get; set; }
+        public int Djzt { get; set; }
     }
 }

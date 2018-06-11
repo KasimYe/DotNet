@@ -61,6 +61,13 @@ namespace Kasim.Core.FileUploadWebApp.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+         
+        public IActionResult Show(string id)
+        {
+            var json = MySecurity.SDecryptString(id, "yss.yh");
+            var fileModel = JsonConvert.DeserializeObject<FileModel>(json);
+            return View(fileModel);
+        }
 
         /// <summary>
         /// 异步上传写入数据库时会重复写入相同数据，无法解决
@@ -220,6 +227,6 @@ namespace Kasim.Core.FileUploadWebApp.Controllers
             var fileModel = JsonConvert.DeserializeObject<FileModel>(json);
             fileModel = bll.GetFiles(fileModel);
             return Ok(new { fileModel });
-        }
+        }           
     }
 }

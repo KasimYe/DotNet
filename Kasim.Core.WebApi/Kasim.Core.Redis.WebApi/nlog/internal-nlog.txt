@@ -466,3 +466,27 @@
 2018-03-21 22:58:53.5868 Info Configured from an XML element in D:\KasimWorks\GitHub\DotNet\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
 2018-03-21 22:58:53.6097 Info Found 53 configuration items
 2018-03-21 22:58:53.6320 Info Found 53 configuration items
+2018-05-24 08:48:40.1344 Info Message Template Auto Format enabled
+2018-05-24 08:48:40.2264 Info Adding target File Target[allfile]
+2018-05-24 08:48:40.2264 Info Adding target File Target[ownFile-web]
+2018-05-24 08:48:40.2264 Info Adding target Null Target[blackhole]
+2018-05-24 08:48:40.2367 Info Configured from an XML element in D:\Workspaces\Br\MaiSiKangLai\WebApi\WebApi\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-05-24 08:48:40.2367 Info Found 56 configuration items
+2018-05-24 15:07:23.3786 Info Message Template Auto Format enabled
+2018-05-24 15:07:23.4667 Info Adding target File Target[allfile]
+2018-05-24 15:07:23.4701 Info Adding target File Target[ownFile-web]
+2018-05-24 15:07:23.4701 Info Adding target Null Target[blackhole]
+2018-05-24 15:07:23.4701 Info Configured from an XML element in D:\Workspaces\Br\MaiSiKangLai\WebApi\WebApi\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-05-24 15:07:23.4941 Info Found 56 configuration items
+2018-05-24 15:08:35.6268 Info Message Template Auto Format enabled
+2018-05-24 15:08:35.7220 Info Adding target File Target[allfile]
+2018-05-24 15:08:35.7220 Info Adding target File Target[ownFile-web]
+2018-05-24 15:08:35.7220 Info Adding target Null Target[blackhole]
+2018-05-24 15:08:35.7220 Info Configured from an XML element in D:\Workspaces\Br\MaiSiKangLai\WebApi\WebApi\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-05-24 15:08:35.7464 Info Found 56 configuration items
+2018-05-25 10:12:21.7756 Info Message Template Auto Format enabled
+2018-05-25 10:12:21.8710 Info Adding target File Target[allfile]
+2018-05-25 10:12:21.8756 Info Adding target File Target[ownFile-web]
+2018-05-25 10:12:21.8756 Info Adding target Null Target[blackhole]
+2018-05-25 10:12:21.8756 Info Configured from an XML element in D:\Workspaces\Br\MaiSiKangLai\WebApi\WebApi\Kasim.Core.WebApi\Kasim.Core.Redis.WebApi\nlog.config...
+2018-05-25 10:12:21.9041 Info Found 56 configuration items

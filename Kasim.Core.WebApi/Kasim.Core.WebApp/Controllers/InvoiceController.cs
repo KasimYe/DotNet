@@ -35,7 +35,6 @@ namespace Kasim.Core.WebApp.Controllers
             try
             {
                 // TODO: Add insert logic here
-
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -58,7 +57,6 @@ namespace Kasim.Core.WebApp.Controllers
             try
             {
                 // TODO: Add update logic here
-
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -81,7 +79,6 @@ namespace Kasim.Core.WebApp.Controllers
             try
             {
                 // TODO: Add delete logic here
-
                 return RedirectToAction(nameof(Index));
             }
             catch

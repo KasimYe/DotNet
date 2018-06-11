@@ -41,8 +41,18 @@ namespace Kasim.Core.SQLServerDAL.WebApi
         {
             using (var Conn = ModelFactory.OpenConnection())
             {
-                var query = "INSERT INTO dbo.Clients(ClientID,ClientCode,ClientName,PYName,BottomLevel,ClientType,bCustomer,bSupplier,Status) "
-                    + "VALUES (@ClientID,@ClientCode,@ClientName,@PYName,@BottomLevel,@ClientType,@bCustomer,@bSupplier,@Status)";
+                var query = string.Format("SELECT COUNT(ClientID) FROM dbo.Clients WHERE ClientID={0}", entity.ClientID);
+                var count = Conn.ExecuteScalar<int>(query);
+                if (count == 0)
+                {
+                    query = "INSERT INTO dbo.Clients(ClientID,ClientCode,ClientName,PYName,BottomLevel,ClientType,bCustomer,bSupplier,Status) "
+                   + "VALUES (@ClientID,@ClientCode,@ClientName,@PYName,@BottomLevel,@ClientType,@bCustomer,@bSupplier,@Status)";
+                }
+                else
+                {
+                    query = "UPDATE dbo.Clients SET ClientCode=@ClientCode,ClientName=@ClientName,PYName=@PYName,BottomLevel=@BottomLevel," +
+                        "ClientType=@ClientType,bCustomer=@bCustomer,bSupplier=@bSupplier,Status=@Status WHERE ClientID=@ClientID";
+                }
                 var reuslt = Conn.Execute(query, entity);
                 Conn.Close();
                 Conn.Dispose();
@@ -54,8 +64,16 @@ namespace Kasim.Core.SQLServerDAL.WebApi
         {
             using (var Conn = ModelFactory.OpenConnection())
             {
-                var query = "INSERT INTO dbo.ClientPriceTypes(ClientID,PriceTypeID,SalesID) "
-                    + "VALUES (@ClientID,@PriceTypeID,@SalesID)";
+                var query = string.Format("SELECT COUNT(*) FROM dbo.ClientPriceTypes WHERE ClientID={0}", entity.ClientID);
+                var count = Conn.ExecuteScalar<int>(query);
+                if (count == 0)
+                {
+                    query = "INSERT INTO dbo.ClientPriceTypes(ClientID,PriceTypeID,SalesID) VALUES (@ClientID,@PriceTypeID,@SalesID)";
+                }
+                else
+                {
+                    query = "UPDATE dbo.ClientPriceTypes SET PriceTypeID=@PriceTypeID,SalesID=@SalesID WHERE ClientID=@ClientID";
+                }
                 var reuslt = Conn.Execute(query, entity);
                 Conn.Close();
                 Conn.Dispose();
@@ -94,8 +112,18 @@ namespace Kasim.Core.SQLServerDAL.WebApi
         {
             using (var Conn = ModelFactory.OpenConnection())
             {
-                var query = "INSERT INTO dbo.g_Users(UserID,UserCode,LoginID,Password,UserName,UserGroupID,StoreID,DID,Telephone,ThePost,BirthDate,WorkTime,CallTime,PersonSex,PersonEdu,PersonProf,Qualification,Notes,Status,Super,StoreType) "
+                var query = string.Format("SELECT COUNT(UserID) FROM dbo.g_Users WHERE UserID={0}", entity.UserID);
+                var count = Conn.ExecuteScalar<int>(query);
+                if (count==0)
+                {
+                    query = "INSERT INTO dbo.g_Users(UserID,UserCode,LoginID,Password,UserName,UserGroupID,StoreID,DID,Telephone,ThePost,BirthDate,WorkTime,CallTime,PersonSex,PersonEdu,PersonProf,Qualification,Notes,Status,Super,StoreType) "
                     + "VALUES (@UserID,@UserCode,@LoginID,@Password,@UserName,@UserGroupID,@StoreID,@DID,@Telephone,@ThePost,@BirthDate,@WorkTime,@CallTime,@PersonSex,@PersonEdu,@PersonProf,@Qualification,@Notes,@Status,@Super,@StoreType)";
+                }
+                else
+                {
+                    query = "UPDATE dbo.g_Users SET UserCode=@UserCode,LoginID=@LoginID,Password=@Password,UserName=@UserName,UserGroupID=@UserGroupID,StoreID=@StoreID,DID=@DID,Telephone=@Telephone,ThePost=@ThePost,BirthDate=@BirthDate," +
+                        "WorkTime=@WorkTime,CallTime=@CallTime,PersonSex=@PersonSex,PersonEdu=@PersonEdu,PersonProf=@PersonProf,Qualification=@Qualification,Notes=@Notes,Status=@Status,Super=@Super,StoreType=@StoreType WHERE UserID=@UserID";
+                }                
                 var reuslt = Conn.Execute(query, entity);
                 Conn.Close();
                 Conn.Dispose();
@@ -119,9 +147,19 @@ namespace Kasim.Core.SQLServerDAL.WebApi
         {
             using (var Conn = ModelFactory.OpenConnection())
             {
-                var query = "INSERT INTO dbo.Level5Products(PID,PCode5,PName,PYName,UnitType,Alias,Model,FromPlace,ShortFromPlace,PuRate,PTypeID,BaseUnit,UnitRate,Status,MUnitRate,LastClientId) "
+                var query = string.Format("SELECT COUNT(PID) FROM dbo.Level5Products WHERE PID={0}", entity.PID);
+                var count = Conn.ExecuteScalar<int>(query);
+                if (count == 0)
+                {
+                    query = "INSERT INTO dbo.Level5Products(PID,PCode5,PName,PYName,UnitType,Alias,Model,FromPlace,ShortFromPlace,PuRate,PTypeID,BaseUnit,UnitRate,Status,MUnitRate,LastClientId) "
                     + "VALUES (@PID,@PCode5,@PName,@PYName,@UnitType,@Alias,@Model,@FromPlace,@ShortFromPlace,@PuRate,@PTypeID,@BaseUnit,@UnitRate,@Status,@MUnitRate,@LastClientId)";
-                var reuslt=Conn.Execute(query, entity);
+                }
+                else
+                {
+                    query = "UPDATE dbo.Level5Products SET PCode5=@PCode5,PName=@PName,PYName=@PYName,UnitType=@UnitType,Alias=@Alias,Model=@Model,FromPlace=@FromPlace,ShortFromPlace=@ShortFromPlace," +
+                        "PuRate=@PuRate,PTypeID=@PTypeID,BaseUnit=@BaseUnit,UnitRate=@UnitRate,Status=@Status,MUnitRate=@MUnitRate,LastClientId=@LastClientId WHERE PID=@PID";
+                }
+                var reuslt = Conn.Execute(query, entity);
                 Conn.Close();
                 Conn.Dispose();
                 return reuslt;
@@ -132,8 +170,17 @@ namespace Kasim.Core.SQLServerDAL.WebApi
         {
             using (var Conn = ModelFactory.OpenConnection())
             {
-                var query = "INSERT INTO dbo.ProductPrices(PID,StoreID,PriceTypeID,ProductPrice,LastUpdate) "
-                    + "VALUES (@PID,@StoreID,@PriceTypeID,@ProductPrice,@LastUpdate)";
+                var query = string.Format("SELECT COUNT(*) FROM dbo.ProductPrices WHERE pID={0} AND StoreID={1} AND PriceTypeID={2}", entity.PID, entity.StoreID, entity.PriceTypeID);
+                var count = Conn.ExecuteScalar<int>(query);
+                if (count == 0)
+                {
+                    query = "INSERT INTO dbo.ProductPrices(PID,StoreID,PriceTypeID,ProductPrice,LastUpdate) "
+                                        + "VALUES (@PID,@StoreID,@PriceTypeID,@ProductPrice,@LastUpdate)";
+                }
+                else
+                {
+                    query = "UPDATE dbo.ProductPrices SET ProductPrice=@ProductPrice WHERE pID=@PID AND StoreID=@StoreID AND PriceTypeID=@PriceTypeID";
+                }
                 var reuslt = Conn.Execute(query, entity);
                 Conn.Close();
                 Conn.Dispose();

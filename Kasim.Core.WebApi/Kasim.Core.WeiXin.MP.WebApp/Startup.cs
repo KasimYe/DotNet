@@ -211,22 +211,22 @@ namespace Kasim.Core.WeiXin.MP.WebApp
 
             ModelFactory.SenparcWeixinSetting = senparcWeixinSetting.Value;
             ModelFactory.ConnectionStringOptions = connectionStringOptions.Value;
-            //缺货任务
-            RecurringJob.AddOrUpdate(
-                () => SendNewsContext.SendNewsQHProducts(), hangfireJobCron.Value.QHProduct,
-                TimeZoneInfo.Local);
+            ////缺货任务
+            //RecurringJob.AddOrUpdate(
+            //    () => SendNewsContext.SendNewsQHProducts(), hangfireJobCron.Value.QHProduct,
+            //    TimeZoneInfo.Local);
 
-            //集单任务
-            RecurringJob.AddOrUpdate(() => SendNewsContext.SendNewsHYOrder(), hangfireJobCron.Value.HYOrder,
-                    TimeZoneInfo.Local);
+            ////集单任务
+            //RecurringJob.AddOrUpdate(() => SendNewsContext.SendNewsHYOrder(), hangfireJobCron.Value.HYOrder,
+            //        TimeZoneInfo.Local);
 
             //发票任务
             RecurringJob.AddOrUpdate(() => SendNewsContext.SendNewsTaxBills(), hangfireJobCron.Value.TaxBill,
                     TimeZoneInfo.Local);
 
-            //出库任务
-            RecurringJob.AddOrUpdate(() => SendNewsContext.SendNewsSaleBills(), hangfireJobCron.Value.SaleBill,
-                    TimeZoneInfo.Local);
+            ////出库任务
+            //RecurringJob.AddOrUpdate(() => SendNewsContext.SendNewsSaleBills(), hangfireJobCron.Value.SaleBill,
+            //        TimeZoneInfo.Local);
 
             ////任务每分钟执行一次
             //RecurringJob.AddOrUpdate(() => Console.WriteLine($"ASP.NET Core LineZero"), Cron.Minutely());

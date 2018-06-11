@@ -28,11 +28,16 @@ _#/|##########/\######(   /\   )######/\##########|\#_
 using Kasim.Core.IDAL.ConsoleApp;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace Kasim.Core.SQLServerDAL.ConsoleApp
 {
-    public class HongRuiDAL: IHongRuiDAL
+    public class HongRuiDAL : IHongRuiDAL
     {
+        public DataTable GetSaleBills(int clientId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

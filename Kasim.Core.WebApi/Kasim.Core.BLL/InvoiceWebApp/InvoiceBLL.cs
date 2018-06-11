@@ -71,7 +71,12 @@ namespace Kasim.Core.BLL.InvoiceWebApp
 
         public Invoice GetInvoice(string id)
         {
-            return dal.GetEntity(id);
+            var entity= dal.GetEntity(id);
+            if (entity==null)
+            {
+                entity= dal.GetEntityMskl(id);
+            }
+            return entity;
         }
 
         public Invoice GetNewInvoice()

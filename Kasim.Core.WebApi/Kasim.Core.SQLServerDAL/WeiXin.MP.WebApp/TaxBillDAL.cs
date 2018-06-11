@@ -44,9 +44,9 @@ namespace Kasim.Core.SQLServerDAL.WeiXin.MP.WebApp
             using (IDbConnection connection = ModelFactory.OpenConnection(ModelFactory.ConnectionStringOptions.TaxConnection))
             {
                 StringBuilder builder = new StringBuilder();
-                builder.Append("SELECT DJH AS FormNumber,KHMC AS ClientName,FPHM AS TaxFphm,FPDM AS TaxFpdm,FPKPRQ AS TaxFprq,BZ AS Note,CONVERT(DECIMAL(18,2),SUM(HSJE-ZK)) AS TaxTotal,CONVERT(DECIMAL(18,2),SUM((HSJE-ZK)/(1+SLV/100))) AS NoTaxTotal,CONVERT(DECIMAL(18,2),SUM(HSJE-ZK)-SUM((HSJE-ZK)/(1+SLV/100))) AS PuTotal");
-                builder.Append(string.Format(" FROM dbo.JSKPXX WHERE DJRQ='{0}' AND DJZT IN (1,11)", DateTime.Now.ToShortDateString()));
-                builder.Append(" GROUP BY DJH,KHMC,FPHM,FPDM,FPKPRQ,BZ ORDER BY DJH");
+                builder.Append("SELECT DJH AS FormNumber,KHMC AS ClientName,FPHM AS TaxFphm,FPDM AS TaxFpdm,FPKPRQ AS TaxFprq,BZ AS Note,CONVERT(DECIMAL(18,2),SUM(HSJE-ZK)) AS TaxTotal,CONVERT(DECIMAL(18,2),SUM((HSJE-ZK)/(1+SLV/100))) AS NoTaxTotal,CONVERT(DECIMAL(18,2),SUM(HSJE-ZK)-SUM((HSJE-ZK)/(1+SLV/100))) AS PuTotal,DJZT");
+                builder.Append(string.Format(" FROM dbo.JSKPXX WHERE DJRQ='{0}' AND DJZT IN (1,11)", DateTime.Now.AddDays(-1).ToShortDateString()));
+                builder.Append(" GROUP BY DJH,KHMC,FPHM,FPDM,FPKPRQ,BZ,DJZT ORDER BY DJH");
                 var result = connection.Query<TaxBill>(builder.ToString()).ToList();
                 connection.Close();
                 connection.Dispose();

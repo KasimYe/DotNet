@@ -76,7 +76,7 @@ namespace Kasim.Core.WeiXin.MP.CommonService.CustomMsg
                                 WeixinTemplate_QhProduct weixinTemplate_QhProduct = new WeixinTemplate_QhProduct(
                                     string.Format("业务员: {0},\r\n您的客户:  {1} \r\n在{2}订货", qp.SalesName, qp.ClientName, qp.SystemDate.ToString("yyyy-MM-dd HH:mm")),
                                     string.Format("{0}/{1}/{2}", qp.PName, qp.Model, qp.FromPlace),
-                                    qp.InQty.ToString("0.###"), qp.InDate.ToString("yyyy-MM-dd HH:mm"), string.Format("缺货数量:{0},请及时通知客户", qp.OrderQty.ToString("0.###"))
+                                    qp.InQty.ToString("0.###"), qp.InDate.ToString("yyyy-MM-dd HH:mm"), string.Format("缺货数量：{0},请及时通知客户", qp.OrderQty.ToString("0.###"))
                                     );
                                 Senparc.Weixin.MP.AdvancedAPIs.TemplateApi.SendTemplateMessage(ModelFactory.SenparcWeixinSetting.WeixinAppId, action.OpenId, weixinTemplate_QhProduct);
                                 newsInfoBLL.SetSendNewsInfo(newsInfo);
@@ -94,7 +94,6 @@ namespace Kasim.Core.WeiXin.MP.CommonService.CustomMsg
 
         public static void SendNewsTaxBills()
         {
-            return;
             ITaxBillBLL taxBillBLL = new TaxBillBLL();
             List<TaxBill> taxBills = taxBillBLL.GetTaxBillList();
             IUserActionBLL userActionBLL = new UserActionBLL();
@@ -122,8 +121,18 @@ namespace Kasim.Core.WeiXin.MP.CommonService.CustomMsg
 
                             if (newsInfoBLL.CheckSendNews(newsInfo))
                             {
-                                WeixinTemplate_TaxBill weixinTemplate_TaxBill = new WeixinTemplate_TaxBill(tb.FormNumber, tb.ClientName,
-                                    tb.TaxTotal.ToString("0.00##") + "元", tb.TaxFpdm, tb.TaxFprq.ToString("yyyy-MM-dd"), tb.Note);
+
+                                string url = null;
+                                string fpzt = "此发票为纸质发票";
+                                if (tb.Djzt == 11)
+                                {
+                                    url = string.Format("http://115.231.58.130:9006/Invoice/Details/{0}", tb.FormNumber);
+                                    fpzt = "此发票为电子发票,点击详情可查看发票图片";
+                                }
+                                WeixinTemplate_TaxBill weixinTemplate_TaxBill = weixinTemplate_TaxBill = new WeixinTemplate_TaxBill(
+                                    string.Format("您好,您有发票开具成功.\r\n流水号:{0}", tb.FormNumber), tb.ClientName,
+                                   string.Format("{0}元\r\n发票号码：{1}", tb.TaxTotal.ToString("0.00##"), tb.TaxFphm), tb.TaxFpdm, tb.TaxFprq.ToString("yyyy-MM-dd"),
+                                   string.Format("随货联单号:{0}\r\n{1}", tb.Note, fpzt), url);
                                 Senparc.Weixin.MP.AdvancedAPIs.TemplateApi.SendTemplateMessage(ModelFactory.SenparcWeixinSetting.WeixinAppId, action.OpenId, weixinTemplate_TaxBill);
                                 newsInfoBLL.SetSendNewsInfo(newsInfo);
                             }

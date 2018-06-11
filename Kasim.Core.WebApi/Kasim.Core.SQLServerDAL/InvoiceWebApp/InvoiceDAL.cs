@@ -57,6 +57,18 @@ namespace Kasim.Core.SQLServerDAL.InvoiceWebApp
             }
         }
 
+        public Invoice GetEntityMskl(string id)
+        {
+            using (var Conn = new SqlConnection(_connsOptions.DevConnection))
+            {
+                string query = "SELECT FormNumber,SystemDate,FPHM AS InvoiceCode,FPDM AS InvoiceId,KPRQ AS InvoiceDate,TaxPaidSum AS InvoiceSum,PdfFileName FROM dbo.SaleTaxBill WHERE FormNumber=@id AND Status=11";
+                var result = Conn.Query<Invoice>(query, new { id }).SingleOrDefault();
+                Conn.Close();
+                Conn.Dispose();
+                return result;
+            }
+        }
+
         public Invoice GetLastEntity()
         {
             using (var Conn = new SqlConnection(_connsOptions.DevConnection))

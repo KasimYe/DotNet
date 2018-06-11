@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 
 namespace Kasim.Core.WebApi.Controllers
 {
@@ -21,7 +22,7 @@ namespace Kasim.Core.WebApi.Controllers
     [Produces("application/json")]
     [Route("api/FlowImport")]
     public class FlowImportController : Controller
-    {        
+    {
         private readonly ILogger<FlowImportController> _logger;
         private readonly ConnectionStringOptions _conns;
         private readonly ApiOptions _apiOptions;
@@ -70,7 +71,7 @@ namespace Kasim.Core.WebApi.Controllers
         /// <returns></returns>
         [HttpPost("AddProduct")]
         public ActionResult AddProduct([FromBody]F_Product entity)
-        {            
+        {
             try
             {
                 int result = bll.AddProduct(entity);
@@ -79,7 +80,8 @@ namespace Kasim.Core.WebApi.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                var err = string.Format("Exception:\r\n{0}\r\nJSON:\r\n{1}\r\nMethod:\r\n{2}", ex.Message, JsonConvert.SerializeObject(entity), MethodBase.GetCurrentMethod().Name);
+                _logger.LogError(err);
                 var tempObj = new { Method = MethodBase.GetCurrentMethod().Name, Result = ex.Message };
                 return Json(tempObj);
             }
@@ -123,7 +125,8 @@ namespace Kasim.Core.WebApi.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                var err = string.Format("Exception:\r\n{0}\r\nJSON:\r\n{1}\r\nMethod:\r\n{2}", ex.Message, JsonConvert.SerializeObject(entity), MethodBase.GetCurrentMethod().Name);
+                _logger.LogError(err);
                 var tempObj = new { Method = MethodBase.GetCurrentMethod().Name, Result = ex.Message };
                 return Json(tempObj);
             }
@@ -167,7 +170,8 @@ namespace Kasim.Core.WebApi.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                var err = string.Format("Exception:\r\n{0}\r\nJSON:\r\n{1}\r\nMethod:\r\n{2}", ex.Message, JsonConvert.SerializeObject(entity), MethodBase.GetCurrentMethod().Name);
+                _logger.LogError(err);
                 var tempObj = new { Method = MethodBase.GetCurrentMethod().Name, Result = ex.Message };
                 return Json(tempObj);
             }
@@ -211,7 +215,8 @@ namespace Kasim.Core.WebApi.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                var err = string.Format("Exception:\r\n{0}\r\nJSON:\r\n{1}\r\nMethod:\r\n{2}", ex.Message, JsonConvert.SerializeObject(entity), MethodBase.GetCurrentMethod().Name);
+                _logger.LogError(err);
                 var tempObj = new { Method = MethodBase.GetCurrentMethod().Name, Result = ex.Message };
                 return Json(tempObj);
             }
@@ -255,7 +260,8 @@ namespace Kasim.Core.WebApi.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                var err = string.Format("Exception:\r\n{0}\r\nJSON:\r\n{1}\r\nMethod:\r\n{2}", ex.Message, JsonConvert.SerializeObject(entity), MethodBase.GetCurrentMethod().Name);
+                _logger.LogError(err);
                 var tempObj = new { Method = MethodBase.GetCurrentMethod().Name, Result = ex.Message };
                 return Json(tempObj);
             }
@@ -300,7 +306,8 @@ namespace Kasim.Core.WebApi.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                var err = string.Format("Exception:\r\n{0}\r\nJSON:\r\n{1}\r\nMethod:\r\n{2}", ex.Message, JsonConvert.SerializeObject(entity), MethodBase.GetCurrentMethod().Name);
+                _logger.LogError(err);
                 var tempObj = new { Method = MethodBase.GetCurrentMethod().Name, Result = ex.Message };
                 return Json(tempObj);
             }
@@ -364,7 +371,8 @@ namespace Kasim.Core.WebApi.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                var err = string.Format("Exception:\r\n{0}\r\nJSON:\r\n{1}\r\nMethod:\r\n{2}", ex.Message, JsonConvert.SerializeObject(entity), MethodBase.GetCurrentMethod().Name);
+                _logger.LogError(err);
                 var tempObj = new { Method = MethodBase.GetCurrentMethod().Name, Result = ex.Message };
                 return Json(tempObj);
             }
@@ -385,11 +393,13 @@ namespace Kasim.Core.WebApi.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                var err = string.Format("Exception:\r\n{0}\r\nJSON:\r\n{1}\r\nMethod:\r\n{2}", ex.Message, JsonConvert.SerializeObject(entity), MethodBase.GetCurrentMethod().Name);
+                _logger.LogError(err);
                 var tempObj = new { Method = MethodBase.GetCurrentMethod().Name, Result = ex.Message };
                 return Json(tempObj);
             }
         }
         #endregion
+
     }
 }
