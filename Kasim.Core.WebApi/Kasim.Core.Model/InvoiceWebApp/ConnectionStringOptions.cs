@@ -35,6 +35,6 @@ namespace Kasim.Core.Model.InvoiceWebApp
     {
         public string DefaultConnection { get; set; }
         public string DevConnection { get; set; }
-
+        public string DevOldConnection { get; set; }
     }
 }

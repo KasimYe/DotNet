@@ -49,7 +49,7 @@ namespace Kasim.Core.SQLServerDAL.InvoiceWebApp
         {
             using (var Conn = new SqlConnection(_connsOptions.DevConnection))
             {
-                string query = "SELECT FormNumber,SystemDate,FPHM AS InvoiceCode,FPDM AS InvoiceId,KPRQ AS InvoiceDate,TaxPaidSum AS InvoiceSum,PdfFileName FROM dbo.SaleTaxBill WHERE FormNumber=@id AND Status=11";
+                string query = "SELECT FormNumber,SystemDate,FPHM AS InvoiceCode,FPDM AS InvoiceId,KPRQ AS InvoiceDate,TaxPaidSum AS InvoiceSum,PuRateSum AS InvoiceRate,PdfFileName FROM dbo.SaleTaxBill WHERE FormNumber=@id";
                 var result = Conn.Query<Invoice>(query, new { id }).SingleOrDefault();
                 Conn.Close();
                 Conn.Dispose();
@@ -59,9 +59,9 @@ namespace Kasim.Core.SQLServerDAL.InvoiceWebApp
 
         public Invoice GetEntityMskl(string id)
         {
-            using (var Conn = new SqlConnection(_connsOptions.DevConnection))
+            using (var Conn = new SqlConnection(_connsOptions.DevOldConnection))
             {
-                string query = "SELECT FormNumber,SystemDate,FPHM AS InvoiceCode,FPDM AS InvoiceId,KPRQ AS InvoiceDate,TaxPaidSum AS InvoiceSum,PdfFileName FROM dbo.SaleTaxBill WHERE FormNumber=@id AND Status=11";
+                string query = "SELECT FormNumber,SystemDate,FPHM AS InvoiceCode,FPDM AS InvoiceId,KPRQ AS InvoiceDate,TaxPaidSum AS InvoiceSum,PdfFileName FROM dbo.SaleTaxBill WHERE FormNumber=@id";
                 var result = Conn.Query<Invoice>(query, new { id }).SingleOrDefault();
                 Conn.Close();
                 Conn.Dispose();
@@ -96,6 +96,18 @@ namespace Kasim.Core.SQLServerDAL.InvoiceWebApp
         public int SetEntity(string id, string filename)
         {
             using (var Conn = new SqlConnection(_connsOptions.DevConnection))
+            {
+                string query = "UPDATE dbo.SaleTaxBill SET PdfFileName=@filename WHERE FormNumber=@id";
+                var result = Conn.Execute(query, new { filename, id });
+                Conn.Close();
+                Conn.Dispose();
+                return result;
+            }
+        }
+
+        public int SetEntityMskl(string id, string filename)
+        {
+            using (var Conn = new SqlConnection(_connsOptions.DevOldConnection))
             {
                 string query = "UPDATE dbo.SaleTaxBill SET PdfFileName=@filename WHERE FormNumber=@id";
                 var result = Conn.Execute(query, new { filename, id });

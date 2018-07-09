@@ -82,5 +82,42 @@ namespace Kasim.Core.SQLServerDAL.WebApi.MIS
                 return result;
             }
         }
+
+        public List<SaleTaxBill> GetListMskl(DateTime startDate, DateTime endDate, int clientId, int taxTypeId, int taxStatusId, string formNumber, int pId)
+        {
+            using (var Conn = new SqlConnection(_conns.DevBakConnection))
+            {
+                var query = new StringBuilder("SELECT BillID,FormNumber,ClientID,BankName,AccountNumber,TaxNumber,Address,Telephone,SystemDate,CASE FormTypeID WHEN 1 THEN '普通发票' ELSE '专用发票' END AS FormTypeName,CASE Status WHEN 1 THEN '纸质发票' ELSE '电子发票' END AS StatusTypeName,"
+                    + "FPHM,FPDM,KPRQ,TaxPaidSum,Notes FROM dbo.SaleTaxBill WHERE SystemDate>=@startDate AND SystemDate<=@endDate AND Status IN (1,11) AND ClientID=@clientId");
+                var param = new DynamicParameters();
+                param.Add("@startDate", startDate);
+                param.Add("@endDate", endDate);
+                param.Add("@clientId", clientId);
+                if (taxTypeId != -1)
+                {
+                    query.Append(" AND FormTypeID=@taxTypeId");
+                    param.Add("@taxTypeId", taxTypeId);
+                }
+                if (taxStatusId != -1)
+                {
+                    query.Append(" AND Status=@taxStatusId");
+                    param.Add("@taxStatusId", taxStatusId);
+                }
+                if (formNumber != "")
+                {
+                    query.AppendFormat(" AND Notes LIKE '%{0}%'", formNumber);
+                }
+                if (pId != -1)
+                {
+                    query.Append(" AND EXISTS (SELECT p.ID FROM dbo.SaleTaxBillDetail d,dbo.SaleTaxBillDetailProducts p WHERE d.DetailID=p.DetailID AND d.BillID=dbo.SaleTaxBill.BillID AND p.PID=@pId)");
+                    param.Add("@pId", pId);
+                }
+                query.Append(" Order By BillID");
+                var result = Conn.Query<SaleTaxBill>(query.ToString(), param).ToList();
+                Conn.Close();
+                Conn.Dispose();
+                return result;
+            }
+        }
     }
 }

@@ -34,5 +34,6 @@ namespace Kasim.Core.IDAL.WebApi.MIS
     public interface ISaleTaxDAL<T> : IBaseDAL<SaleTaxBill>
     {
         List<SaleTaxBill> GetList(DateTime startDate, DateTime endDate, int clientId, int taxTypeId=-1, int taxStatusId=-1, string formNumber = "", int pId=-1);
+        List<SaleTaxBill> GetListMskl(DateTime startDate, DateTime endDate, int clientId, int taxTypeId, int taxStatusId, string formNumber, int pId);
     }
 }

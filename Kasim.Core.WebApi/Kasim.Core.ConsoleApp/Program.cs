@@ -147,6 +147,8 @@ namespace Kasim.Core.ConsoleApp
                     case "3":
                         try
                         {
+                            Console.WriteLine("请输入连接字符串：");
+                            conSet.DevConnection = Console.ReadLine();
                             Console.WriteLine("请输入工作簿名称：");
                             var workSheetName = Console.ReadLine();
                             Console.WriteLine("请输入查询语句(不能超过26列)：");

@@ -54,6 +54,12 @@ namespace Kasim.Core.InvoiceWebApp.Controllers
                 {
                     return Content("未找到电子发票，请确定此为电子发票");
                 }
+                else if (sjm == "IsPaper")
+                {
+                    var iMsg = string.Format("该发票为纸质发票,发票详情如下:\r\n发票代码:{0}\r\n发票号码:{1}\r\n开票日期:{2}\r\n金额:{3}\r\n税额:{4}",
+                        invoice.InvoiceCode, invoice.InvoiceId, invoice.SystemDate.ToString("yyyy-MM-dd"), invoice.InvoiceSum.ToString("0.00"), invoice.InvoiceRate.ToString("0.00"));
+                    return Content(iMsg);
+                }
                 else if (sjm == "TimeOut")
                 {
                     return Content("查询超时，请稍后重新尝试");
@@ -104,7 +110,7 @@ namespace Kasim.Core.InvoiceWebApp.Controllers
 
         // GET: Invoice/Edit/5
         public async Task<ActionResult> AdminAsync(string id)
-        {           
+        {
             ClaimsPrincipal principal = HttpContext.User as ClaimsPrincipal;
             principal.AddIdentity(new ClaimsIdentity { Label = id });
             await HttpContext.SignInAsync("MyCookieAuthenticationScheme", principal);

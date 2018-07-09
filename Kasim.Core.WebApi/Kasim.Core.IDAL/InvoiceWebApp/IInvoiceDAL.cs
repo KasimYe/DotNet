@@ -39,5 +39,6 @@ namespace Kasim.Core.IDAL.InvoiceWebApp
         int SetEntity(string id, string filename);
         Invoice GetLastEntity();
         Invoice GetEntityMskl(string id);
+        int SetEntityMskl(string id, string filename);
     }
 }

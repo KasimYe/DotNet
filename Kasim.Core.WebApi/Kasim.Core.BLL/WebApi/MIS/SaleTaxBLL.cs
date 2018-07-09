@@ -55,7 +55,10 @@ namespace Kasim.Core.BLL.WebApi.MIS
         public List<SaleTaxBill> GetSaleTaxBills(DateTime startDate, DateTime endDate, int clientId, int taxTypeId = -1, int taxStatusId = -1, string formNumber = "", int pId = -1)
         {
             if (endDate >= DateTime.Now.Date) endDate = DateTime.Now.AddDays(-1).Date;
-            return dal.GetList(startDate, endDate, clientId, taxTypeId, taxStatusId, formNumber, pId);
+            var list = dal.GetListMskl(startDate, endDate, clientId, taxTypeId, taxStatusId, formNumber, pId);
+            var list2= dal.GetList(startDate, endDate, clientId, taxTypeId, taxStatusId, formNumber, pId);
+            list.AddRange(list2);
+            return list;
         }
     }
 }

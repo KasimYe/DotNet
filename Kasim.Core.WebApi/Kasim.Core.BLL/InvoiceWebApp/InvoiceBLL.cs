@@ -182,7 +182,11 @@ namespace Kasim.Core.BLL.InvoiceWebApp
             //Console.WriteLine("发票密码:\r\n" + result);
             jsonData = (JObject)JsonConvert.DeserializeObject(result);
             var rc = jsonData["code"].Value<string>();
-            if (rc != "0000")
+            if (rc=="9997")
+            {
+                return "IsPaper";
+            }
+            else if (rc != "0000")
             {
                 if (sp < 4000)
                 {
@@ -212,7 +216,12 @@ namespace Kasim.Core.BLL.InvoiceWebApp
 
         public int SetInvoice(string id, string filename)
         {
-            return dal.SetEntity(id, filename);
+            var ret= dal.SetEntity(id, filename);
+            if (ret==0)
+            {
+                ret= dal.SetEntityMskl(id, filename);
+            }
+            return ret;
         }
 
         public string DownloadInvoicePdf(Invoice invoice)
